@@ -1,253 +1,213 @@
-# Livn - Calcolo IMU AI-First
+# LIVN - Calcolo IMU
 
-Servizio online intelligente per il calcolo dell'IMU in Italia, che utilizza l'intelligenza artificiale per analizzare automaticamente i documenti catastali e calcolare l'importo dovuto.
+Piattaforma intelligente per il calcolo dell'IMU con due modalità di utilizzo:
+- **Ricerca automatica tramite codice fiscale** (NUOVO!)
+- **Analisi documenti catastali caricati**
 
-## 🎯 Funzionalità
+## 🚀 Nuove Funzionalità
 
-- **Upload Documenti**: Carica visure catastali, contratti, atti di compravendita in formato PDF
-- **Analisi AI**: Estrazione automatica delle informazioni catastali dai documenti
-- **Dialogo Interattivo**: Completamento guidato dei dati mancanti
-- **Calcolo Preciso**: Calcolo IMU basato sulle aliquote comunali 2025
-- **Report Dettagliato**: Riepilogo completo con dettagli per ogni immobile
+### Ricerca Catastale Automatica
+- Inserisci solo il **codice fiscale**
+- Recupera automaticamente **tutti gli immobili** dall'Agenzia delle Entrate
+- Calcolo IMU **istantaneo** su tutti gli immobili trovati
+- Dati sempre **aggiornati** in tempo reale
 
 ## 🏗️ Architettura
 
-### Frontend
-- **Next.js 14** con App Router
-- **React 18** con TypeScript
-- **Tailwind CSS** per lo styling
-- **Lucide React** per le icone
-
-### Backend
-- **Supabase** per storage e database
-- **Vercel** per deployment e API routes
-- **OpenAI/OpenRouter** per analisi AI dei documenti
-
-### Storage
-- **Bucket `uploads`**: Documenti caricati dagli utenti
-- **Bucket `imu`**: Delibere comunali in `statements/2025/`
-  - Formato nome file: `{NomeComune}_{SiglaProvincia}_{CodiceComune}.pdf`
-  - Esempio: `Milano_MI_F205.pdf`
-
-## 🚀 Installazione
-
-1. **Clona il repository**
-   ```bash
-   git clone https://github.com/your-username/livn-imu-calculator.git
-   cd livn-imu-calculator
-   ```
-
-2. **Installa le dipendenze**
-   ```bash
-   npm install
-   ```
-
-3. **Configura le variabili d'ambiente**
-   ```bash
-   cp env.example .env.local
-   ```
-   
-   Modifica `.env.local` con i tuoi valori:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-   OPENAI_API_KEY=your_openai_api_key
-   ```
-
-4. **Configura Supabase**
-   
-   Crea i bucket necessari:
-   ```sql
-   -- Bucket per documenti utenti
-   INSERT INTO storage.buckets (id, name, public) VALUES ('uploads', 'uploads', false);
-   
-   -- Bucket per delibere comunali
-   INSERT INTO storage.buckets (id, name, public) VALUES ('imu', 'imu', true);
-   ```
-
-5. **Avvia il server di sviluppo**
-   ```bash
-   npm run dev
-   ```
-
-## 📁 Struttura del Progetto
-
 ```
-livn-imu-calculator/
-├── app/                    # Next.js App Router
-│   ├── api/               # API Routes
-│   │   ├── upload/        # Upload documenti
-│   │   ├── analyze/       # Analisi AI
-│   │   └── calculate/     # Calcolo IMU
-│   ├── globals.css        # Stili globali
-│   ├── layout.tsx         # Layout principale
-│   └── page.tsx           # Homepage
-├── components/            # Componenti React
-│   ├── DocumentUpload.tsx # Upload documenti
-│   ├── PropertyAnalysis.tsx # Analisi proprietà
-│   └── IMUCalculation.tsx # Calcolo IMU
-├── lib/                   # Utilities e servizi
-│   ├── supabase.ts        # Client Supabase
-│   ├── pdf-analyzer.ts    # Analisi PDF
-│   └── imu-calculator.ts  # Logica calcolo IMU
-├── types/                 # Tipi TypeScript
-│   └── property.ts        # Tipi per proprietà
-└── README.md
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Next.js App   │    │   OpenAPI.com    │    │  Agenzia delle  │
+│                 │ ─► │   (Catasto API)  │ ─► │     Entrate     │
+│ - React UI      │    │                  │    │                 │
+│ - API Routes    │    │ - Ricerca CF     │    │ - Dati Ufficiali│
+└─────────────────┘    │ - Dati Immobili  │    │ - Sempre Aggiornati│
+                       └──────────────────┘    └─────────────────┘
+          │
+          ▼
+┌─────────────────┐    ┌──────────────────┐
+│    Supabase     │    │     OpenAI       │
+│                 │    │                  │
+│ - Database      │    │ - Analisi Docs   │
+│ - Comuni        │    │ - Estrazione AI  │
+└─────────────────┘    └──────────────────┘
 ```
 
-## 🔧 Configurazione Supabase
+## 📋 Funzionalità
 
-### 1. Bucket Storage
+### 🔍 Ricerca per Codice Fiscale
+- **Input**: Solo codice fiscale
+- **Output**: Lista completa degli immobili
+- **Vantaggi**: Veloce, preciso, sempre aggiornato
 
-Crea i seguenti bucket in Supabase:
+### 📄 Upload Documenti
+- **Input**: PDF di visure catastali
+- **Output**: Analisi AI dei documenti
+- **Vantaggi**: Flessibile per documenti specifici
 
-- **uploads** (privato): Per i documenti caricati dagli utenti
-- **imu** (pubblico): Per le delibere comunali
+### 🧮 Calcolo IMU
+- Coefficienti aggiornati per categoria
+- Aliquote comunali
+- Detrazioni automatiche
+- Export risultati
 
-### 2. Politiche di Sicurezza
+## 🛠️ Setup
 
-```sql
--- Policy per upload documenti (solo utenti autenticati)
-CREATE POLICY "Users can upload their own documents" ON storage.objects
-FOR INSERT WITH CHECK (bucket_id = 'uploads' AND auth.uid()::text = (storage.foldername(name))[1]);
-
--- Policy per lettura delibere (pubblico)
-CREATE POLICY "Public can read IMU statements" ON storage.objects
-FOR SELECT USING (bucket_id = 'imu');
+### 1. Installazione
+```bash
+git clone https://github.com/your-repo/livn
+cd livn
+npm install
 ```
 
-### 3. Struttura Delibere
+### 2. Configurazione Variabili d'Ambiente
 
-Le delibere comunali devono essere caricate nel bucket `imu` con questa struttura:
+Crea un file `.env.local`:
 
-```
-imu/
-└── statements/
-    └── 2025/
-        ├── Milano_MI_F205.pdf
-        ├── Roma_RM_H501.pdf
-        ├── Napoli_NA_F839.pdf
-        └── ...
-```
+```bash
+# OpenAPI per ricerca catastale
+OPENAPI_BASE_URL=https://catasto.openapi.it
+OPENAPI_CATASTO_TOKEN=your_catasto_token_here
 
-## 🤖 Integrazione AI
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
-### OpenAI
-Per l'analisi dei documenti PDF, il sistema può utilizzare OpenAI GPT-4:
-
-```typescript
-// Esempio di prompt per l'analisi
-const prompt = `
-Analizza questo documento catastale e estrai:
-- Comune e provincia
-- Categoria catastale
-- Rendita catastale
-- Foglio, particella, subalterno
-- Superficie e vani (se disponibili)
-
-Documento: ${pdfText}
-`;
+# OpenAI per analisi documenti
+OPENAI_API_KEY=your_openai_key
 ```
 
-### OpenRouter
-Alternativa a OpenAI per accedere a diversi modelli:
-
-```typescript
-const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-  method: 'POST',
-  headers: {
-    'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    model: 'anthropic/claude-3-sonnet',
-    messages: [{ role: 'user', content: prompt }]
-  })
-});
+### 3. Setup Database
+```bash
+npm run setup-supabase
 ```
 
-## 📊 Calcolo IMU
+### 4. Avvia Development Server
+```bash
+npm run dev
+```
 
-Il sistema calcola l'IMU seguendo la normativa italiana:
+## 🔑 Configurazione OpenAPI
 
-1. **Rivalutazione**: Rendita catastale × 1.05 (5%)
-2. **Base imponibile**: Rendita rivalutata × moltiplicatore (160 per cat. A)
-3. **Importo lordo**: Base imponibile × aliquota comunale
-4. **Detrazioni**: Sottrazione detrazioni (€200 per abitazione principale)
-5. **Quota possesso**: Applicazione della quota di possesso
+### Ottenere l'API Key
 
-### Aliquote Standard
-- **Abitazione principale**: 0.4% - 0.6%
-- **Altre abitazioni**: 0.76% - 1.06%
-- **Immobili locati**: Stessa aliquota delle altre abitazioni
+1. **Registrazione**: [console.openapi.com](https://console.openapi.com)
+2. **Piano**: Scegli tra pay-per-use o abbonamento
+3. **API Key**: Ottieni la chiave dall'area riservata
 
-## 🎨 Interfaccia Utente
+### Costi
+- **Ricerca base**: €0,30 per codice fiscale
+- **Visure**: €0,99-1,90 per documento
+- **Abbonamenti**: Prezzi ridotti per volumi elevati
 
-L'interfaccia è progettata per essere intuitiva e guidare l'utente attraverso 3 step:
+### Test Integrazione
+```bash
+npm run test:openapi
+```
 
-1. **Carica Documenti**: Drag & drop per PDF
-2. **Verifica Dati**: Completamento informazioni mancanti
-3. **Risultato**: Calcolo dettagliato con possibilità di download
+## 🧪 Testing
 
-### Componenti Principali
+### Test Completo
+```bash
+npm test
+```
 
-- **DocumentUpload**: Gestisce l'upload con preview
-- **PropertyAnalysis**: Mostra proprietà estratte e raccoglie dati mancanti
-- **IMUCalculation**: Visualizza il calcolo finale con dettagli
+### Test Specifici
+```bash
+# Test integrazione OpenAPI
+npm run test:openapi
+
+# Test calcolo IMU
+npm run test:imu
+
+# Test upload documenti
+npm run test:upload
+```
+
+## 📁 Struttura Progetto
+
+```
+livn/
+├── app/
+│   ├── api/
+│   │   ├── search-cf/          # API ricerca codice fiscale
+│   │   ├── analyze/            # API analisi documenti
+│   │   └── calculate/          # API calcolo IMU
+│   ├── page.tsx                # Homepage
+│   └── layout.tsx
+├── components/
+│   ├── CadastralSearch.tsx     # Ricerca per CF
+│   ├── DocumentUpload.tsx      # Upload documenti
+│   └── IMUCalculation.tsx      # Calcolo IMU
+├── lib/
+│   ├── supabase.ts
+│   └── imu-calculator.ts
+├── scripts/
+│   ├── test-openapi-integration.js
+│   └── setup-supabase.js
+└── types/
+    └── property.ts
+```
 
 ## 🚀 Deployment
 
 ### Vercel (Raccomandato)
+1. Fai push su GitHub
+2. Connetti repository a Vercel
+3. Configura le variabili d'ambiente
+4. Deploy automatico
 
-1. Connetti il repository a Vercel
-2. Configura le variabili d'ambiente
-3. Deploy automatico ad ogni push
-
-### Altre Piattaforme
-
-Il progetto è compatibile con qualsiasi piattaforma che supporta Next.js:
-- Netlify
-- Railway
-- DigitalOcean App Platform
-
-## 🧪 Testing
-
+### Variabili Produzione
 ```bash
-# Test di sviluppo
-npm run dev
-
-# Build di produzione
-npm run build
-
-# Avvia build di produzione
-npm start
+OPENAPI_BASE_URL=https://api.openapi.it
+OPENAPI_KEY=prod_key_here
+NEXT_PUBLIC_SUPABASE_URL=prod_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=prod_supabase_key
+OPENAI_API_KEY=prod_openai_key
 ```
 
-## 📝 Licenza
+## 🔄 Workflow Utente
 
-Questo progetto è rilasciato sotto licenza MIT. Vedi il file `LICENSE` per i dettagli.
+### Metodo 1: Ricerca Automatica
+1. **Input**: Codice fiscale
+2. **Ricerca**: Automatica via OpenAPI
+3. **Risultati**: Lista immobili istantanea
+4. **Calcolo**: IMU automatico per tutti
 
-## 🤝 Contributi
+### Metodo 2: Upload Documenti
+1. **Upload**: PDF visure catastali
+2. **Analisi**: AI estrae dati
+3. **Verifica**: Controllo manuale
+4. **Calcolo**: IMU sui dati estratti
 
-I contributi sono benvenuti! Per favore:
+## 🤝 Contribuire
 
-1. Fai un fork del progetto
-2. Crea un branch per la tua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit le tue modifiche (`git commit -m 'Add some AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
+1. Fork del repository
+2. Crea feature branch
+3. Implementa modifiche
+4. Testa le modifiche
+5. Crea Pull Request
 
 ## 📞 Supporto
 
-Per supporto o domande:
-- Apri una issue su GitHub
-- Email: support@livn.it
+- **Email**: support@livn.com
+- **Documentazione**: [docs.livn.com](https://docs.livn.com)
+- **Issues**: [GitHub Issues](https://github.com/your-repo/livn/issues)
 
-## ⚠️ Note Legali
+## 📄 Licenza
 
-Questo strumento fornisce calcoli indicativi basati sulle informazioni disponibili. Per calcoli ufficiali e consulenza fiscale, consultare sempre un commercialista qualificato.
+MIT License - vedi [LICENSE](LICENSE) per dettagli.
 
----
+## 🏆 Ringraziamenti
 
-Sviluppato con ❤️ per semplificare il calcolo dell'IMU in Italia.
+- **OpenAPI.com** per l'accesso ai dati catastali
+- **Agenzia delle Entrate** per i dati ufficiali
+- **Community** per feedback e contributi
+
+### 🔧 Integrazione OpenAPI (CONFIGURATA! ✅)
+
+Abbiamo configurato l'integrazione con OpenAPI per la ricerca catastale:
+
+- **URL Base**: `https://catasto.openapi.it` ✅
+- **Token**: Token catasto specifico ✅
+- **Parametro**: `cf_piva` (non `codice_fiscale`) ✅
+- **Metodo**: `Bearer token` ✅

@@ -7,7 +7,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "setup-supabase": "node scripts/setup-supabase.js",
+    "test:openapi": "node scripts/test-openapi-integration.js",
+    "test:tokens": "node scripts/test-both-tokens.js",
+    "test:catasto": "node scripts/test-catasto-corrected.js",
+    "test:imu": "node scripts/test-imu-calculator.js",
+    "test:upload": "node scripts/test-upload.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.0",
