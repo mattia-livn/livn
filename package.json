@@ -12,6 +12,9 @@
     "test:openapi": "node scripts/test-openapi-integration.js",
     "test:tokens": "node scripts/test-both-tokens.js",
     "test:catasto": "node scripts/test-catasto-corrected.js",
+    "test:real": "node scripts/test-real-cf.js",
+    "test:wait": "node scripts/test-long-wait.js",
+    "validate:cf": "node scripts/validate-cf.js",
     "test:imu": "node scripts/test-imu-calculator.js",
     "test:upload": "node scripts/test-upload.js"
   },
