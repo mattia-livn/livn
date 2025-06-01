@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start",
+    "test:catasto": "npx tsc test-catasto-service.ts --target es2020 --module commonjs --moduleResolution node --esModuleInterop --skipLibCheck && node test-catasto-service.js",
+    "demo:catasto": "npx tsc services/catasto-service.ts examples/catasto-api-example.ts --target es2020 --module commonjs --moduleResolution node --esModuleInterop --skipLibCheck && node examples/catasto-api-example.js",
+    "build:catasto": "npx tsc services/catasto-service.ts --target es2020 --module commonjs --moduleResolution node --esModuleInterop --skipLibCheck",
     "lint": "next lint"
   },
   "dependencies": {
@@ -29,6 +33,6 @@
     "eslint-config-next": "15.3.2",
     "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }
