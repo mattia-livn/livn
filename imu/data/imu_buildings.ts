@@ -1,13 +1,14 @@
-export interface IMUFormulaInput {
-  RC: number; // Cadastral income (rendita catastale)
-  CATEGORY_COEFFICIENT: number; // Coefficient by cadastral category
-  RATE: number; // Municipal rate (per mille)
-  DAYS_OWNED: number; // Days owned during the year
-  OWNERSHIP_SHARE: number; // Ownership percentage (1.0 = 100%)
+export interface InputFormulaIMU {
+  RC: number; // Rendita catastale
+  COEFFICIENTE_CATEGORIA: number; // Coefficiente per categoria catastale
+  ALIQUOTA: number; // Aliquota comunale (per mille)
+  GIORNI_POSSESSO: number; // Giorni di possesso durante l'anno
+  QUOTA_POSSESSO: number; // Percentuale di proprietà (1.0 = 100%)
 }
 
-export const imuBuildingsFormula = {
-  type: "IMU_buildings",
-  description: "IMU calculation for buildings (excluding non-luxury primary residences)",
-  formula: "IMU = ((RC × 1.05) × CATEGORY_COEFFICIENT) × (RATE / 1000) × (DAYS_OWNED / 365) × OWNERSHIP_SHARE"
+export const formulaIMUFabbricati = {
+  tipo: "IMU_fabbricati",
+  descrizione: "Calcolo IMU per fabbricati (escluse abitazioni principali non di lusso)",
+  formula: "IMU = ((RC × 1,05) × COEFFICIENTE_CATEGORIA) × (ALIQUOTA / 1000) × (GIORNI_POSSESSO / 365) × QUOTA_POSSESSO",
+  note: "La rivalutazione del 5% (1,05) è stabilita per legge. I coefficienti variano per categoria catastale."
 };

@@ -1,73 +1,71 @@
-export interface CadastralCategory {
-    code: string;
-    description: string;
-    coefficient?: number;
-    notes?: string;
+export interface CategoriaCatastale {
+    codice: string;
+    descrizione: string;
+    coefficiente?: number;
+    note?: string;
   }
   
-  export const cadastralCategories: CadastralCategory[] = [
-    // Group A - Residential buildings
-    { code: "A/1", description: "Luxury residential home", coefficient: 160, notes: "Subject to IMU even if primary residence" },
-    { code: "A/2", description: "Standard residential home", coefficient: 160 },
-    { code: "A/3", description: "Economic residential home", coefficient: 160 },
-    { code: "A/4", description: "Popular housing", coefficient: 160 },
-    { code: "A/5", description: "Ultra-popular housing (obsolete)", coefficient: 160 },
-    { code: "A/6", description: "Rural residential home", coefficient: 160 },
-    { code: "A/7", description: "Single-family villa", coefficient: 160 },
-    { code: "A/8", description: "Luxury villa", coefficient: 160, notes: "Subject to IMU even if primary residence" },
-    { code: "A/9", description: "Castles or artistic buildings", coefficient: 160, notes: "Always subject to IMU" },
-    { code: "A/10", description: "Office/studio not in residential buildings", coefficient: 80 },
-    { code: "A/11", description: "Public housing", coefficient: 160 },
+  export const categorieAtastali: CategoriaCatastale[] = [
+    // Gruppo A - Abitazioni
+    { codice: "A/1", descrizione: "Abitazione di tipo signorile", coefficiente: 160, note: "Soggetta a IMU anche se abitazione principale" },
+    { codice: "A/2", descrizione: "Abitazione di tipo civile", coefficiente: 160 },
+    { codice: "A/3", descrizione: "Abitazione di tipo economico", coefficiente: 160 },
+    { codice: "A/4", descrizione: "Abitazione di tipo popolare", coefficiente: 160 },
+    { codice: "A/5", descrizione: "Abitazione di tipo ultrapopolare (obsoleta)", coefficiente: 160 },
+    { codice: "A/6", descrizione: "Abitazione di tipo rurale", coefficiente: 160 },
+    { codice: "A/7", descrizione: "Abitazione in villini", coefficiente: 160 },
+    { codice: "A/8", descrizione: "Abitazione in ville", coefficiente: 160, note: "Soggetta a IMU anche se abitazione principale" },
+    { codice: "A/9", descrizione: "Castelli, palazzi di eminenti pregi artistici", coefficiente: 160, note: "Sempre soggetta a IMU" },
+    { codice: "A/10", descrizione: "Uffici e studi privati", coefficiente: 80 },
+    { codice: "A/11", descrizione: "Abitazioni e alloggi tipici dei luoghi", coefficiente: 160 },
   
-    // Group B - Public interest buildings
-    { code: "B/1", description: "Boarding schools, convents, orphanages", coefficient: 140 },
-    { code: "B/2", description: "Colleges and universities", coefficient: 140 },
-    { code: "B/3", description: "Prisons", coefficient: 140 },
-    { code: "B/4", description: "Hospitals and nursing homes", coefficient: 140 },
-    { code: "B/5", description: "Laboratories and research centers", coefficient: 140 },
-    { code: "B/6", description: "Libraries, museums, galleries", coefficient: 140 },
-    { code: "B/7", description: "Religious buildings", coefficient: 140 },
-    { code: "B/8", description: "Charity buildings not for housing", coefficient: 140 },
+    // Gruppo B - Edifici a uso collettivo
+    { codice: "B/1", descrizione: "Collegi e convitti, educandati, ricoveri, orfanotrofi", coefficiente: 140 },
+    { codice: "B/2", descrizione: "Case di cura e ospedali (se non in cat. D/4)", coefficiente: 140 },
+    { codice: "B/3", descrizione: "Prigioni e riformatori", coefficiente: 140 },
+    { codice: "B/4", descrizione: "Uffici pubblici", coefficiente: 140 },
+    { codice: "B/5", descrizione: "Scuole, laboratori scientifici, biblioteche", coefficiente: 140 },
+    { codice: "B/6", descrizione: "Biblioteche, pinacoteche, musei, gallerie", coefficiente: 140 },
+    { codice: "B/7", descrizione: "Cappelle e oratori non destinati al culto pubblico", coefficiente: 140 },
+    { codice: "B/8", descrizione: "Magazzini sotterranei per depositi derrate", coefficiente: 140 },
   
-    // Group C - Commercial and accessory units
-    { code: "C/1", description: "Shops and stores", coefficient: 55 },
-    { code: "C/2", description: "Storage rooms, attics, cellars", coefficient: 160 },
-    { code: "C/3", description: "Artisan workshops", coefficient: 140 },
-    { code: "C/4", description: "Gyms, beauty salons, etc.", coefficient: 140 },
-    { code: "C/5", description: "Baths and laundries", coefficient: 140 },
-    { code: "C/6", description: "Stables and garages", coefficient: 160 },
-    { code: "C/7", description: "Sheds and canopies", coefficient: 160 },
+    // Gruppo C - Edifici a destinazione ordinaria commerciale
+    { codice: "C/1", descrizione: "Negozi e botteghe", coefficiente: 55 },
+    { codice: "C/2", descrizione: "Magazzini e locali di deposito", coefficiente: 160 },
+    { codice: "C/3", descrizione: "Laboratori per arti e mestieri", coefficiente: 140 },
+    { codice: "C/4", descrizione: "Fabbricati e locali per esercizi sportivi", coefficiente: 140 },
+    { codice: "C/5", descrizione: "Stabilimenti balneari e di acque curative", coefficiente: 140 },
+    { codice: "C/6", descrizione: "Stalle, scuderie, rimesse, autorimesse", coefficiente: 160 },
+    { codice: "C/7", descrizione: "Tettoie chiuse o aperte", coefficiente: 160 },
   
-    // Group D - Special use buildings
-    { code: "D/1", description: "Industrial buildings", coefficient: 65 },
-    { code: "D/2", description: "Hotels and pensions", coefficient: 65 },
-    { code: "D/3", description: "Theaters, cinemas, etc.", coefficient: 65 },
-    { code: "D/4", description: "Private hospitals", coefficient: 65 },
-    { code: "D/5", description: "Bank and insurance buildings", coefficient: 80 },
-    { code: "D/6", description: "Sports facilities", coefficient: 65 },
-    { code: "D/7", description: "Production plants", coefficient: 65 },
-    { code: "D/8", description: "Commercial buildings", coefficient: 65 },
-    { code: "D/9", description: "Floating structures", coefficient: 65 },
-    { code: "D/10", description: "Rural agricultural buildings", coefficient: 65 },
+    // Gruppo D - Immobili a destinazione speciale
+    { codice: "D/1", descrizione: "Opifici", coefficiente: 65 },
+    { codice: "D/2", descrizione: "Alberghi e pensioni", coefficiente: 65 },
+    { codice: "D/3", descrizione: "Teatri, cinematografi, sale per concerti", coefficiente: 65 },
+    { codice: "D/4", descrizione: "Case di cura e ospedali privati", coefficiente: 65 },
+    { codice: "D/5", descrizione: "Istituti di credito, cambio, assicurazione", coefficiente: 80 },
+    { codice: "D/6", descrizione: "Fabbricati e locali per esercizi sportivi", coefficiente: 65 },
+    { codice: "D/7", descrizione: "Fabbricati costruiti per speciali esigenze industriali", coefficiente: 65 },
+    { codice: "D/8", descrizione: "Fabbricati costruiti per le speciali esigenze di un'attività commerciale", coefficiente: 65 },
+    { codice: "D/9", descrizione: "Edifici galleggianti o sospesi assicurati a punti fissi", coefficiente: 65 },
+    { codice: "D/10", descrizione: "Fabbricati per funzioni produttive connesse alle attività agricole", coefficiente: 65 },
   
-    // Group E - Public utility infrastructure
-    { code: "E/1", description: "Railways", coefficient: 80 },
-    { code: "E/2", description: "Bridges and viaducts", coefficient: 80 },
-    { code: "E/3", description: "Public buildings (not for housing)", coefficient: 80 },
-    { code: "E/4", description: "Forts and defense buildings", coefficient: 80 },
-    { code: "E/5", description: "Churches and temples", coefficient: 80 },
-    { code: "E/6", description: "Public cemeteries", coefficient: 80 },
-    { code: "E/7", description: "Lighthouses, towers", coefficient: 80 },
-    { code: "E/8", description: "Public aqueducts", coefficient: 80 },
-    { code: "E/9", description: "Special public utility buildings", coefficient: 80 },
+    // Gruppo E - Immobili a destinazione particolare
+    { codice: "E/1", descrizione: "Stazioni per servizi di trasporto terrestri, marittimi, aerei", coefficiente: 80 },
+    { codice: "E/2", descrizione: "Ponti comunali e provinciali soggetti a pedaggio", coefficiente: 80 },
+    { codice: "E/3", descrizione: "Costruzioni e fabbricati per esigenze pubbliche", coefficiente: 80 },
+    { codice: "E/4", descrizione: "Recinti chiusi per speciali esigenze pubbliche", coefficiente: 80 },
+    { codice: "E/5", descrizione: "Costruzioni adibite al culto pubblico", coefficiente: 80 },
+    { codice: "E/6", descrizione: "Fabbricati e costruzioni per speciali esigenze pubbliche", coefficiente: 80 },
+    { codice: "E/7", descrizione: "Fabbricati costruiti per l'esercizio pubblico dei culti", coefficiente: 80 },
+    { codice: "E/8", descrizione: "Fabbricati e costruzioni nei cimiteri", coefficiente: 80 },
+    { codice: "E/9", descrizione: "Edifici a destinazione particolare non compresi nelle altre categorie", coefficiente: 80 },
   
-    // Group F - Special and undefined units
-    { code: "F/1", description: "Under-construction or unfinished building", notes: "Not subject to IMU until usable" },
-    { code: "F/2", description: "Unusable ruins", notes: "Not subject to IMU if certified uninhabitable" },
-    { code: "F/3", description: "Building unit under construction", notes: "Subject to IMU only if classified as usable" },
-    { code: "F/4", description: "Unit under definition", notes: "Temporary classification — check local rules" },
-    { code: "F/5", description: "Urban land not yet built", notes: "Usually treated as buildable land for IMU" },
-    { code: "F/6", description: "Unit declared no longer existing", notes: "Removed from IMU calculation" },
-    { code: "F/7", description: "Common areas not listed separately", notes: "Not subject to IMU" },
-    { code: "F/8", description: "Infrastructure unit (e.g. fiber cabinets)", notes: "Check with local cadastre" }
+    // Gruppo F - Entità urbane
+    { codice: "F/1", descrizione: "Area urbana", note: "Non produce reddito" },
+    { codice: "F/2", descrizione: "Unità collabenti", note: "Non soggetta a IMU se dichiarata inagibile" },
+    { codice: "F/3", descrizione: "Unità in corso di costruzione", note: "Soggetta a IMU solo se abitabile" },
+    { codice: "F/4", descrizione: "Unità in corso di definizione", note: "Classificazione temporanea" },
+    { codice: "F/5", descrizione: "Lastrico solare", note: "Generalmente trattato come area edificabile per IMU" },
+    { codice: "F/6", descrizione: "Fabbricato dichiarato inagibile totalmente o parzialmente", note: "Escluso dal calcolo IMU se certificato" }
   ];

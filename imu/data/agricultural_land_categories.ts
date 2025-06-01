@@ -1,24 +1,28 @@
-export interface AgriculturalLandCategory {
-    code: string;
-    quality: string;
-    description: string;
-    notes?: string;
+export interface CategoriaTerreno {
+    codice: string;
+    qualita: string;
+    descrizione: string;
+    note?: string;
   }
   
-  export const agriculturalLandCategories: AgriculturalLandCategory[] = [
-    // Common land qualities
-    { code: "TA", quality: "Arable land", description: "Land used for cultivation of crops" },
-    { code: "TU", quality: "Grassland", description: "Natural or improved pasture for grazing animals" },
-    { code: "TP", quality: "Permanent pasture", description: "Pasture not plowed for at least 5 years" },
-    { code: "TL", quality: "Woodland", description: "Land with spontaneous or planted forest cover" },
-    { code: "TB", quality: "Bushland", description: "Land covered with bushes, shrubs, or low trees" },
-    { code: "TM", quality: "Meadow", description: "Land used for hay or forage production" },
-    { code: "TC", quality: "Vineyard", description: "Land cultivated with vines for grape production" },
-    { code: "TO", quality: "Olive grove", description: "Land cultivated with olive trees" },
-    { code: "TF", quality: "Fruit orchard", description: "Land cultivated with various fruit trees" },
-    { code: "TG", quality: "Garden", description: "Land used for horticulture or small-scale crops" },
-    { code: "TZ", quality: "Unproductive land", description: "Land not used for productive agricultural purposes", notes: "Usually not subject to IMU or with very low RD" },
-    { code: "TQ", quality: "Quarry or peat land", description: "Land used for extraction purposes", notes: "Check local IMU applicability" },
-    { code: "TS", quality: "Fish farming area", description: "Land used for aquaculture" },
-    { code: "TT", quality: "Nursery land", description: "Land for plant nursery or intensive cultivation" }
+  export const categorieTerreniAgricoli: CategoriaTerreno[] = [
+    // Qualità comuni dei terreni
+    { codice: "TA", qualita: "Seminativo", descrizione: "Terreno utilizzato per la coltivazione di colture stagionali" },
+    { codice: "TU", qualita: "Pascolo", descrizione: "Pascolo naturale o migliorato per il pascolamento di animali" },
+    { codice: "TP", qualita: "Pascolo permanente", descrizione: "Pascolo non arato da almeno 5 anni" },
+    { codice: "TL", qualita: "Bosco", descrizione: "Terreno con copertura forestale spontanea o piantumata" },
+    { codice: "TB", qualita: "Bosco ceduo", descrizione: "Terreno coperto da cespugli, arbusti o alberi bassi" },
+    { codice: "TM", qualita: "Prato", descrizione: "Terreno utilizzato per la produzione di fieno o foraggio" },
+    { codice: "TC", qualita: "Vigneto", descrizione: "Terreno coltivato con viti per la produzione di uva" },
+    { codice: "TO", qualita: "Oliveto", descrizione: "Terreno coltivato con alberi di olivo" },
+    { codice: "TF", qualita: "Frutteto", descrizione: "Terreno coltivato con vari alberi da frutto" },
+    { codice: "TG", qualita: "Orto", descrizione: "Terreno utilizzato per l'orticoltura o colture di piccola scala" },
+    { codice: "TZ", qualita: "Terreno incolto", descrizione: "Terreno non utilizzato per scopi agricoli produttivi", note: "Generalmente non soggetto a IMU o con RD molto basso" },
+    { codice: "TQ", qualita: "Cava o torbiera", descrizione: "Terreno utilizzato per scopi estrattivi", note: "Verificare applicabilità IMU locale" },
+    { codice: "TS", qualita: "Piscicoltura", descrizione: "Terreno utilizzato per l'acquacoltura" },
+    { codice: "TT", qualita: "Vivaio", descrizione: "Terreno per vivai di piante o coltivazione intensiva" },
+    { codice: "TR", qualita: "Risaia", descrizione: "Terreno coltivato a riso con sistema di allagamento" },
+    { codice: "TN", qualita: "Noccioleto", descrizione: "Terreno coltivato con alberi di nocciolo" },
+    { codice: "TV", qualita: "Castagneto", descrizione: "Terreno coltivato con alberi di castagno" },
+    { codice: "TE", qualita: "Ente urbano", descrizione: "Terreno urbano non edificabile", note: "Spesso soggetto a regimi IMU speciali" }
   ];

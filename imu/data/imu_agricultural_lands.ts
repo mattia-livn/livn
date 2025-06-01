@@ -1,12 +1,14 @@
-export interface IMUAgriculturalLandInput {
-  RD: number; // Dominical income
-  RATE: number; // IMU rate (per mille)
-  DAYS_OWNED: number;
-  OWNERSHIP_SHARE: number;
+export interface InputFormulaIMUTerreni {
+  RD: number; // Reddito dominicale
+  COEFFICIENTE_TERRENI: number; // Coefficiente per terreni (generalmente 135)
+  ALIQUOTA: number; // Aliquota comunale (per mille)
+  GIORNI_POSSESSO: number; // Giorni di possesso durante l'anno
+  QUOTA_POSSESSO: number; // Percentuale di proprietà (1.0 = 100%)
 }
 
-export const imuAgriculturalLandFormula = {
-  type: "IMU_agricultural_land",
-  description: "IMU calculation for agricultural land",
-  formula: "IMU = ((RD × 1.25) × 135) × (RATE / 1000) × (DAYS_OWNED / 365) × OWNERSHIP_SHARE"
+export const formulaIMUTerreniAgricoli = {
+  tipo: "IMU_terreni_agricoli",
+  descrizione: "Calcolo IMU per terreni agricoli",
+  formula: "IMU = ((RD × 1,25) × 135) × (ALIQUOTA / 1000) × (GIORNI_POSSESSO / 365) × QUOTA_POSSESSO",
+  note: "La rivalutazione del 25% (1,25) e il coefficiente 135 sono stabiliti per legge per i terreni."
 };
