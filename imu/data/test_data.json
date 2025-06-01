@@ -1,0 +1,75 @@
+{
+    "owner_tax_code": "MTTPCC80A01H501Z",
+    "municipality": {
+      "name": "Alessandria",
+      "province": "AL",
+      "istat_code": "006003"
+    },
+    "parcels": [
+      {
+        "type": "building",
+        "category": "A/2",
+        "description": "Apartment on 2nd floor",
+        "address": {
+          "street": "Via Aspromonte",
+          "civic_number": "12",
+          "floor": "2"
+        },
+        "cadastral_income": {
+          "value": 812.34,
+          "currency": "EUR"
+        },
+        "ownership_share": 1.0,
+        "days_owned": 365
+      },
+      {
+        "type": "building",
+        "category": "C/6",
+        "description": "Garage in basement",
+        "address": {
+          "street": "Via Aspromonte",
+          "civic_number": "12",
+          "floor": "-1"
+        },
+        "cadastral_income": {
+          "value": 102.55,
+          "currency": "EUR"
+        },
+        "ownership_share": 1.0,
+        "days_owned": 365
+      },
+      {
+        "type": "building",
+        "category": "C/1",
+        "description": "Street-level shop",
+        "address": {
+          "street": "Via San Lorenzo",
+          "civic_number": "8",
+          "floor": "0"
+        },
+        "cadastral_income": {
+          "value": 1450.00,
+          "currency": "EUR"
+        },
+        "ownership_share": 0.5,
+        "days_owned": 300
+      },
+      {
+        "type": "land",
+        "category": "TA",
+        "description": "Agricultural field near SP31",
+        "location": {
+          "section": "B",
+          "sheet": "35",
+          "parcel": "214"
+        },
+        "dominical_income": {
+          "value": 96.12,
+          "currency": "EUR"
+        },
+        "ownership_share": 1.0,
+        "days_owned": 365
+      }
+    ]
+  }
+  
