@@ -1,0 +1,1003 @@
+# CONDIZIONI UNICHE IMU 2025
+# Estratte da 7018 comuni
+# Data estrazione: 2025-06-01T17:22:58.908Z
+# Condizioni totali: 54100
+# Condizioni uniche: 997
+
+1. Abitazione a disposizione
+2. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato
+3. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Fabbricati divenuti inagibili a seguito di calamità naturali
+4. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Periodo non coperto da contratti purché la condizione di immobile a disposizione persista da almeno 12 mesi
+5. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Privi di ogni arredo, sprovvisti di utenze di fornitura attive di acqua, luce e gas
+6. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Requisiti del soggetto passivo: Portato di handicap grave
+7. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Requisiti del soggetto passivo: Portatore di handicap grave
+8. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Requisiti del soggetto passivo: Portatore di handicap grave riconosciuto ai sensi dell
+9. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Requisiti del soggetto passivo: Soggetto con invalidità civile
+10. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato - Requisiti del soggetto passivo: Soggetto con invalidità civile riconosciuta in percentuale non inferiore al 100%
+11. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato Categoria catastale: - A/11 Abitazioni ed alloggi tipici dei luoghi
+12. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato Categoria catastale: A/11
+13. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato Categoria catastale: A/2, A/3, A/4, A/5, A/6, A/7
+14. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato con portato di handicap grave
+15. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato con soggetto passivo con invalidità civile riconosciuta
+16. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato dentro il centro storico
+17. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato di proprietà di ONLUS o di altri enti del terzo settore
+18. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato nonché abitazioni locate o concesse in comodato per periodi inferiori all
+19. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato, categoria catastale A/1
+20. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato, categoria catastale A/2
+21. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato, categoria catastale A/3
+22. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato, categoria catastale A/4
+23. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato, categoria catastale A/5
+24. Abitazione a disposizione - Abitazioni non locate e non concesse in comodato, categoria catastale A/6
+25. Abitazione a disposizione - Fabbricati divenuti inagibili a seguito di calamità naturali
+26. Abitazione a disposizione con uso limitato e discontinuo o stagionale
+27. Abitazione a disposizione dentro il centro storico
+28. Abitazione a disposizione di proprietà di ONLUS o di altri enti del terzo settore
+29. Abitazione a disposizione di proprietà di ONLUS o enti del terzo settore
+30. Abitazione a disposizione non locata e non concessa in comodato
+31. Abitazione a disposizione non locata e non concessa in comodato, fabbricati inagibili a seguito di calamità naturali
+32. Abitazione a disposizione non locata e non concessa in comodato, portatore di handicap grave
+33. Abitazione a disposizione non locata e non concessa in comodato, priva di arredi e utenze
+34. Abitazione a disposizione non locata e non concessa in comodato, soggetto con invalidità civile
+35. Abitazione a disposizione non locate e non concesse in comodato
+36. Abitazione a disposizione, abitazioni non locate e non concesse in comodato
+37. Abitazione a disposizione, abitazioni non locate e non concesse in comodato, fabbricati di interesse storico
+38. Abitazione a disposizione, abitazioni non locate e non concesse in comodato, sprovvisti di utenze di fornitura attive di acqua, luce e gas
+39. Abitazione a disposizione, categoria A/2
+40. Abitazione a disposizione, categorie catastali A/1, A/2, A/3, A/4, A/5, A/6, A/7
+41. Abitazione a disposizione, non locata e non concessa in comodato
+42. Abitazione a disposizione, non locata e non concessa in comodato, con requisiti del soggetto passivo
+43. Abitazione a disposizione, non locate e non concesse in comodato, categoria catastale A/2, A/3, A/4, A/5, A/6, A/7
+44. Abitazione a disposizione, non locate e non concesse in comodato, fabbricati divenuti inagibili a seguito di calamità naturali
+45. Abitazione a disposizione, non locate e non concesse in comodato, fabbricati inagibili
+46. Abitazione a disposizione, non locate e non concesse in comodato, fabbricati inagibili a seguito di calamità naturali
+47. Abitazione a disposizione, non locate e non concesse in comodato, prive di arredo e utenze
+48. Abitazione destinata a struttura turistico-ricettiva
+49. Abitazione destinata a struttura turistico-ricettiva - Attività condotta in forma imprenditoriale
+50. Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.10.00 - Alberghi
+51. Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.2
+52. Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.20.51
+53. Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.20.51 - Affittacamere per brevi soggiorni, case ed appartamenti per vacanze, bed and breakfast, residence
+54. Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.20.52 - Attività di alloggio connesse alle aziende agricole
+55. Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.30.00
+56. Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.9
+57. Abitazione destinata a struttura turistico-ricettiva - Collocazione immobile: Dentro il centro storico - Attività condotta in forma imprenditoriale
+58. Abitazione destinata a struttura turistico-ricettiva - Fabbricati divenuti inagibili a seguito di calamità naturali
+59. Abitazione destinata a struttura turistico-ricettiva - In attività da almeno mesi: 1
+60. Abitazione destinata a struttura turistico-ricettiva - In attività da almeno mesi: 6
+61. Abitazione destinata a struttura turistico-ricettiva condotta in forma imprenditoriale
+62. Abitazione destinata a struttura turistico-ricettiva dentro il centro storico
+63. Abitazione destinata a struttura turistico-ricettiva di proprietà di ONLUS o enti del terzo settore
+64. Abitazione destinata a struttura turistico-ricettiva, CAV ai sensi artt. 26 e 38 LR 27/2015
+65. Abitazione destinata a struttura turistico-ricettiva, CAV con convenzione
+66. Abitazione destinata a struttura turistico-ricettiva, codice ATECO: 55.10.00
+67. Abitazione destinata a struttura turistico-ricettiva, codice ATECO: 55.20.10
+68. Abitazione destinata a struttura turistico-ricettiva, codice ATECO: 55.20.20
+69. Abitazione destinata a struttura turistico-ricettiva, codice ATECO: 55.30.00
+70. Abitazione locata a soggetti in condizioni di vulnerabilità sociale
+71. Abitazione locata a studenti ai sensi dell
+72. Abitazione locata a studenti con contratto di durata non inferiore a 6 mesi
+73. Abitazione locata ai sensi dell
+74. Abitazione locata con accordi/patti territoriali per esigenze abitative particolari
+75. Abitazione locata con accordi/patti territoriali per particolari esigenze abitative
+76. Abitazione locata con contratto ai sensi dell
+77. Abitazione locata con contratto di locazione ai sensi dell
+78. Abitazione locata con contratto registrato, utilizzata come abitazione principale
+79. Abitazione locata o in comodato
+80. Abitazione locata o in comodato - Comodato d
+81. Abitazione locata o in comodato - Locazione a canone libero
+82. Abitazione locata o in comodato - Locazione a studenti
+83. Abitazione locata o in comodato - Locazione a studenti ai sensi dell
+84. Abitazione locata o in comodato - Locazione ai sensi dell
+85. Abitazione locata o in comodato - Locazione con reddito ISEE del comodatario non superiore a € 35000
+86. Abitazione locata o in comodato - Locazione o comodato d
+87. Abitazione locata o in comodato - Tipo contratto: Accordi/Patti territoriali
+88. Abitazione locata o in comodato - Tipo contratto: Accordi/Patti territoriali per soddisfare particolari esigenze abitative
+89. Abitazione locata o in comodato - Tipo contratto: Accordi/Patti territoriali per soddisfare particolari esigenze abitative come definiti nel regolamento
+90. Abitazione locata o in comodato - Tipo contratto: Comodato d
+91. Abitazione locata o in comodato - Tipo contratto: Locazione
+92. Abitazione locata o in comodato - Tipo contratto: Locazione - Condizioni locatario/comodatario: Soggetto in condizioni di vulnerabilità sociale/emergenza abitativa
+93. Abitazione locata o in comodato - Tipo contratto: Locazione - Destinazione d
+94. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a 12 mesi
+95. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a 18 mesi
+96. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a 5 mesi
+97. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a 6 mesi
+98. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a mesi, specifica: 1
+99. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a mesi, specifica: 12
+100. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a mesi, specifica: 12 - Destinazione d
+101. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a mesi, specifica: 6
+102. Abitazione locata o in comodato - Tipo contratto: Locazione - Durata del contratto di durata non inferiore a mesi, specifica: 8
+103. Abitazione locata o in comodato - Tipo contratto: Locazione Categoria catastale
+104. Abitazione locata o in comodato - Tipo contratto: Locazione Categoria catastale: - A/11 Abitazioni ed alloggi tipici dei luoghi
+105. Abitazione locata o in comodato - Tipo contratto: Locazione Categoria catastale: A/7 Abitazioni in villini
+106. Abitazione locata o in comodato - Tipo contratto: Locazione a canone libero
+107. Abitazione locata o in comodato - Tipo contratto: Locazione a studenti
+108. Abitazione locata o in comodato - Tipo contratto: Locazione a studenti ai sensi dell
+109. Abitazione locata o in comodato - Tipo contratto: Locazione ai sensi dell
+110. Abitazione locata o in comodato - Tipo contratto: Locazione o comodato d
+111. Abitazione locata o in comodato - Tipo contratto: Locazione, Categoria catastale: A/2 Abitazioni di tipo civile
+112. Abitazione locata o in comodato a ONLUS o altri enti del terzo settore
+113. Abitazione locata o in comodato a canone libero
+114. Abitazione locata o in comodato a parenti fino al secondo grado
+115. Abitazione locata o in comodato a parenti sino al primo grado
+116. Abitazione locata o in comodato a parenti sino al secondo grado
+117. Abitazione locata o in comodato a soggetti in condizioni di vulnerabilità sociale/emergenza abitativa
+118. Abitazione locata o in comodato a soggetto in condizioni di vulnerabilità sociale/emergenza abitativa
+119. Abitazione locata o in comodato a studenti
+120. Abitazione locata o in comodato a studenti ai sensi dell
+121. Abitazione locata o in comodato ai sensi dell
+122. Abitazione locata o in comodato con accordi/patti territoriali
+123. Abitazione locata o in comodato con contratti di Accordi/Patti territoriali
+124. Abitazione locata o in comodato con contratti di accordi/patti territoriali
+125. Abitazione locata o in comodato con contratti di locazione ai sensi dell
+126. Abitazione locata o in comodato con contratti di tipo Accordi/Patti territoriali
+127. Abitazione locata o in comodato con contratti specifici
+128. Abitazione locata o in comodato con contratto a canone libero
+129. Abitazione locata o in comodato con contratto ai sensi dell
+130. Abitazione locata o in comodato con contratto di Accordi/Patti territoriali
+131. Abitazione locata o in comodato con contratto di Comodato d
+132. Abitazione locata o in comodato con contratto di comodato d
+133. Abitazione locata o in comodato con contratto di durata non inferiore a 12 mesi
+134. Abitazione locata o in comodato con contratto di durata non inferiore a 36 mesi
+135. Abitazione locata o in comodato con contratto di locazione
+136. Abitazione locata o in comodato con contratto di locazione a canone libero
+137. Abitazione locata o in comodato con contratto di locazione a studenti
+138. Abitazione locata o in comodato con contratto di locazione a studenti ai sensi dell
+139. Abitazione locata o in comodato con contratto di locazione ai sensi dell
+140. Abitazione locata o in comodato con contratto di locazione o comodato d
+141. Abitazione locata o in comodato con contratto di locazione registrato
+142. Abitazione locata o in comodato con contratto registrato
+143. Abitazione locata o in comodato con contratto registrato e condizioni di difficoltà economiche
+144. Abitazione locata o in comodato con contratto registrato e condizioni diverse
+145. Abitazione locata o in comodato con contratto registrato e condizioni locatario/comodatario parenti sino al primo grado
+146. Abitazione locata o in comodato con contratto registrato e condizioni specifiche
+147. Abitazione locata o in comodato con contratto registrato e destinazione d
+148. Abitazione locata o in comodato con contratto registrato e utilizzata come abitazione principale
+149. Abitazione locata o in comodato con contratto registrato e utilizzata come abitazione principale sino al terzo grado in linea retta
+150. Abitazione locata o in comodato con contratto registrato e utilizzata come abitazione principale, ipotesi diverse
+151. Abitazione locata o in comodato con contratto registrato, categorie A/2, A/3, A/4, A/5, A/6, A/7, A/11
+152. Abitazione locata o in comodato con contratto registrato, categorie catastali A/2, A/3, A/4, A/5, A/6, A/7, A/11
+153. Abitazione locata o in comodato con contratto registrato, condizioni diverse
+154. Abitazione locata o in comodato con contratto registrato, condizioni locatario/comodatario: parenti sino al primo grado
+155. Abitazione locata o in comodato con contratto registrato, condizioni particolari
+156. Abitazione locata o in comodato con contratto registrato, destinazione d
+157. Abitazione locata o in comodato con contratto registrato, ipotesi diverse da quelle di cui all
+158. Abitazione locata o in comodato con contratto registrato, utilizzata come abitazione principale
+159. Abitazione locata o in comodato con contratto registrato, utilizzata come abitazione principale, categorie catastali A/1, A/2, A/3, A/4, A/5, A/6, A/7
+160. Abitazione locata o in comodato con contratto registrato, utilizzata come abitazione principale, categorie catastali A/2, A/3, A/4, A/5, A/6, A/7, A/11
+161. Abitazione locata o in comodato con contratto registrato, utilizzata come abitazione principale, ipotesi diverse
+162. Abitazione locata o in comodato con contratto registrato, utilizzata come abitazione principale, sino al secondo grado in linea retta e collaterale
+163. Abitazione locata o in comodato con destinazione d
+164. Abitazione locata o in comodato con particolari condizioni
+165. Abitazione locata o in comodato con specifiche categorie catastali
+166. Abitazione locata o in comodato con ulteriori condizioni stabilite dal comune
+167. Abitazione locata o in comodato d
+168. Abitazione locata o in comodato dentro il centro storico
+169. Abitazione locata o in comodato di proprietà di ONLUS o enti del terzo settore
+170. Abitazione locata o in comodato in zone esondabili dal fiume Secchia 2014
+171. Abitazione locata o in comodato in zone specifiche
+172. Abitazione locata o in comodato purché l
+173. Abitazione locata o in comodato senza contratto registrato
+174. Abitazione locata o in comodato utilizzata come abitazione principale
+175. Abitazione locata o in comodato, categoria A/1, A/2, A/3, A/4, A/5, A/6, A/7, A/8, A/9
+176. Abitazione locata o in comodato, categoria catastale A/2, A/3, A/4, A/5, A/6, A/7
+177. Abitazione locata o in comodato, categoria catastale A/2, A/3, A/4, A/5, A/6, A/7, in comodato d
+178. Abitazione locata o in comodato, categorie A/2, A/3, A/4, A/5, A/6, A/7
+179. Abitazione locata o in comodato, comodato d
+180. Abitazione locata o in comodato, contratto ai sensi dell
+181. Abitazione locata o in comodato, contratto di comodato d
+182. Abitazione locata o in comodato, contratto di locazione a studenti
+183. Abitazione locata o in comodato, contratto di locazione ai sensi dell
+184. Abitazione locata o in comodato, locazione a studenti ai sensi dell
+185. Abitazione locata o in comodato, locazione ai sensi dell
+186. Abitazione locata o in comodato, tipo contratto: Accordi/Patti territoriali
+187. Abitazione locata o in comodato, tipo contratto: Accordi/Patti territoriali con destinazione d
+188. Abitazione locata o in comodato, tipo contratto: Comodato d
+189. Abitazione locata o in comodato, tipo contratto: Locazione
+190. Abitazione locata o in comodato, tipo contratto: Locazione ai sensi dell
+191. Abitazione locata o in comodato, tipo contratto: Locazione o comodato d
+192. Abitazione locata o in comodato, tipo contratto: Locazione, categorie catastali A/1, A/8, A/9
+193. Abitazione locata o in comodato, tipo contratto: Locazione, categorie catastali A/2, A/3, A/4, A/5, A/6, A/7
+194. Abitazione locata o in comodato, tipo contratto: Locazione, destinazione d
+195. Abitazione locata o in comodato, tipo contratto: comodato d
+196. Abitazione locata o in comodato, tipo contratto: locazione
+197. Abitazione locata o in comodato, utilizzata come abitazione principale
+198. Abitazione principale
+199. Abitazione principale assimilata
+200. Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze
+201. Abitazione principale e relative pertinenze
+202. Abitazione utilizzata direttamente dal soggetto passivo
+203. Abitazione utilizzata direttamente dal soggetto passivo - Categoria catastale: A/1, A/8, A/9
+204. Abitazione utilizzata direttamente dal soggetto passivo - Requisiti del soggetto passivo: Di proprietà di ONLUS o enti del terzo settore
+205. Abitazione utilizzata direttamente dal soggetto passivo con handicap grave
+206. Abitazione utilizzata direttamente dal soggetto passivo con invalidità civile riconosciuta al 100%
+207. Abitazione utilizzata direttamente dal soggetto passivo di categoria catastale A/11
+208. Abitazione utilizzata direttamente dal soggetto passivo di proprietà di ONLUS o enti del terzo settore
+209. Abitazione utilizzata direttamente dal soggetto passivo, categoria A/6
+210. Abitazione utilizzata direttamente dal soggetto passivo, categoria catastale A/1, A/8, A/9, con invalidità civile
+211. Abitazione utilizzata direttamente dal soggetto passivo, categoria catastale A/1, A/8, A/9, con requisiti specifici
+212. Abitazione utilizzata direttamente dal soggetto passivo, di proprietà di ONLUS o enti del terzo settore
+213. Abitazioni non locate e non concesse in comodato
+214. Abitazioni non locate e non concesse in comodato - Fabbricati divenuti inagibili a seguito di calamità naturali
+215. Abitazioni residenziali situate in determinate zone
+216. Abitazioni residenziali situate in determinate zone soggette a limiti vincolati
+217. Alloggi regolarmente assegnati dagli IACP o dagli enti di edilizia residenziale pubblica
+218. Alloggi regolarmente assegnati dagli IACP o dagli enti di edilizia residenziale pubblica aventi le stesse finalità
+219. Alloggi regolarmente assegnati dagli IACP o dagli enti di edilizia residenziale pubblica aventi le stesse finalità - Fabbricati divenuti inagibili a seguito di calamità naturali
+220. Altri fabbricati
+221. Altri fabbricati a disposizione di ONLUS o enti del terzo settore
+222. Altri fabbricati di categoria A/10, C/1, C/3, C/4, C/5
+223. Altri fabbricati di categoria A10, C locati o concessi in comodato per attività produttiva e/o commerciale
+224. Altri fabbricati di categoria A10, C locati o concessi in comodato per scopi istituzionali o di pubblica utilità, senza fine di lucro
+225. Altri fabbricati di categoria A10, C utilizzati per attività produttiva e/o commerciale
+226. Altri fabbricati di categoria A10, C utilizzati per attività produttiva e/o commerciale o per l
+227. Altri fabbricati di categoria A10, C utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+228. Altri fabbricati di categoria A10, C, di proprietà di ONLUS o enti del terzo settore
+229. Altri fabbricati di categoria C
+230. Altri fabbricati di categoria C (C/1) a disposizione
+231. Altri fabbricati di categoria C (C/1) utilizzati direttamente dal soggetto passivo
+232. Altri fabbricati di categoria C utilizzati per attività produttiva e/o commerciale
+233. Altri fabbricati di categoria C, concessi in comodato
+234. Altri fabbricati di categoria C, utilizzati direttamente dal soggetto passivo
+235. Altri fabbricati di categoria C, utilizzati per attività produttiva e/o commerciale
+236. Altri fabbricati di proprietà di ONLUS o enti del terzo settore
+237. Altri fabbricati diversi
+238. Altri fabbricati diversi - Immobili di categoria A10, C
+239. Altri fabbricati diversi dall
+240. Altri fabbricati in comodato d
+241. Altri fabbricati locati ai sensi dell
+242. Altri fabbricati locati o in comodato
+243. Altri fabbricati locati o in comodato con contratto ai sensi dell
+244. Altri fabbricati locati o in comodato con contratto di comodato d
+245. Altri fabbricati locati o in comodato con contratto di locazione ai sensi dell
+246. Altri fabbricati locati o in comodato con contratto di locazione o comodato d
+247. Altri fabbricati residenziali
+248. Altri fabbricati, abitazione a disposizione, categoria A/3 in una zona specifica
+249. Altri fabbricati, abitazione a disposizione, categoria A/4 e A/5
+250. Altri fabbricati, abitazione locata o in comodato
+251. Altri fabbricati, abitazione locata o in comodato a studenti, categorie A/3, A/4, A/5, A/6
+252. Altri fabbricati, abitazione locata o in comodato, categorie A/2, A/3, A/4, A/5
+253. Altri fabbricati, abitazione locata o in comodato, categorie A/3, A/4, A/5, A/6
+254. Altri fabbricati, abitazione locata o in comodato, categorie A/6, A/7
+255. Altri fabbricati, abitazione locata o in comodato, locazione a studenti
+256. Altri fabbricati, abitazione locata o in comodato, locazione ai sensi dell
+257. Altri fabbricati, alloggi regolarmente assegnati dagli IACP o dagli enti di edilizia residenziale pubblica
+258. Altri fabbricati, immobili di categoria A/10
+259. Altri fabbricati, immobili di categoria A/10, C
+260. Altri fabbricati, immobili di categoria A10, C
+261. Altri fabbricati, immobili di categoria A10, C in Via Caselle
+262. Altri fabbricati, immobili di categoria C
+263. Altri fabbricati, immobili di categoria C, categoria C/1
+264. Altri fabbricati, immobili di categoria C, categoria C/1, C/3
+265. Altri fabbricati, immobili di categoria C, categoria C/1, C/3, utilizzati direttamente dal soggetto passivo
+266. Altri fabbricati, immobili di categoria C, categoria C/1, dentro il centro storico
+267. Altri fabbricati, immobili di categoria C, categorie C/1, C/2, C/3
+268. Aree e Fabbricabili situate in determinate zone: Attrezzature pubbliche di progetto - Verde privato vincolato
+269. Aree e Fabbricabili situate in determinate zone: Zona omogenea A e Zona Omogenea 1
+270. Aree fabbricabili
+271. Aree fabbricabili - Tipologia: Diverse da residenziali - Situate in determinate zone
+272. Aree fabbricabili - Tipologia: Diverse da residenziali - Situate in determinate zone: Aree artigianali e industriali, verde privato
+273. Aree fabbricabili - Tipologia: Diverse da residenziali - Situate in determinate zone: Aree turistico ricettive alberghiere
+274. Aree fabbricabili - Tipologia: Diverse da residenziali - Situate in determinate zone: Classificate nel gruppo catastale C, non lottizzate
+275. Aree fabbricabili - Tipologia: Diverse da residenziali - Situate in determinate zone: ZONA PIP/2
+276. Aree fabbricabili di proprietà di ONLUS o enti del terzo settore
+277. Aree fabbricabili diverse da residenziali
+278. Aree fabbricabili diverse da residenziali situate in centro storico durante il periodo di recupero del fabbricato
+279. Aree fabbricabili diverse da residenziali situate in determinate zone
+280. Aree fabbricabili diverse da residenziali situate in determinate zone con vincolo preordinato all
+281. Aree fabbricabili diverse da residenziali situate in determinate zone: zona p.i.p.
+282. Aree fabbricabili diverse da residenziali situate nel Distretto di Trasformazione n. 20 Fiera-Kennedy
+283. Aree fabbricabili residenziali situate in centro storico durante il periodo di recupero del fabbricato
+284. Aree fabbricabili residenziali situate in determinate zone
+285. Aree fabbricabili residenziali situate in determinate zone con vincolo preordinato all
+286. Aree fabbricabili residenziali situate in determinate zone da 0 a 500 mq utilizzati dai proprietari a scopi agricoli o incolti
+287. Aree fabbricabili residenziali situate in determinate zone inferiori a 100 mq
+288. Aree fabbricabili residenziali situate nel Distretto di Trasformazione n. 20 Fiera-Kennedy
+289. Aree fabbricabili situate in determinate zone
+290. Aree fabbricabili situate in determinate zone con rinuncia a diritto di edificazione
+291. Aree fabbricabili situate in determinate zone con vincolo per esproprio
+292. Aree fabbricabili situate in determinate zone destinate a verde
+293. Aree fabbricabili situate in determinate zone: AREE CLASSE C1-AREE NON ANCORA LOTTIZZATE
+294. Aree fabbricabili situate in determinate zone: AT09 rientranti nel bando Investinlombardy
+295. Aree fabbricabili situate in determinate zone: Altre Zone
+296. Aree fabbricabili situate in determinate zone: DISCARICA
+297. Aree fabbricabili situate in determinate zone: Ricadenti in area PG4
+298. Aree fabbricabili situate in determinate zone: ZONA GIALLA P2 DEL P.A.I. - MEDIA PERICOLOSITÀ IDROGEOLOGICA
+299. Aree fabbricabili situate in determinate zone: ZONA ROSSA P3 DEL P.A.I. - ALTA PERICOLOSITÀ IDROGEOLOGICA
+300. Aree fabbricabili situate in determinate zone: ZONE DI TIPO A
+301. Aree fabbricabili situate in determinate zone: ZONE DI TIPO B
+302. Aree fabbricabili situate in determinate zone: ZONE DI TIPO C
+303. Aree fabbricabili situate in determinate zone: ZONE DI TIPO D
+304. Aree fabbricabili situate in determinate zone: Zone A e C lottizzate
+305. Aree fabbricabili situate nel futuro Parco Commerciale in Via Caselle
+306. Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili
+307. Esenti
+308. Esercizi commerciali e artigianali in zone chiuse al traffico per lavori pubblici
+309. Esercizi commerciali e artigianali situati in zone chiuse al traffico
+310. Esercizi commerciali e artigianali situati in zone chiuse al traffico a causa di lavori pubblici
+311. Esercizi commerciali e artigianali situati in zone chiuse al traffico per lavori pubblici
+312. Esercizi commerciali e artigianali situati in zone precluse al traffico a causa dello svolgimento di lavori per la realizzazione di opere pubbliche che si protraggono per oltre sei mesi
+313. Esercizi commerciali e artigianali situati in zone precluse al traffico a causa di lavori pubblici
+314. Fabbricati a disposizione di proprietà di ONLUS o enti del terzo settore
+315. Fabbricati a disposizione o utilizzati da ONLUS o altri enti del terzo settore
+316. Fabbricati a disposizione o utilizzati da ONLUS o enti del terzo settore
+317. Fabbricati a disposizione o utilizzati direttamente dal soggetto passivo
+318. Fabbricati a disposizione o utilizzati per attività produttiva e/o commerciale o per l
+319. Fabbricati a disposizione o utilizzati, immobili a disposizione da almeno 12 mesi
+320. Fabbricati a disposizione o utilizzati: Immobili a disposizione
+321. Fabbricati a disposizione o utilizzati: Immobili a disposizione - Purché la condizione di immobile a disposizione persista da almeno 12 mesi
+322. Fabbricati a disposizione o utilizzati: Immobili concessi in comodato
+323. Fabbricati a disposizione o utilizzati: Immobili locati
+324. Fabbricati a disposizione o utilizzati: Immobili locati - Utilizzato per attività produttiva e/o commerciale o per l
+325. Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato
+326. Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+327. Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Codice ATECO: 86 - ASSISTENZA SANITARIA
+328. Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Codice ATECO: 87 - SERVIZI DI ASSISTENZA SOCIALE RESIDENZIALE
+329. Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Destinazione d
+330. Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo
+331. Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo - Destinazione d
+332. Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo - Utilizzato per attività produttiva e/o commerciale o per l
+333. Fabbricati appartenenti al gruppo catastale D
+334. Fabbricati appartenenti al gruppo catastale D (D/1, D/2, D/3, D/4, D/6, D/7, D/8, D/9)
+335. Fabbricati appartenenti al gruppo catastale D (D/1, D/2, D/3, D/4, D/6, D/7, D/9)
+336. Fabbricati appartenenti al gruppo catastale D (D/1, D/2, D/3, D/6)
+337. Fabbricati appartenenti al gruppo catastale D (D/1, D/7, D/8) locati o concessi in comodato
+338. Fabbricati appartenenti al gruppo catastale D (D/1, D/7, D/8) utilizzati direttamente dal soggetto passivo
+339. Fabbricati appartenenti al gruppo catastale D (D/5)
+340. Fabbricati appartenenti al gruppo catastale D (D/5) istituto di credito, cambio e assicurazione con fine di lucro
+341. Fabbricati appartenenti al gruppo catastale D (D/5, D/8)
+342. Fabbricati appartenenti al gruppo catastale D - Altre attività connesse alle telecomunicazioni
+343. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici
+344. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici - Rendita catastale €: 2654,59
+345. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici - Rendita catastale €: 2760
+346. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici - Rendita catastale €: 3532,57
+347. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici - Rendita catastale €: 4260,00
+348. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici - Rendita catastale €: 4270,00
+349. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici - Rendita catastale €: 48436,00
+350. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/1 Opifici, D/7 Fabbricati costruiti o adattati per le speciali esigenze di un
+351. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/2 Alberghi e pensioni con fine di lucro
+352. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/2, D/3, D/4, D/6, D/7
+353. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro
+354. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/5 Istituto di credito, cambio e assicurazione con fine di lucro
+355. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/6 Fabbricati e locali per esercizi sportivi con fine di lucro
+356. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/7 Fabbricati costruiti o adattati per le speciali esigenze di un
+357. Fabbricati appartenenti al gruppo catastale D - Categoria catastale: D/8
+358. Fabbricati appartenenti al gruppo catastale D - Commercio di energia elettrica
+359. Fabbricati appartenenti al gruppo catastale D - D/1 Opifici
+360. Fabbricati appartenenti al gruppo catastale D - D/1, D/3, D/5
+361. Fabbricati appartenenti al gruppo catastale D - D/2 Alberghi e pensioni con fine di lucro
+362. Fabbricati appartenenti al gruppo catastale D - D/2 Alberghi e pensioni con fine di lucro - D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro
+363. Fabbricati appartenenti al gruppo catastale D - D/2, D/6, D/8
+364. Fabbricati appartenenti al gruppo catastale D - D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro
+365. Fabbricati appartenenti al gruppo catastale D - D/4 Case di cura ed ospedali con fine di lucro - D/5 Istituto di credito, cambio e assicurazione con fine di lucro
+366. Fabbricati appartenenti al gruppo catastale D - D/4 Case di cura ed ospedali con fine di lucro - D/6 Fabbricati e locali per esercizi sportivi con fine di lucro - D/7 Fabbricati costruiti o adattati per le speciali esigenze di un
+367. Fabbricati appartenenti al gruppo catastale D - D/6 Fabbricati e locali per esercizi sportivi con fine di lucro
+368. Fabbricati appartenenti al gruppo catastale D - D/7 Fabbricati costruiti o adattati per le speciali esigenze di un
+369. Fabbricati appartenenti al gruppo catastale D - D/8 Fabbricati costruiti o adattati per le speciali esigenze di un
+370. Fabbricati appartenenti al gruppo catastale D - Discount di alimentari
+371. Fabbricati appartenenti al gruppo catastale D - Distribuzione di energia elettrica
+372. Fabbricati appartenenti al gruppo catastale D - Erogazione di servizi di accesso ad internet ISP
+373. Fabbricati appartenenti al gruppo catastale D - Fabbricati divenuti inagibili a seguito di calamità naturali
+374. Fabbricati appartenenti al gruppo catastale D - Immobili a disposizione
+375. Fabbricati appartenenti al gruppo catastale D - Immobili ad uso produttivo classificati nel gruppo catastale D centrali idroelettriche, istituti di credito e relative pertinenze
+376. Fabbricati appartenenti al gruppo catastale D - Immobili concessi in comodato
+377. Fabbricati appartenenti al gruppo catastale D - Immobili locati
+378. Fabbricati appartenenti al gruppo catastale D - Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+379. Fabbricati appartenenti al gruppo catastale D - Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Codice ATECO: 35.11.00 - Produzione di energia elettrica
+380. Fabbricati appartenenti al gruppo catastale D - Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Codice ATECO: 35.12.00 - Trasmissione di energia elettrica
+381. Fabbricati appartenenti al gruppo catastale D - Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Codice ATECO: 35.13.00 - Distribuzione di energia elettrica
+382. Fabbricati appartenenti al gruppo catastale D - Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Codice ATECO: 49.4
+383. Fabbricati appartenenti al gruppo catastale D - Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Codice ATECO: 52
+384. Fabbricati appartenenti al gruppo catastale D - Immobili utilizzati direttamente dal soggetto passivo
+385. Fabbricati appartenenti al gruppo catastale D - Intermediazione in servizi di telecomunicazione e trasmissione dati
+386. Fabbricati appartenenti al gruppo catastale D - Produzione di energia elettrica
+387. Fabbricati appartenenti al gruppo catastale D - Supermercati
+388. Fabbricati appartenenti al gruppo catastale D - Telecomunicazioni mobili
+389. Fabbricati appartenenti al gruppo catastale D - Telecomunicazioni satellitari
+390. Fabbricati appartenenti al gruppo catastale D - Trasmissione di energia elettrica
+391. Fabbricati appartenenti al gruppo catastale D a disposizione
+392. Fabbricati appartenenti al gruppo catastale D a disposizione di ONLUS o enti del terzo settore
+393. Fabbricati appartenenti al gruppo catastale D categoria D/5
+394. Fabbricati appartenenti al gruppo catastale D con impianti fotovoltaici
+395. Fabbricati appartenenti al gruppo catastale D con potenza impianti produzione energia superiore a 15 kW
+396. Fabbricati appartenenti al gruppo catastale D con specifiche categorie
+397. Fabbricati appartenenti al gruppo catastale D con specifiche categorie e requisiti
+398. Fabbricati appartenenti al gruppo catastale D con specifiche condizioni
+399. Fabbricati appartenenti al gruppo catastale D con specifiche destinazioni d
+400. Fabbricati appartenenti al gruppo catastale D con superficie non superiore a 1500 MQ, utilizzati direttamente dal soggetto passivo
+401. Fabbricati appartenenti al gruppo catastale D con superficie non superiore a 300 MQ, utilizzati direttamente dal soggetto passivo
+402. Fabbricati appartenenti al gruppo catastale D concessi in comodato
+403. Fabbricati appartenenti al gruppo catastale D concessi in comodato a ONLUS o altri enti del terzo settore
+404. Fabbricati appartenenti al gruppo catastale D dentro il centro storico
+405. Fabbricati appartenenti al gruppo catastale D destinati a nuovo insediamento produttivo
+406. Fabbricati appartenenti al gruppo catastale D di nuova costruzione e ampliamenti
+407. Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10
+408. Fabbricati appartenenti al gruppo catastale D in Zone Economiche Speciali
+409. Fabbricati appartenenti al gruppo catastale D in una zona specificamente indicata dal comune
+410. Fabbricati appartenenti al gruppo catastale D in una zona specificamente indicata dal comune con funzioni ammesse
+411. Fabbricati appartenenti al gruppo catastale D in una zona specificamente indicata dal comune con funzioni ammesse e privi di giochi di azzardo
+412. Fabbricati appartenenti al gruppo catastale D in una zona specificamente indicata dal comune con funzioni non ammesse
+413. Fabbricati appartenenti al gruppo catastale D in zona ZES
+414. Fabbricati appartenenti al gruppo catastale D in zona specifica
+415. Fabbricati appartenenti al gruppo catastale D in zone soggette ad un alto tasso di abbandono di attività economico-commerciale, locati
+416. Fabbricati appartenenti al gruppo catastale D in zone soggette ad un alto tasso di abbandono di attività economico-commerciale, utilizzati direttamente dal soggetto passivo
+417. Fabbricati appartenenti al gruppo catastale D in zone specifiche
+418. Fabbricati appartenenti al gruppo catastale D locati
+419. Fabbricati appartenenti al gruppo catastale D locati o concessi in comodato
+420. Fabbricati appartenenti al gruppo catastale D oggetto di attività di recupero per miglioramento del decoro urbano o della classe energetica
+421. Fabbricati appartenenti al gruppo catastale D per unità immobiliari ad uso produttivo soggetti NON residenti o NON aventi sede legale nel Comune di Nulvi
+422. Fabbricati appartenenti al gruppo catastale D situati nel centro urbano
+423. Fabbricati appartenenti al gruppo catastale D situati nel perimetro della Z.E.S. Adriatica Interregionale Puglia e Molise
+424. Fabbricati appartenenti al gruppo catastale D specifici
+425. Fabbricati appartenenti al gruppo catastale D utilizzati da ONLUS o altri enti del terzo settore
+426. Fabbricati appartenenti al gruppo catastale D utilizzati da persona fisica
+427. Fabbricati appartenenti al gruppo catastale D utilizzati da persona giuridica
+428. Fabbricati appartenenti al gruppo catastale D utilizzati direttamente dal soggetto passivo
+429. Fabbricati appartenenti al gruppo catastale D utilizzati direttamente dal soggetto passivo per attività produttiva e/o commerciale
+430. Fabbricati appartenenti al gruppo catastale D utilizzati per attività produttiva e/o commerciale
+431. Fabbricati appartenenti al gruppo catastale D utilizzati per attività produttiva e/o commerciale o per l
+432. Fabbricati appartenenti al gruppo catastale D utilizzati per la produzione di energia elettrica
+433. Fabbricati appartenenti al gruppo catastale D utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+434. Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici
+435. Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici e D/7, utilizzati direttamente dal soggetto passivo
+436. Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, immobili locati
+437. Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, utilizzati direttamente dal soggetto passivo
+438. Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, utilizzati direttamente dal soggetto passivo con meno di 49 dipendenti
+439. Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, utilizzati direttamente dal soggetto passivo per impianti fotovoltaici
+440. Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, utilizzati direttamente dal soggetto passivo, microimprese
+441. Fabbricati appartenenti al gruppo catastale D, categoria D/1 e D/2
+442. Fabbricati appartenenti al gruppo catastale D, categoria D/1 e D/5
+443. Fabbricati appartenenti al gruppo catastale D, categoria D/1 e D/7
+444. Fabbricati appartenenti al gruppo catastale D, categoria D/1 e D/8 in una zona specifica
+445. Fabbricati appartenenti al gruppo catastale D, categoria D/1, D/2, D/7
+446. Fabbricati appartenenti al gruppo catastale D, categoria D/1, D/7, D/8
+447. Fabbricati appartenenti al gruppo catastale D, categoria D/1, D/7, utilizzati direttamente dal soggetto passivo
+448. Fabbricati appartenenti al gruppo catastale D, categoria D/2
+449. Fabbricati appartenenti al gruppo catastale D, categoria D/2 Alberghi e pensioni con fine di lucro
+450. Fabbricati appartenenti al gruppo catastale D, categoria D/2 e D/5
+451. Fabbricati appartenenti al gruppo catastale D, categoria D/2 e D/8
+452. Fabbricati appartenenti al gruppo catastale D, categoria D/2, D/3, D/4, D/5, D/6, D/9
+453. Fabbricati appartenenti al gruppo catastale D, categoria D/2, D/3, utilizzati per attività produttiva e/o commerciale
+454. Fabbricati appartenenti al gruppo catastale D, categoria D/3
+455. Fabbricati appartenenti al gruppo catastale D, categoria D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro
+456. Fabbricati appartenenti al gruppo catastale D, categoria D/3 e D/6
+457. Fabbricati appartenenti al gruppo catastale D, categoria D/3 utilizzati da ONLUS o altri enti del terzo settore
+458. Fabbricati appartenenti al gruppo catastale D, categoria D/3, D/4, D/6
+459. Fabbricati appartenenti al gruppo catastale D, categoria D/3, immobili locati
+460. Fabbricati appartenenti al gruppo catastale D, categoria D/3, immobili utilizzati direttamente
+461. Fabbricati appartenenti al gruppo catastale D, categoria D/5
+462. Fabbricati appartenenti al gruppo catastale D, categoria D/5 Istituto di credito, cambio e assicurazione con fine di lucro
+463. Fabbricati appartenenti al gruppo catastale D, categoria D/5 e D/8
+464. Fabbricati appartenenti al gruppo catastale D, categoria D/5, istituti di credito
+465. Fabbricati appartenenti al gruppo catastale D, categoria D/6
+466. Fabbricati appartenenti al gruppo catastale D, categoria D/7
+467. Fabbricati appartenenti al gruppo catastale D, categoria D/7 e D/8
+468. Fabbricati appartenenti al gruppo catastale D, categoria D/7 e D/8 in zona ZLS Emilia Romagna
+469. Fabbricati appartenenti al gruppo catastale D, categoria D/8
+470. Fabbricati appartenenti al gruppo catastale D, categoria D/8 con superficie non inferiore a 1500 MQ
+471. Fabbricati appartenenti al gruppo catastale D, categoria D/8 con superficie non superiore a 1499 MQ
+472. Fabbricati appartenenti al gruppo catastale D, categoria D/8, ipermercati
+473. Fabbricati appartenenti al gruppo catastale D, categoria D/8, superficie non inferiore a 9000 MQ
+474. Fabbricati appartenenti al gruppo catastale D, categoria D/8, supermercati
+475. Fabbricati appartenenti al gruppo catastale D, categoria D/9
+476. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/1
+477. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/1 Opifici
+478. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/1 Opifici, in una zona specificamente indicata dal comune
+479. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/1 e D/2
+480. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/1 e D/5
+481. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2
+482. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2 Alberghi e pensioni con fine di lucro
+483. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2 e D/4
+484. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2 e D/5
+485. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2 e D/8
+486. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2 e D/8, concessi in comodato
+487. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2 e D/8, utilizzati direttamente dal soggetto passivo
+488. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/3
+489. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/3 e D/6
+490. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/3, attività di proiezione cinematografica
+491. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/3, gestione di teatri e sale da concerto
+492. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/4
+493. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/4 Case di cura ed ospedali con fine di lucro
+494. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/5
+495. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/5 Istituto di credito, cambio e assicurazione con fine di lucro
+496. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/5 e D/8
+497. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/6
+498. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/7 e D/8
+499. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/8
+500. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/8, codice ATECO: 47.11
+501. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/8, codice ATECO: 47.2
+502. Fabbricati appartenenti al gruppo catastale D, categoria catastale D/8, codice ATECO: 56.3
+503. Fabbricati appartenenti al gruppo catastale D, categoria impianti di energia rinnovabile fotovoltaici a terra ed eolici
+504. Fabbricati appartenenti al gruppo catastale D, categorie D/1 Opifici e D/8 Fabbricati costruiti o adattati per le speciali esigenze di un
+505. Fabbricati appartenenti al gruppo catastale D, categorie D/1 e D/5
+506. Fabbricati appartenenti al gruppo catastale D, categorie D/1 e D/7
+507. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/2, D/3, D/4, D/6, D/7, D/8
+508. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/2, D/3, D/4, D/6, D/7, D/8, D/9
+509. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/2, D/3, D/4, D/6, D/7, D/8, D/9, utilizzati direttamente dal soggetto passivo per attività produttiva e/o commerciale
+510. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/2, D/3, D/4, D/6, D/7, D/9
+511. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/2, D/7, D/8
+512. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/3, D/4, D/6, D/7
+513. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/3, D/4, D/6, D/7, D/9
+514. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/7, D/8
+515. Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/7, D/8 utilizzati da imprese che hanno ampliato la propria attività economica
+516. Fabbricati appartenenti al gruppo catastale D, categorie D/4 e D/5
+517. Fabbricati appartenenti al gruppo catastale D, categorie D/4, D/5, D/8
+518. Fabbricati appartenenti al gruppo catastale D, categorie D/5 e D/8
+519. Fabbricati appartenenti al gruppo catastale D, categorie D/7 e D/8
+520. Fabbricati appartenenti al gruppo catastale D, categorie catastali D/1, D/2, D/3, D/4, D/6, D/7, D/8
+521. Fabbricati appartenenti al gruppo catastale D, categorie catastali D/1, D/2, D/3, D/4, D/6, D/7, D/8, D/9
+522. Fabbricati appartenenti al gruppo catastale D, categorie catastali D/1, D/2, D/4, D/5, D/6, D/7, D/8, D/9
+523. Fabbricati appartenenti al gruppo catastale D, categorie catastali D/1, D/3, D/4, D/6, D/7, D/8, D/9
+524. Fabbricati appartenenti al gruppo catastale D, categorie catastali D/1, D/7, D/8 in zone soggette ad un alto tasso di abbandono di attività economico-commerciale
+525. Fabbricati appartenenti al gruppo catastale D, categorie catastali D/2, D/8, D/9
+526. Fabbricati appartenenti al gruppo catastale D, immobili a disposizione
+527. Fabbricati appartenenti al gruppo catastale D, immobili in Via Caselle
+528. Fabbricati appartenenti al gruppo catastale D, immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+529. Fabbricati appartenenti al gruppo catastale D, immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo, destinazione d
+530. Fabbricati appartenenti al gruppo catastale D, locati o concessi in comodato, utilizzati per attività innovative - Start up
+531. Fabbricati appartenenti al gruppo catastale D, locati o concessi in comodato, utilizzati per attività produttiva e/o commerciale
+532. Fabbricati appartenenti al gruppo catastale D, per impianti fotovoltaici a terra
+533. Fabbricati appartenenti al gruppo catastale D, utilizzati da ONLUS o altri enti del terzo settore
+534. Fabbricati appartenenti al gruppo catastale D/1 Opifici
+535. Fabbricati appartenenti al gruppo catastale D/3 utilizzati per attività di proiezione cinematografica
+536. Fabbricati appartenenti al gruppo catastale D/3, concessi in comodato per attività di proiezione cinematografica
+537. Fabbricati appartenenti al gruppo catastale D/3, concessi in comodato per gestione di teatri, sale da concerto e altre strutture artistiche
+538. Fabbricati appartenenti al gruppo catastale D/3, utilizzati direttamente dal soggetto passivo per attività di proiezione cinematografica
+539. Fabbricati appartenenti al gruppo catastale D/3, utilizzati direttamente dal soggetto passivo per gestione di teatri, sale da concerto e altre strutture artistiche
+540. Fabbricati appartenenti al gruppo catastale D/5 e D/8
+541. Fabbricati costruiti e destinati dall’impresa costruttrice alla vendita
+542. Fabbricati di categoria D/2 Alberghi e pensioni con fine di lucro
+543. Fabbricati di categoria catastale C/1 Negozi e botteghe e C/3 Laboratori per arti e mestieri
+544. Fabbricati di categoria catastale D/2 Alberghi e pensioni con fine di lucro
+545. Fabbricati di categoria catastale D/5 Istituto di credito, cambio e assicurazione con fine di lucro
+546. Fabbricati di civile abitazione destinati ad alloggi sociali
+547. Fabbricati di civile abitazione destinati ad alloggi sociali non adibiti ad abitazione principale
+548. Fabbricati di civile abitazione destinati ad alloggi sociali non adibiti ad abitazione principale per il periodo di espletamento delle attività di assegnazione
+549. Fabbricati di proprietà di ONLUS o enti del terzo settore
+550. Fabbricati di proprietà di ONLUS o enti del terzo settore a disposizione
+551. Fabbricati di proprietà di ONLUS o enti del terzo settore utilizzati direttamente
+552. Fabbricati di proprietà di ONLUS o enti del terzo settore, diverse da residenziali
+553. Fabbricati divenuti inagibili a seguito di calamità naturali
+554. Fabbricati diverse da residenziali situate in determinate zone
+555. Fabbricati diversi da residenziali situati in centro storico durante interventi di recupero
+556. Fabbricati diversi da residenziali situati in determinate zone
+557. Fabbricati diversi da residenziali situati in determinate zone con vincolo preordinato all
+558. Fabbricati diversi da residenziali situati in determinate zone in centro storico durante interventi di recupero
+559. Fabbricati diversi da residenziali situati in determinate zone: Ambito di trasformazione ATI 5 Loc. Area Industriale
+560. Fabbricati diversi da residenziali situati in determinate zone: D1 - D2 - D3 - D4 - D5 - D6
+561. Fabbricati diversi da residenziali situati in determinate zone: E1
+562. Fabbricati diversi da residenziali situati in determinate zone: F1 - F2 - F3 - V/P - S1 - S2
+563. Fabbricati diversi da residenziali situati in determinate zone: Zona articolo 3.6 area per attrezzature verde attrezzato gioco, sport, parco
+564. Fabbricati diversi da residenziali situati in determinate zone: Zona articolo 4.23.4 Mod_Att_Agr modalità di attuazione dell
+565. Fabbricati diversi da residenziali situati in determinate zone: centro storico
+566. Fabbricati e impianti anche industriali adibiti e utilizzati per la produzione di energia elettrica
+567. Fabbricati e locali per esercizi sportivi con fine di lucro
+568. Fabbricati gruppo D
+569. Fabbricati gruppo D (escluso D/10)
+570. Fabbricati locati o concessi in comodato a ONLUS o altri enti del terzo settore
+571. Fabbricati non residenziali in aree P.I.P. – D1
+572. Fabbricati non residenziali in aree P.I.P. – D2
+573. Fabbricati non residenziali in aree P.I.P. – D3
+574. Fabbricati non residenziali in aree P.I.T.
+575. Fabbricati residenziali con vincolo ambientale, paesaggistico o idrogeologico
+576. Fabbricati residenziali non vincolati
+577. Fabbricati residenziali situate in determinate zone
+578. Fabbricati residenziali situati in aree sottoposte a vincolo cimiteriale
+579. Fabbricati residenziali situati in centro storico durante interventi di recupero
+580. Fabbricati residenziali situati in determinate zone
+581. Fabbricati residenziali situati in determinate zone con delibera di vincolo preordinato all
+582. Fabbricati residenziali situati in determinate zone con vincolo preordinato all
+583. Fabbricati residenziali situati in determinate zone in centro storico durante interventi di recupero
+584. Fabbricati residenziali situati in determinate zone: 1 - 2 - 3 - 4 - 5
+585. Fabbricati residenziali situati in determinate zone: A1 - A2 - A3
+586. Fabbricati residenziali situati in determinate zone: C1
+587. Fabbricati residenziali situati in determinate zone: C1A - C1 - C2
+588. Fabbricati residenziali situati in determinate zone: C3 - C3A
+589. Fabbricati residenziali situati in determinate zone: C4
+590. Fabbricati residenziali situati in determinate zone: E1A
+591. Fabbricati residenziali situati in determinate zone: centro storico
+592. Fabbricati rurali ad uso strumentale
+593. Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10
+594. Fabbricati situati in determinate zone: Categoria C/2, C/3, D/2
+595. Immobili concessi in comodato a ONLUS o altri enti del terzo settore
+596. Immobili conferiti in trust a favore di persone con handicap grave
+597. Immobili conferiti in trust istituito a favore di persone con handicap grave
+598. Immobili conferiti in trust per persone con handicap grave
+599. Immobili dati in comodato gratuito
+600. Immobili dati in comodato gratuito al comune o ad altro ente territoriale
+601. Immobili dati in comodato gratuito al comune per scopi istituzionali
+602. Immobili di categoria
+603. Immobili di categoria , C - /2 Case di cura ed ospedali senza fine di lucro - /3 Prigioni e riformatori - /4 Uffici pubblici - /5 Scuole e laboratori scientifici - /6 Biblioteche, pinacoteche, musei, gallerie, accademie che non hanno sede in edifici della categoria
+604. Immobili di categoria - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme
+605. Immobili di categoria - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - /2 Case di cura ed ospedali senza fine di lucro
+606. Immobili di categoria - /5 Scuole e laboratori scientifici
+607. Immobili di categoria - Case di cura ed ospedali senza fine di lucro
+608. Immobili di categoria - Categoria catastale: - /2 Case di cura ed ospedali senza fine di lucro
+609. Immobili di categoria - Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme
+610. Immobili di categoria - Magazzini sotterranei per depositi di derrate
+611. Immobili di categoria - Scuole e laboratori scientifici
+612. Immobili di categoria - Scuole e laboratori scientifici utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+613. Immobili di categoria /1
+614. Immobili di categoria /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme
+615. Immobili di categoria /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme, /2 Case di cura ed ospedali senza fine di lucro, /3 Prigioni e riformatori, /4 Uffici pubblici, /5 Scuole e laboratori scientifici, /6 Biblioteche, pinacoteche, musei, gallerie, accademie che non hanno sede in edifici della categoria A/9, /7 Cappelle ed oratori non destinati all
+616. Immobili di categoria /1 e /2
+617. Immobili di categoria /1 e /2 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+618. Immobili di categoria /1 utilizzati direttamente dal soggetto passivo
+619. Immobili di categoria /1 utilizzati per attività dei vigili del fuoco
+620. Immobili di categoria /1 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+621. Immobili di categoria /1, /2
+622. Immobili di categoria /1, /2, /3, /4, /5, /6, /7, /8
+623. Immobili di categoria /2 Case di cura ed ospedali senza fine di lucro
+624. Immobili di categoria /5 Scuole e laboratori scientifici
+625. Immobili di categoria /5, /7 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+626. Immobili di categoria /6
+627. Immobili di categoria /7
+628. Immobili di categoria A/10
+629. Immobili di categoria A/10 Uffici e studi privati
+630. Immobili di categoria A/10 Uffici e studi privati, C/1 Negozi e botteghe, C/3 Laboratori per arti e mestieri
+631. Immobili di categoria A/10 e C
+632. Immobili di categoria A/10 e C utilizzati per attività produttiva e/o commerciale
+633. Immobili di categoria A/10 e altre categorie specifiche
+634. Immobili di categoria A/10 e altri specifici usi
+635. Immobili di categoria A/10, C
+636. Immobili di categoria A/10, C - Categoria catastale: A/10 Uffici e studi privati, C/1 Negozi e botteghe, C/3 Laboratori per arti e mestieri
+637. Immobili di categoria A/10, C - Fabbricati a disposizione o utilizzati
+638. Immobili di categoria A/10, C - Oggetto di attività di recupero per miglioramento del decoro urbano o della classe energetica
+639. Immobili di categoria A/10, C concessi in comodato
+640. Immobili di categoria A/10, C dentro il centro storico
+641. Immobili di categoria A/10, C di proprietà di ONLUS o enti del terzo settore
+642. Immobili di categoria A/10, C fuori dal centro storico
+643. Immobili di categoria A/10, C locati
+644. Immobili di categoria A/10, C utilizzati da persona giuridica
+645. Immobili di categoria A/10, C utilizzati direttamente da ONLUS o enti del terzo settore
+646. Immobili di categoria A/10, C utilizzati direttamente dal soggetto passivo
+647. Immobili di categoria A/10, C utilizzati per attività innovative - Start up
+648. Immobili di categoria A/10, C utilizzati per attività produttiva e/o commerciale
+649. Immobili di categoria A/10, C utilizzati per attività produttiva e/o commerciale o per l
+650. Immobili di categoria A/10, C, varie categorie
+651. Immobili di categoria A/10, C/1
+652. Immobili di categoria A/10, C/1 - Dentro il centro storico
+653. Immobili di categoria A/10, C/1 - Fuori dal centro storico
+654. Immobili di categoria A/10, C/1, C/2
+655. Immobili di categoria A/10, C/1, C/2, C/3
+656. Immobili di categoria A/10, C/1, C/2, C/3, C/4
+657. Immobili di categoria A/10, C/1, C/2, C/3, C/4, C/5, C/6, C/7
+658. Immobili di categoria A/10, C/1, C/2, C/3, C/6, C/7
+659. Immobili di categoria A/10, C/1, C/3
+660. Immobili di categoria A/10, C/1, C/3 concessi in comodato
+661. Immobili di categoria A/10, C/1, C/3 utilizzati direttamente dal soggetto passivo
+662. Immobili di categoria A/10, C/1, C/3 utilizzati per attività produttiva e/o commerciale o per l
+663. Immobili di categoria A/10, C/1, C/3 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+664. Immobili di categoria A/10, C/1, C/3, C/4
+665. Immobili di categoria A/10, C/1, C/3, C/4 utilizzati direttamente dal soggetto passivo
+666. Immobili di categoria A/10, C/1, C/3, C/4, C/5
+667. Immobili di categoria A/10, C/3
+668. Immobili di categoria A/10, C/3, C/4, C/5
+669. Immobili di categoria A/10, Categoria catastale
+670. Immobili di categoria A/10, Categoria catastale: - A/10 Uffici e studi privati - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - /5 Scuole e laboratori scientifici
+671. Immobili di categoria A/10, uffici e studi privati
+672. Immobili di categoria A/5 Scuole e laboratori scientifici
+673. Immobili di categoria A10
+674. Immobili di categoria A10 - Categoria catastale: A/10 Uffici e studi privati - Fabbricati a disposizione o utilizzati: Immobili locati
+675. Immobili di categoria A10 - Categoria catastale: A/10 Uffici e studi privati - Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo
+676. Immobili di categoria A10 - Uffici e studi privati
+677. Immobili di categoria A10 e altre specifiche categorie
+678. Immobili di categoria A10, C
+679. Immobili di categoria A10, C (Uffici, negozi, laboratori, fabbricati sportivi, stabilimenti balneari)
+680. Immobili di categoria A10, C - Collocazione immobile: In una zona specificamente indicata dal comune
+681. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati
+682. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati per attività produttiva e/o commerciale o per l
+683. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili a disposizione
+684. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili a disposizione - Purché la condizione di immobile a disposizione persista da almeno 12 mesi
+685. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili locati
+686. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d
+687. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato
+688. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+689. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo
+690. Immobili di categoria A10, C - Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo - Destinazione d
+691. Immobili di categoria A10, C - Fabbricati divenuti inagibili a seguito di calamità naturali
+692. Immobili di categoria A10, C - Immobili a disposizione
+693. Immobili di categoria A10, C - Immobili locati
+694. Immobili di categoria A10, C - Immobili locati - Utilizzato per attività produttiva e/o commerciale o per l
+695. Immobili di categoria A10, C - Immobili utilizzati direttamente dal soggetto passivo
+696. Immobili di categoria A10, C - Oggetto di attività di recupero per miglioramento del decoro urbano o della classe energetica
+697. Immobili di categoria A10, C - Requisiti del soggetto passivo: Di proprietà di ONLUS o enti del terzo settore
+698. Immobili di categoria A10, C concessi in comodato
+699. Immobili di categoria A10, C concessi in comodato a ONLUS o altri enti
+700. Immobili di categoria A10, C concessi in comodato a ONLUS o altri enti del terzo settore
+701. Immobili di categoria A10, C dentro il centro storico
+702. Immobili di categoria A10, C di proprietà di ONLUS o enti del terzo settore
+703. Immobili di categoria A10, C divenuti inagibili a seguito di calamità naturali
+704. Immobili di categoria A10, C in zone specifiche
+705. Immobili di categoria A10, C situati nel perimetro della Z.E.S. Adriatica Interregionale Puglia e Molise
+706. Immobili di categoria A10, C utilizzati da ONLUS o altri enti del terzo settore
+707. Immobili di categoria A10, C utilizzati direttamente dal soggetto passivo
+708. Immobili di categoria A10, C utilizzati per attività produttiva e/o commerciale
+709. Immobili di categoria A10, C utilizzati per attività produttiva e/o commerciale o per l
+710. Immobili di categoria A10, C, a disposizione da almeno 12 mesi
+711. Immobili di categoria A10, Categoria catastale: - A/10 Uffici e studi privati
+712. Immobili di categoria A10, Uffici e studi privati
+713. Immobili di categoria A10, categoria A/10
+714. Immobili di categoria A10, categoria catastale A/10
+715. Immobili di categoria A10, categoria catastale A/10 Uffici e studi privati
+716. Immobili di categoria A10, categorie catastali A/10, B/1, B/2, B/3, B/4, B/5, B/6, B/7, B/8
+717. Immobili di categoria B
+718. Immobili di categoria B, C/2, C/3
+719. Immobili di categoria B, continuazione
+720. Immobili di categoria B/2, B/3, B/4, B/5, B/6, B/7, B/8
+721. Immobili di categoria C
+722. Immobili di categoria C (C/1 Negozi e botteghe, C/3 Laboratori per arti e mestieri)
+723. Immobili di categoria C (C/1, C/2, C/3)
+724. Immobili di categoria C (C/1, C/3)
+725. Immobili di categoria C (C/2, C/6, C/7)
+726. Immobili di categoria C - C/1 Negozi e botteghe
+727. Immobili di categoria C - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri
+728. Immobili di categoria C - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - C/4 Fabbricati e locali per esercizi sportivi senza fine di lucro
+729. Immobili di categoria C - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d
+730. Immobili di categoria C - C/1 Negozi e botteghe - Fabbricati a disposizione o utilizzati: Immobili a disposizione
+731. Immobili di categoria C - C/1 Negozi e botteghe - Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo
+732. Immobili di categoria C - C/1 Negozi e botteghe - Immobili locati o concessi in comodato
+733. Immobili di categoria C - C/1 Negozi e botteghe - Immobili utilizzati direttamente dal soggetto passivo
+734. Immobili di categoria C - C/1 Negozi e botteghe - Superficie: Non superiore a Mq 250
+735. Immobili di categoria C - C/1, C/3, C/4, C/5
+736. Immobili di categoria C - C/2 Magazzini e locali di deposito - C/6 Stalle, scuderie, rimesse, autorimesse senza fine di lucro
+737. Immobili di categoria C - C/2 Magazzini e locali di deposito, C/6 Stalle, scuderie, rimesse, autorimesse senza fine di lucro, C/7 Tettoie chiuse od aperte
+738. Immobili di categoria C - C/2, C/6, C/7
+739. Immobili di categoria C - C/3 Laboratori per arti e mestieri
+740. Immobili di categoria C - C/3 Laboratori per arti e mestieri, C/4 Fabbricati e locali per esercizi sportivi senza fine di lucro, C/5 Stabilimenti balneari e di acque curative senza fine di lucro
+741. Immobili di categoria C - Categoria catastale: C/1 Negozi e botteghe
+742. Immobili di categoria C - Categoria catastale: C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Fabbricati a disposizione o utilizzati: Immobili locati
+743. Immobili di categoria C - Categoria catastale: C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo
+744. Immobili di categoria C - Categoria catastale: C/1 Negozi e botteghe - Fabbricati a disposizione o utilizzati: Immobili a disposizione
+745. Immobili di categoria C - Categoria catastale: C/1 Negozi e botteghe - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Destinazione d
+746. Immobili di categoria C - Categoria catastale: C/1 Negozi e botteghe, C/3 Laboratori per arti e mestieri
+747. Immobili di categoria C - Categoria catastale: C/3 Laboratori per arti e mestieri
+748. Immobili di categoria C - Categoria catastale: C/3 Laboratori per arti e mestieri - C/4 Fabbricati e locali per esercizi sportivi senza fine di lucro
+749. Immobili di categoria C - Categoria catastale: C/3 Laboratori per arti e mestieri - Fabbricati a disposizione o utilizzati: Immobili utilizzati direttamente dal soggetto passivo
+750. Immobili di categoria C - Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+751. Immobili di categoria C - Immobili non utilizzati/sfitti
+752. Immobili di categoria C - Immobili utilizzati direttamente dal soggetto passivo
+753. Immobili di categoria C - Laboratori per arti e mestieri
+754. Immobili di categoria C - Negozi e botteghe
+755. Immobili di categoria C - Negozi e botteghe con superficie non inferiore a 250 mq
+756. Immobili di categoria C - Negozi e botteghe, Laboratori per arti e mestieri
+757. Immobili di categoria C a disposizione
+758. Immobili di categoria C con specifiche condizioni
+759. Immobili di categoria C concessi in comodato
+760. Immobili di categoria C concessi in comodato a ONLUS o altri enti del terzo settore
+761. Immobili di categoria C in Centro Storico per attività avviate dal 1 gennaio 2022
+762. Immobili di categoria C in nuclei di antica formazione
+763. Immobili di categoria C in una zona specificamente indicata dal comune
+764. Immobili di categoria C in zona agricola
+765. Immobili di categoria C in zona specifica
+766. Immobili di categoria C in zone soggette ad un alto tasso di abbandono di attività economico-commerciale
+767. Immobili di categoria C in zone specifiche
+768. Immobili di categoria C locati
+769. Immobili di categoria C locati o concessi in comodato
+770. Immobili di categoria C locati per attività produttiva e/o commerciale
+771. Immobili di categoria C senza fine di lucro
+772. Immobili di categoria C situati nel centro urbano
+773. Immobili di categoria C utilizzati come bottega storica o artigiana
+774. Immobili di categoria C utilizzati da ONLUS o enti del terzo settore
+775. Immobili di categoria C utilizzati da persona fisica di età non superiore a 80 anni
+776. Immobili di categoria C utilizzati da persona giuridica esercente attività d
+777. Immobili di categoria C utilizzati direttamente da ONLUS o altri enti del terzo settore
+778. Immobili di categoria C utilizzati direttamente dal soggetto passivo
+779. Immobili di categoria C utilizzati direttamente dal soggetto passivo per attività produttiva e/o commerciale
+780. Immobili di categoria C utilizzati direttamente dal soggetto passivo per attività produttiva e/o commerciale o per l
+781. Immobili di categoria C utilizzati per attività
+782. Immobili di categoria C utilizzati per attività produttiva e/o commerciale
+783. Immobili di categoria C utilizzati per attività produttiva e/o commerciale o per l
+784. Immobili di categoria C utilizzati per negozi e botteghe o laboratori per arti e mestieri
+785. Immobili di categoria C, C/1, C/3
+786. Immobili di categoria C, Categoria catastale: - C/1 Negozi e botteghe
+787. Immobili di categoria C, Negozi e botteghe
+788. Immobili di categoria C, Negozi e botteghe, Laboratori per arti e mestieri
+789. Immobili di categoria C, a disposizione
+790. Immobili di categoria C, categoria C/1
+791. Immobili di categoria C, categoria C/1 Negozi e botteghe
+792. Immobili di categoria C, categoria C/1 Negozi e botteghe locati
+793. Immobili di categoria C, categoria C/1 Negozi e botteghe utilizzati direttamente
+794. Immobili di categoria C, categoria C/1 Negozi e botteghe, C/3 Laboratori per arti e mestieri
+795. Immobili di categoria C, categoria C/1 a disposizione
+796. Immobili di categoria C, categoria C/1 e C/3
+797. Immobili di categoria C, categoria C/1 e C/3 in area di valorizzazione commerciale centro storico
+798. Immobili di categoria C, categoria C/1 locati o concessi in comodato
+799. Immobili di categoria C, categoria C/1, locati in centro storico
+800. Immobili di categoria C, categoria C/1, negozi e botteghe, immobili locati
+801. Immobili di categoria C, categoria C/1, negozi e botteghe, immobili utilizzati direttamente
+802. Immobili di categoria C, categoria C/1, utilizzati direttamente dal soggetto passivo
+803. Immobili di categoria C, categoria C/2
+804. Immobili di categoria C, categoria C/2 Magazzini e locali di deposito
+805. Immobili di categoria C, categoria C/2, C/6, C/7
+806. Immobili di categoria C, categoria C/3
+807. Immobili di categoria C, categoria C/3 Laboratori per arti e mestieri locati
+808. Immobili di categoria C, categoria C/3 Laboratori per arti e mestieri utilizzati direttamente
+809. Immobili di categoria C, categoria C/3, C/2, C/1, C/4
+810. Immobili di categoria C, categoria C/3, utilizzati direttamente dal soggetto passivo
+811. Immobili di categoria C, categoria C/4
+812. Immobili di categoria C, categoria catastale C/1
+813. Immobili di categoria C, categoria catastale C/1 Negozi e botteghe
+814. Immobili di categoria C, categoria catastale C/1 Negozi e botteghe, C/3 Laboratori per arti e mestieri
+815. Immobili di categoria C, categoria catastale C/1 Negozi e botteghe, Immobili concessi in comodato
+816. Immobili di categoria C, categoria catastale C/1 Negozi e botteghe, immobili a disposizione
+817. Immobili di categoria C, categoria catastale C/1 Negozi e botteghe, immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+818. Immobili di categoria C, categoria catastale C/1 Negozi e botteghe, superficie non superiore a 100 mq
+819. Immobili di categoria C, categoria catastale C/1 e C/3
+820. Immobili di categoria C, categoria catastale C/1 e C/3 dentro il centro storico
+821. Immobili di categoria C, categoria catastale C/1 e C/3 fuori dal centro storico
+822. Immobili di categoria C, categoria catastale C/1, negozi e botteghe, superficie non superiore a 100 mq, dentro il centro storico
+823. Immobili di categoria C, categoria catastale C/2 Magazzini e locali di deposito
+824. Immobili di categoria C, categoria catastale C/2, C/6
+825. Immobili di categoria C, categoria catastale C/3
+826. Immobili di categoria C, categoria catastale C/3 Laboratori per arti e mestieri
+827. Immobili di categoria C, categoria catastale C/3 Laboratori per arti e mestieri, superficie non superiore a 100 mq
+828. Immobili di categoria C, categoria catastale C/4
+829. Immobili di categoria C, categoria catastale C/4 e C/5
+830. Immobili di categoria C, categoria catastale C/6
+831. Immobili di categoria C, categoria catastale: C/1 e C/3
+832. Immobili di categoria C, categorie C/2 e C/6
+833. Immobili di categoria C, categorie C/2, C/3, C/4
+834. Immobili di categoria C, categorie C/2, C/3, C/6, C/7
+835. Immobili di categoria C, categorie C/3, C/4, C/5
+836. Immobili di categoria C, categorie catastali C/1 e C/3
+837. Immobili di categoria C, categorie catastali C/1, C/2, C/3
+838. Immobili di categoria C, categorie catastali C/1, C/3
+839. Immobili di categoria C, categorie catastali C/2, C/3, C/4, C/5, C/6, C/7
+840. Immobili di categoria C, categorie catastali C/3, C/4, C/5
+841. Immobili di categoria C, categorie catastali: C/1, C/2, C/3, C/4, C/5, C/6, C/7
+842. Immobili di categoria C, collocazione immobile: Centro storico Città vecchia
+843. Immobili di categoria C, collocazione: all
+844. Immobili di categoria C, locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+845. Immobili di categoria C, negozi e botteghe, superficie non superiore a 200 mq
+846. Immobili di categoria C, oggetto di attività di recupero per miglioramento del decoro urbano o della classe energetica
+847. Immobili di categoria C, utilizzati direttamente dal soggetto passivo
+848. Immobili di categoria C, utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+849. Immobili di categoria C/1
+850. Immobili di categoria C/1 (Negozi e botteghe) privi o che intendono dismettere giochi di azzardo
+851. Immobili di categoria C/1 Negozi e botteghe
+852. Immobili di categoria C/1 Negozi e botteghe - Immobili locati
+853. Immobili di categoria C/1 Negozi e botteghe - Immobili utilizzati direttamente dal soggetto passivo
+854. Immobili di categoria C/1 Negozi e botteghe a disposizione
+855. Immobili di categoria C/1 Negozi e botteghe con specifiche condizioni
+856. Immobili di categoria C/1 Negozi e botteghe con superficie non superiore a 100 MQ
+857. Immobili di categoria C/1 Negozi e botteghe con superficie non superiore a 100 mq
+858. Immobili di categoria C/1 Negozi e botteghe con superficie non superiore a 100 mq utilizzati direttamente dal soggetto passivo
+859. Immobili di categoria C/1 Negozi e botteghe con superficie non superiore a 250 MQ
+860. Immobili di categoria C/1 Negozi e botteghe dentro il centro storico a disposizione
+861. Immobili di categoria C/1 Negozi e botteghe dentro il centro storico locati
+862. Immobili di categoria C/1 Negozi e botteghe dentro il centro storico locati o concessi in comodato a ONLUS o altri enti del terzo settore
+863. Immobili di categoria C/1 Negozi e botteghe dentro il centro storico utilizzati direttamente
+864. Immobili di categoria C/1 Negozi e botteghe fuori dal centro storico
+865. Immobili di categoria C/1 Negozi e botteghe in specifiche zone
+866. Immobili di categoria C/1 Negozi e botteghe locati privi o che intendono dismettere giochi di azzardo
+867. Immobili di categoria C/1 Negozi e botteghe utilizzati come bottega storica o artigiana
+868. Immobili di categoria C/1 Negozi e botteghe utilizzati direttamente dal soggetto passivo
+869. Immobili di categoria C/1 Negozi e botteghe utilizzati direttamente dal soggetto passivo privi o che intendono dismettere giochi di azzardo
+870. Immobili di categoria C/1 Negozi e botteghe utilizzati per attività produttiva e/o commerciale o per l
+871. Immobili di categoria C/1 concessi in comodato in zone ad alto tasso di abbandono
+872. Immobili di categoria C/1 e C/2 utilizzati per commercio al dettaglio
+873. Immobili di categoria C/1 e C/2 utilizzati per commercio di tabacco
+874. Immobili di categoria C/1 e C/2 utilizzati per minimercati
+875. Immobili di categoria C/1 e C/3
+876. Immobili di categoria C/1 locati a persone fisiche di età non superiore a 36 anni
+877. Immobili di categoria C/1 utilizzati direttamente dal soggetto passivo
+878. Immobili di categoria C/1 utilizzati per attività produttiva e/o commerciale
+879. Immobili di categoria C/1, C/2, C/3, C/4, C/5
+880. Immobili di categoria C/1, C/2, C/3, C/4, C/5, C/6, C/7, C/8
+881. Immobili di categoria C/1, C/3 utilizzati per attività produttiva e/o commerciale o per l
+882. Immobili di categoria C/1, C/3, C/4
+883. Immobili di categoria C/1, C/3, C/4, C/5
+884. Immobili di categoria C/1, C/3, utilizzati direttamente dal soggetto passivo come bottega storica o artigiana
+885. Immobili di categoria C/1, C/4, C/5 concessi in comodato a ONLUS o altri enti del terzo settore
+886. Immobili di categoria C/1, fabbricati a disposizione o utilizzati
+887. Immobili di categoria C/1, fabbricati a disposizione o utilizzati, immobili locati
+888. Immobili di categoria C/1, negozi e botteghe, in Via Mezzaterra
+889. Immobili di categoria C/2
+890. Immobili di categoria C/2 Magazzini e locali di deposito
+891. Immobili di categoria C/2 Magazzini e locali di deposito, C/3 Laboratori per arti e mestieri, C/7 Tettoie chiuse od aperte
+892. Immobili di categoria C/2 Magazzini e locali di deposito, C/6 Stalle, scuderie, rimesse, autorimesse senza fine di lucro, C/7 Tettoie chiuse od aperte
+893. Immobili di categoria C/2 e C/3
+894. Immobili di categoria C/2, C/4, C/5, C/6, C/7 senza fine di lucro
+895. Immobili di categoria C/2, C/6
+896. Immobili di categoria C/2, C/6, C/7
+897. Immobili di categoria C/3
+898. Immobili di categoria C/3 Laboratori per arti e mestieri
+899. Immobili di categoria C/3 Laboratori per arti e mestieri con superficie non superiore a 200 mq utilizzati direttamente dal soggetto passivo
+900. Immobili di categoria C/3 Laboratori per arti e mestieri e C/1 Negozi e botteghe
+901. Immobili di categoria C/3 Laboratori per arti e mestieri locati
+902. Immobili di categoria C/3 Laboratori per arti e mestieri utilizzati direttamente dal soggetto passivo
+903. Immobili di categoria C/3 utilizzati direttamente dal soggetto passivo
+904. Immobili di categoria C/3, C/4, C/5
+905. Immobili di categoria C/3, laboratori per arti e mestieri, fabbricati a disposizione o utilizzati
+906. Immobili di categoria C/4 Fabbricati e locali per esercizi sportivi senza fine di lucro
+907. Immobili di categoria C/4 Fabbricati e locali per esercizi sportivi senza fine di lucro e C/5 Stabilimenti balneari e di acque curative senza fine di lucro
+908. Immobili di categoria C/4 e C/7
+909. Immobili di categoria C/4 per esercizi sportivi senza fine di lucro
+910. Immobili di categoria C/6
+911. Immobili di categoria C/6 Stalle, scuderie, rimesse, autorimesse senza fine di lucro
+912. Immobili di categoria C/6 e C/7
+913. Immobili di categoria case di cura ed ospedali senza fine di lucro
+914. Immobili di categoria catastale - /5 Scuole e laboratori scientifici
+915. Immobili di categoria catastale - /5 Scuole e laboratori scientifici di proprietà di ONLUS o enti del terzo settore
+916. Immobili di categoria catastale - /7 Cappelle ed oratori non destinati all
+917. Immobili di categoria catastale /1
+918. Immobili di categoria catastale /2, case di cura ed ospedali senza fine di lucro
+919. Immobili di categoria catastale /2, locati o concessi in comodato a ONLUS o altri enti del terzo settore
+920. Immobili di categoria catastale /6
+921. Immobili di categoria catastale A/4 Uffici pubblici
+922. Immobili di categoria catastale C/7 Cappelle ed oratori non destinati all
+923. Immobili di categoria catastale D/2 senza fine di lucro
+924. Immobili di categoria catastale: - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - /5 Scuole e laboratori scientifici
+925. Immobili di categoria catastale: Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme
+926. Immobili di categoria speciale
+927. Immobili di categoria speciale (Collegi, case di cura, prigioni, uffici pubblici, scuole, biblioteche, cappelle, magazzini)
+928. Immobili di categoria speciale (Collegi, convitti, ospedali, ecc.)
+929. Immobili di categoria speciale di proprietà di ONLUS o enti del terzo settore
+930. Immobili di categoria utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro
+931. Immobili di categoria utilizzati per scopi specifici
+932. Immobili di categoria, categoria catastale /8
+933. Immobili di categoria, categorie catastali /1, /2, /3, /4, /5, /6, /7
+934. Immobili di proprietà di ONLUS o enti del terzo settore
+935. Immobili esenti
+936. Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo
+937. Immobili locati o concessi in comodato o utilizzati direttamente dal soggetto passivo - Impianti fotovoltaici con potenza superiore a 2000 kW
+938. Immobili situati in determinate zone: PLANIMETRIA ZONA SVANTAGGIATA PIANO MARINO
+939. Istituto di credito, cambio e assicurazione con fine di lucro
+940. Terreni agricoli
+941. Terreni agricoli - Collocazione: Ricadenti nei fogli catastali
+942. Terreni agricoli - Collocazione: Terreni ricadenti in determinate aree: Area: Municipio di Castellar
+943. Terreni agricoli - Collocazione: Terreni ricadenti in determinate aree: Aree: terreni agricoli montani
+944. Terreni agricoli - Utilizzo: Coltivati e destinati ad alcuni tipi di coltura
+945. Terreni agricoli - Utilizzo: Terreni agricoli condotti da CD e IAP e Società agricole non posseduti
+946. Terreni agricoli a immutabile destinazione agro silvo-pastorale a proprietà collettiva indivisibile e non usucapibile
+947. Terreni agricoli coltivati
+948. Terreni agricoli coltivati da coltivatori diretti o imprenditori agricoli professionali
+949. Terreni agricoli coltivati da parenti e affini di coltivatori entro il terzo grado
+950. Terreni agricoli coltivati destinati a produzione agricola biologica
+951. Terreni agricoli coltivati di proprietà di ONLUS o enti del terzo settore
+952. Terreni agricoli coltivati e destinati ad alcuni tipi di coltura
+953. Terreni agricoli coltivati e destinati ad alcuni tipi di coltura: ULIVO
+954. Terreni agricoli coltivati e destinati ad alcuni tipi di coltura: frutteti irrigui
+955. Terreni agricoli coltivati in determinate aree
+956. Terreni agricoli coltivati in specifiche aree
+957. Terreni agricoli coltivati ricadenti nei fogli catastali n. 35, 36 e 37
+958. Terreni agricoli condotti da CD e IAP e Società agricole non posseduti
+959. Terreni agricoli di proprietà di ONLUS o enti del terzo settore
+960. Terreni agricoli esenti
+961. Terreni agricoli in area montana
+962. Terreni agricoli in aree montane o di collina
+963. Terreni agricoli in determinate aree
+964. Terreni agricoli in determinate aree montane
+965. Terreni agricoli in determinate aree: Area golenale
+966. Terreni agricoli in determinate zone
+967. Terreni agricoli in frazioni montane
+968. Terreni agricoli in zone esondabili dal fiume Secchia 2014
+969. Terreni agricoli in zone esondabili dal fiume Secchia 2018
+970. Terreni agricoli in zone svantaggiate montane
+971. Terreni agricoli non coltivati
+972. Terreni agricoli parzialmente e totalmente esenti
+973. Terreni agricoli ricadenti in aree montane o di collina
+974. Terreni agricoli ricadenti in determinate aree
+975. Terreni agricoli ricadenti in determinate aree montane o di collina
+976. Terreni agricoli ricadenti in determinate aree: Zona Montana
+977. Terreni agricoli ricadenti in specifiche zone
+978. Terreni agricoli ricadenti nei fogli catastali ad esclusione del foglio 3
+979. Terreni agricoli ricadenti nei fogli catastali dal 24 al 31
+980. Terreni agricoli ricadenti nei fogli catastali esclusi
+981. Terreni agricoli ricadenti nei fogli catastali interamente esenti
+982. Terreni agricoli ricadenti nei fogli catastali n. 1
+983. Terreni agricoli ricadenti nei fogli catastali n. 16 e 17
+984. Terreni agricoli ricadenti nei fogli catastali n.: 1,2,3,4,5,6,9
+985. Terreni agricoli ricadenti nei fogli catastali n.: 901, 902 e 903
+986. Terreni agricoli ricadenti nei fogli catastali n.: fg. 31 e fg 36
+987. Terreni agricoli ricadenti nei fogli catastali n.: fogli catastali: 36 e 37
+988. Terreni agricoli ricadenti nei fogli catastali n.: fogli catastali: dal n. 1 al n. 15
+989. Terreni agricoli ricadenti nei fogli catastali n.: fogli catastali: dal n. 1 al n. 52 e nel n. 56
+990. Terreni agricoli ricadenti nei fogli catastali parzialmente esenti
+991. Terreni agricoli ricadenti nei fogli catastali specificati
+992. Terreni agricoli ricadenti nei fogli catastali specifici
+993. Terreni agricoli ricadenti nel Foglio Catastale 21
+994. Terreni agricoli ricadenti nel Foglio Catastale 25
+995. Terreni agricoli ricadenti nel Foglio Catastale 34
+996. Terreni agricoli ricadenti nel foglio catastale 3 posseduti e condotti da CD e IAP e Società agricole
+997. Terreni agricoli situati in determinate zone
