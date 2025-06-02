@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏠 Assistente IMU 2025 - Chat</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .chat-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin: 0 10px;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .message.ai .message-content {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            opacity: 0.6;
+            margin-top: 5px;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 20px;
+            border-bottom-left-radius: 5px;
+            border: 1px solid #e0e0e0;
+            max-width: 70px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .input-field {
+            flex: 1;
+            min-height: 50px;
+            max-height: 120px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            resize: none;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #4CAF50;
+        }
+
+        .send-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .file-upload-area {
+            margin: 15px 0;
+            padding: 20px;
+            border: 2px dashed #4CAF50;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f0f8f0;
+        }
+
+        .file-upload-area:hover {
+            border-color: #45a049;
+            background: #e8f5e8;
+        }
+
+        .file-upload-area.dragover {
+            border-color: #45a049;
+            background: #e8f5e8;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .data-preview {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .data-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-button.secondary {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
+
+        .action-button.success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .calculation-result {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            border: 1px solid #2196F3;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .calculation-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1976D2;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .calculation-details {
+            display: grid;
+            gap: 10px;
+        }
+
+        .calculation-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 3px solid #2196F3;
+        }
+
+        .logic-explanation {
+            background: #FFF3E0;
+            border: 1px solid #FF9800;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 95%;
+                height: 95vh;
+                border-radius: 15px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .chat-header h1 {
+                font-size: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .action-button {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🏠 Assistente IMU 2025</h1>
+            <p>Il tuo consulente fiscale virtuale per il calcolo dell'IMU</p>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message ai">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div>Ciao! Sono il tuo assistente per il calcolo dell'IMU 2025. 👋</div>
+                    <div style="margin-top: 10px;">
+                        <strong>Posso aiutarti a:</strong><br>
+                        📄 Analizzare le tue visure catastali<br>
+                        🧮 Calcolare l'IMU dovuta<br>
+                        📋 Identificare detrazioni e agevolazioni<br>
+                        📑 Generare un report dettagliato
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <strong>Per iniziare, carica le tue visure catastali:</strong>
+                    </div>
+                    <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+                        <div class="upload-icon">📁</div>
+                        <div>Clicca qui o trascina i file</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                            Formati supportati: CSV, TXT, PDF
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" style="display: none;" multiple accept=".csv,.txt,.pdf">
+                    <div class="message-time" id="welcomeTime"></div>
+                </div>
+            </div>
+
+            <div class="message ai typing-indicator" id="typingIndicator">
+                <div class="message-avatar">🤖</div>
+                <div class="typing-indicator">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input">
+                <textarea 
+                    class="input-field" 
+                    id="messageInput" 
+                    placeholder="Scrivi un messaggio o fai una domanda sull'IMU..."
+                    rows="1"></textarea>
+                <button class="send-button" id="sendButton" onclick="sendMessage()">
+                    ➤
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Stato dell'applicazione
+        let conversationState = {
+            phase: 'welcome', // welcome, upload, analysis, questions, calculation, report
+            uploadedData: null,
+            userResponses: {},
+            calculationResult: null,
+            sessionId: null
+        };
+
+        // Messaggi predefiniti per diverse fasi
+        const messages = {
+            fileUploaded: "✅ Perfetto! Ho ricevuto i tuoi file. Sto analizzando i dati catastali...",
+            analysisComplete: "🔍 Analisi completata! Ho trovato {count} immobili. Ecco cosa ho rilevato:",
+            needMoreInfo: "🤔 Per calcolare correttamente l'IMU, ho bisogno di alcune informazioni aggiuntive:",
+            calculationReady: "🧮 Ottimo! Ho tutte le informazioni necessarie. Procedo con il calcolo dell'IMU 2025...",
+            calculationComplete: "✅ Calcolo completato! Ecco il riepilogo della tua IMU 2025:",
+            reportReady: "📑 Il tuo report dettagliato è pronto per il download!"
+        };
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('welcomeTime').textContent = new Date().toLocaleTimeString('it-IT', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Setup file upload
+            setupFileUpload();
+            
+            // Setup input handlers
+            setupInputHandlers();
+        });
+
+        function setupFileUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.querySelector('.file-upload-area');
+
+            fileInput.addEventListener('change', handleFileUpload);
+
+            // Drag and drop handlers
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+        }
+
+        function setupInputHandlers() {
+            const input = document.getElementById('messageInput');
+            
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            input.addEventListener('input', () => {
+                autoResizeTextarea();
+            });
+        }
+
+        function autoResizeTextarea() {
+            const textarea = document.getElementById('messageInput');
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        async function handleFileUpload(event) {
+            const files = event.target.files;
+            handleFiles(files);
+        }
+
+        async function handleFiles(files) {
+            if (files.length === 0) return;
+
+            // Mostra messaggio utente
+            addUserMessage(`Ho caricato ${files.length} file: ${Array.from(files).map(f => f.name).join(', ')}`);
+
+            // Mostra typing
+            showTyping();
+
+            try {
+                // Simula upload e processing
+                await simulateFileProcessing(files);
+                
+                // Passa alla fase di analisi
+                conversationState.phase = 'analysis';
+                hideTyping();
+                
+                setTimeout(() => {
+                    showAnalysisResults();
+                }, 500);
+
+            } catch (error) {
+                hideTyping();
+                addAIMessage(`❌ Si è verificato un errore durante l'elaborazione dei file: ${error.message}`);
+            }
+        }
+
+        async function simulateFileProcessing(files) {
+            // Chiamata API reale al server
+            try {
+                const file = files[0]; // Prende il primo file
+                
+                // 1. Crea sessione
+                const sessionResponse = await fetch('/api/session/new', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                const sessionData = await sessionResponse.json();
+                if (!sessionData.success) {
+                    throw new Error('Errore creazione sessione');
+                }
+                
+                const sessionId = sessionData.sessionId;
+                console.log('📋 Sessione creata:', sessionId);
+                
+                // Salva la sessionId nello stato della conversazione
+                conversationState.sessionId = sessionId;
+                
+                // 2. Upload file(s)
+                const formData = new FormData();
+                // Aggiungi tutti i file
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('files', files[i]);
+                }
+                
+                const uploadResponse = await fetch(`/api/session/${sessionId}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const uploadResult = await uploadResponse.json();
+                if (!uploadResult.success) {
+                    throw new Error(uploadResult.error || 'Errore upload file');
+                }
+                
+                console.log('📤 Upload completato, messaggi ricevuti:', uploadResult.messages.length);
+                
+                // 3. Ottieni risultati dalla sessione
+                const resultResponse = await fetch(`/api/session/${sessionId}`);
+                const resultData = await resultResponse.json();
+                
+                if (!resultData.success) {
+                    throw new Error('Errore recupero risultati');
+                }
+                
+                // 4. Estrai dati dal risultato
+                const sessionState = resultData.state;
+                if (!sessionState.extractedData) {
+                    throw new Error('Dati non trovati nella sessione');
+                }
+                
+                console.log('📊 Dati estratti dal server:', sessionState.extractedData);
+                
+                // 5. Aggiorna stato conversazione con dati reali
+                conversationState.uploadedData = {
+                    fabbricati: sessionState.extractedData.fabbricati || [],
+                    terreni: sessionState.extractedData.terreni || []
+                };
+                
+                console.log('✅ Frontend aggiornato con:', conversationState.uploadedData);
+                
+            } catch (error) {
+                console.error('❌ Errore durante upload:', error);
+                throw new Error(`Errore elaborazione file: ${error.message}`);
+            }
+        }
+
+        function showAnalysisResults() {
+            const data = conversationState.uploadedData;
+            const totalProperties = data.fabbricati.length + data.terreni.length;
+            
+            if (totalProperties === 0) {
+                addAIMessage(`
+                    ⚠️ Non sono stati trovati dati negli immobili nel file caricato.
+                    <div class="action-buttons">
+                        <button class="action-button" onclick="document.getElementById('fileInput').click()">
+                            📁 Prova con un altro file
+                        </button>
+                        <button class="action-button secondary" onclick="manualDataEntry()">
+                            ✏️ Inserire dati manualmente
+                        </button>
+                    </div>
+                `);
+                return;
+            }
+            
+            let analysisHtml = `
+                <div>${messages.analysisComplete.replace('{count}', totalProperties)}</div>
+                <div class="data-preview">
+            `;
+
+            // Mostra fabbricati
+            if (data.fabbricati.length > 0) {
+                analysisHtml += `<div style="font-weight: bold; margin-bottom: 10px;">🏠 Fabbricati (${data.fabbricati.length}):</div>`;
+                data.fabbricati.forEach((fab, i) => {
+                    const ubicazione = fab.ubicazione || `${fab.comune || 'N/D'}`;
+                    const categoria = fab.categoria || 'N/D';
+                    const rendita = fab.rendita || 0;
+                    
+                    analysisHtml += `
+                        <div class="data-item">
+                            <div><strong>Immobile ${i + 1}</strong></div>
+                            <div>📍 ${ubicazione} - ${fab.comune || 'N/D'} (${fab.provincia || 'N/D'})</div>
+                            <div>🏷️ Categoria: ${categoria}</div>
+                            <div>💰 Rendita: €${rendita.toFixed(2)}</div>
+                            ${fab.foglio ? `<div>📋 Foglio: ${fab.foglio}, Particella: ${fab.particella}, Sub: ${fab.subalterno}</div>` : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            // Mostra terreni
+            if (data.terreni.length > 0) {
+                analysisHtml += `<div style="font-weight: bold; margin: 15px 0 10px 0;">🌾 Terreni (${data.terreni.length}):</div>`;
+                data.terreni.forEach((ter, i) => {
+                    const qualita = ter.qualita || 'N/D';
+                    const redditoDominicale = ter.redditoDominicale || 0;
+                    const superficie = ter.superficie || 0;
+                    
+                    analysisHtml += `
+                        <div class="data-item">
+                            <div><strong>Terreno ${i + 1}</strong></div>
+                            <div>📍 ${ter.comune || 'N/D'} (${ter.provincia || 'N/D'})</div>
+                            <div>🌱 Qualità: ${qualita}</div>
+                            <div>💰 Reddito Dominicale: €${redditoDominicale.toFixed(2)}</div>
+                            <div>📐 Superficie: ${superficie} mq</div>
+                            ${ter.foglio ? `<div>📋 Foglio: ${ter.foglio}, Particella: ${ter.particella}</div>` : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            analysisHtml += `</div>`;
+
+            // Bottoni di azione
+            analysisHtml += `
+                <div class="action-buttons">
+                    <button class="action-button success" onclick="proceedToQuestions()">
+                        ✅ I dati sono corretti, procedi
+                    </button>
+                    <button class="action-button secondary" onclick="askForCorrections()">
+                        ✏️ Ci sono errori da correggere
+                    </button>
+                </div>
+            `;
+
+            addAIMessage(analysisHtml);
+        }
+
+        function proceedToQuestions() {
+            conversationState.phase = 'questions';
+            showTyping();
+            
+            setTimeout(async () => {
+                hideTyping();
+                await startQuestionnairePhase();
+            }, 1000);
+        }
+
+        async function startQuestionnairePhase() {
+            try {
+                // Chiama l'API del backend per iniziare il questionario
+                const response = await fetch(`/api/session/${conversationState.sessionId}/action`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'start_questionnaire'
+                    })
+                });
+
+                const result = await response.json();
+                if (!result.success) {
+                    throw new Error(result.error || 'Errore avvio questionario');
+                }
+
+                // Processa i messaggi ricevuti dal backend
+                result.messages.forEach(message => {
+                    if (message.type === 'action_buttons') {
+                        displayQuestionMessage(message);
+                    } else {
+                        addAIMessage(message.content);
+                    }
+                });
+
+            } catch (error) {
+                console.error('❌ Errore avvio questionario:', error);
+                addAIMessage(`❌ Errore durante l'avvio del questionario: ${error.message}`);
+            }
+        }
+
+        function displayQuestionMessage(message) {
+            const questionData = message.metadata;
+            const questions = questionData.questions;
+            const currentQuestion = questions.find(q => q.id === questionData.questionId);
+            
+            if (!currentQuestion) {
+                console.error('Domanda non trovata:', questionData.questionId);
+                return;
+            }
+
+            let questionHtml = `<div>${currentQuestion.text}</div>`;
+
+            if (currentQuestion.type === 'select' && currentQuestion.options) {
+                questionHtml += `<div class="action-buttons">`;
+                currentQuestion.options.forEach(option => {
+                    questionHtml += `
+                        <button class="action-button" onclick="answerQuestionAPI('${currentQuestion.id}', '${option.value}')">
+                            ${option.label}
+                        </button>
+                    `;
+                });
+                questionHtml += `</div>`;
+            }
+
+            addAIMessage(questionHtml);
+        }
+
+        async function answerQuestionAPI(questionId, answer) {
+            try {
+                // Mostra la risposta dell'utente
+                const response = await fetch(`/api/session/${conversationState.sessionId}/action`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'answer_question',
+                        data: { questionId, answer }
+                    })
+                });
+
+                const result = await response.json();
+                if (!result.success) {
+                    throw new Error(result.error || 'Errore invio risposta');
+                }
+
+                // Trova l'etichetta per la risposta
+                const selectedLabel = await findAnswerLabel(questionId, answer);
+                addUserMessage(selectedLabel || answer);
+
+                // Mostra typing
+                showTyping();
+                
+                setTimeout(() => {
+                    hideTyping();
+                    
+                    // Processa i messaggi ricevuti dal backend
+                    result.messages.forEach(message => {
+                        if (message.type === 'action_buttons') {
+                            displayQuestionMessage(message);
+                        } else if (message.type === 'calculation') {
+                            displayCalculationResult(message);
+                        } else {
+                            addAIMessage(message.content);
+                        }
+                    });
+                }, 800);
+
+            } catch (error) {
+                hideTyping();
+                console.error('❌ Errore invio risposta:', error);
+                addAIMessage(`❌ Errore durante l'invio della risposta: ${error.message}`);
+            }
+        }
+
+        async function findAnswerLabel(questionId, answer) {
+            // Cerca l'etichetta basandosi sui dati caricati
+            if (questionId === 'residenza_principale') {
+                const fabbricatiAbitazioni = conversationState.uploadedData.fabbricati.filter(fab => 
+                    fab.categoria && fab.categoria.startsWith('A/') && !fab.categoria.includes('A/10')
+                );
+                const index = parseInt(answer);
+                const fabbricato = conversationState.uploadedData.fabbricati[index];
+                if (fabbricato) {
+                    return `${fabbricato.ubicazione} - ${fabbricato.comune} (${fabbricato.categoria})`;
+                }
+            }
+            return answer;
+        }
+
+        function displayCalculationResult(message) {
+            conversationState.phase = 'calculation';
+            conversationState.calculationResult = message.metadata.calculation;
+            addAIMessage(message.content);
+        }
+
+        function askForCorrections() {
+            addAIMessage(`
+                📝 Nessun problema! Puoi:
+                <div class="action-buttons">
+                    <button class="action-button" onclick="document.getElementById('fileInput').click()">
+                        📁 Caricare altri file
+                    </button>
+                    <button class="action-button secondary" onclick="manualDataEntry()">
+                        ✏️ Inserire dati manualmente
+                    </button>
+                </div>
+            `);
+        }
+
+        function proceedToCalculation() {
+            conversationState.phase = 'calculation';
+            addAIMessage(messages.calculationReady);
+            
+            showTyping();
+            setTimeout(() => {
+                hideTyping();
+                showCalculationResults();
+            }, 2000);
+        }
+
+        function showCalculationResults() {
+            // Simula calcolo IMU
+            const calculation = {
+                totalIMU: 1250.75,
+                details: [
+                    { item: "Abitazione principale", base: 123456, aliquota: "0.4%", detrazione: 200, importo: 293.82 },
+                    { item: "Garage", base: 62500, aliquota: "0.76%", detrazione: 0, importo: 475.00 },
+                    { item: "Terreno agricolo", base: 15432, aliquota: "0.76%", detrazione: 0, importo: 117.28 }
+                ],
+                logic: [
+                    "✅ Detrazione abitazione principale applicata (€200)",
+                    "✅ Aliquota comunale verificata per Milano",
+                    "✅ Rivalutazione catastale applicata (+5%)",
+                    "⚠️ Verificare scadenze: acconto 16/06, saldo 16/12"
+                ]
+            };
+
+            let resultHtml = `
+                <div>${messages.calculationComplete}</div>
+                <div class="calculation-result">
+                    <div class="calculation-header">
+                        💰 IMU 2025 Totale: €${calculation.totalIMU.toFixed(2)}
+                    </div>
+                    <div class="calculation-details">
+            `;
+
+            calculation.details.forEach(detail => {
+                resultHtml += `
+                    <div class="calculation-item">
+                        <span>${detail.item}</span>
+                        <span><strong>€${detail.importo.toFixed(2)}</strong></span>
+                    </div>
+                `;
+            });
+
+            resultHtml += `
+                    </div>
+                </div>
+                <div class="logic-explanation">
+                    <strong>🧠 Logica applicata:</strong><br>
+                    ${calculation.logic.join('<br>')}
+                </div>
+                <div class="action-buttons">
+                    <button class="action-button success" onclick="generateReport()">
+                        📑 Genera Report PDF
+                    </button>
+                    <button class="action-button" onclick="modifyCalculation()">
+                        ✏️ Modifica Calcolo
+                    </button>
+                    <button class="action-button secondary" onclick="startNewCalculation()">
+                        🔄 Nuovo Calcolo
+                    </button>
+                </div>
+            `;
+
+            conversationState.calculationResult = calculation;
+            addAIMessage(resultHtml);
+        }
+
+        function generateReport() {
+            addUserMessage("Genera il report PDF");
+            showTyping();
+            
+            setTimeout(() => {
+                hideTyping();
+                addAIMessage(`
+                    ${messages.reportReady}
+                    <div class="action-buttons">
+                        <button class="action-button success" onclick="downloadReport()">
+                            📥 Scarica Report PDF
+                        </button>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 14px; color: #666;">
+                        Il report include: dati catastali, calcoli dettagliati, normativa applicata, scadenze e raccomandazioni.
+                    </div>
+                `);
+            }, 1500);
+        }
+
+        function downloadReport() {
+            // Simula download
+            const link = document.createElement('a');
+            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent('Report IMU 2025 - Placeholder');
+            link.download = 'IMU_2025_Report.pdf';
+            link.click();
+
+            addAIMessage("📥 Download iniziato! Trovi il file nella cartella Download del tuo dispositivo.");
+        }
+
+        function modifyCalculation() {
+            addUserMessage("Voglio modificare qualcosa nel calcolo");
+            addAIMessage(`
+                🔧 Cosa vorresti modificare?
+                <div class="action-buttons">
+                    <button class="action-button" onclick="modifyProperty()">🏠 Dati immobili</button>
+                    <button class="action-button" onclick="modifyRates()">📊 Aliquote</button>
+                    <button class="action-button" onclick="modifyDeductions()">💰 Detrazioni</button>
+                </div>
+            `);
+        }
+
+        function startNewCalculation() {
+            addUserMessage("Voglio iniziare un nuovo calcolo");
+            location.reload();
+        }
+
+        function addUserMessage(content) {
+            addMessage(content, 'user');
+        }
+
+        function addAIMessage(content) {
+            addMessage(content, 'ai');
+        }
+
+        function addMessage(content, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const time = new Date().toLocaleTimeString('it-IT', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${sender === 'ai' ? '🤖' : '👤'}</div>
+                <div class="message-content">
+                    <div>${content}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+
+            // Rimuovi typing indicator se presente
+            hideTyping();
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            addUserMessage(message);
+            input.value = '';
+            autoResizeTextarea();
+
+            // Simula risposta AI
+            handleUserMessage(message);
+        }
+
+        function handleUserMessage(message) {
+            showTyping();
+            
+            setTimeout(() => {
+                hideTyping();
+                
+                // Logica di risposta basata sul contesto
+                if (conversationState.phase === 'welcome') {
+                    addAIMessage("Per iniziare, carica le tue visure catastali usando il pulsante qui sopra! 📁");
+                } else {
+                    addAIMessage("Interessante! Al momento sto elaborando i tuoi dati. Puoi usare i pulsanti qui sopra per procedere, oppure fammi sapere se hai domande specifiche! 🤔");
+                }
+            }, 1000 + Math.random() * 1000);
+        }
+
+        function showTyping() {
+            document.getElementById('typingIndicator').style.display = 'flex';
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTyping() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        // Placeholder functions
+        function manualDataEntry() {
+            addAIMessage("📝 Funzionalità di inserimento manuale in sviluppo!");
+        }
+
+        function modifyProperty() {
+            addAIMessage("🏠 Modifica dati immobili in sviluppo!");
+        }
+
+        function modifyRates() {
+            addAIMessage("📊 Modifica aliquote in sviluppo!");
+        }
+
+        function modifyDeductions() {
+            addAIMessage("💰 Modifica detrazioni in sviluppo!");
+        }
+    </script>
+</body>
+</html> 

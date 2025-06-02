@@ -1,0 +1,3 @@
+tipo,comune,provincia,foglio,particella,subalterno,categoria,classe,consistenza,superficie,rendita,qualita,reddito_dominicale,reddito_agrario,ubicazione,zona,piano,interno,codice_catastale,sezione,sezione_urbana
+fabbricato,Milano,MI,123,456,1,A/2,3,5.5,85,1234.56,,,,Via Roma 1,Zona 1,2,int. 5,F205,,
+terreno,Milano,MI,124,789,,,2,,5000,,SEMINATIVO,123.45,67.89,Via Campagna sn,,,,F205,A,

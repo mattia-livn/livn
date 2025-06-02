@@ -16,7 +16,7 @@ function loadCredentialsFromEnvLocal(): { apiKey: string; token: string; baseUrl
       // Prova nella directory padre
       const parentEnvPath = path.join(__dirname, '..', '..', '.env.local');
       if (!fs.existsSync(parentEnvPath)) {
-        console.log('❌ File .env.local non trovato né in imu/ né nella directory padre');
+        console.log('❌ File .env.local non trovato');
         return null;
       }
       

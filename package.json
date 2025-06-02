@@ -1,7 +1,38 @@
 {
+  "name": "imu-calculator",
+  "version": "1.0.0",
+  "description": "Calcolatore IMU 2025 con analisi automatica visure catastali",
+  "main": "server-chat-api.ts",
+  "scripts": {
+    "start": "tsx server-chat-api.ts",
+    "dev": "tsx watch server-chat-api.ts",
+    "test": "tsx test-chat-imu.ts"
+  },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.8",
-    "openai": "^4.103.0",
-    "pdf-lib": "^1.17.1"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
+    "@types/natural": "^5.1.5",
+    "@types/node": "^20.10.4",
+    "@types/pdf-parse": "^1.1.4",
+    "@types/string-similarity": "^4.0.2",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "iconv-lite": "^0.6.3",
+    "multer": "^1.4.5-lts.1",
+    "natural": "^6.5.0",
+    "openai": "^5.0.1",
+    "pdf-parse": "^1.1.1",
+    "pdf-poppler": "^0.2.1",
+    "sharp": "^0.33.2",
+    "string-similarity": "^4.0.4",
+    "tesseract.js": "^5.0.4",
+    "tsx": "^4.6.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.3.3"
   }
 }

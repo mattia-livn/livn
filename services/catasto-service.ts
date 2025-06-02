@@ -70,25 +70,41 @@ export interface TerrenoCatastaleAPI {
 }
 
 /**
- * Risposta dell'endpoint ricerca_nazionale
+ * Risposta dell'endpoint ricerca_nazionale (formato reale API)
  */
 export interface RicercaNazionaleRisposta {
   data: {
     endpoint: string;
-    stato: 'in_elaborazione' | 'evasa';
+    stato: 'in_elaborazione' | 'evasa' | 'in_erogazione';
     callback: boolean;
     parametri: {
       cf_piva: string;
       tipo_catasto: 'T' | 'F' | 'TF';
     };
     risultato?: {
-      province: Array<{
-        provincia: string;
-        fabbricati?: number;
-        terreni?: number;
+      soggetti: Array<{
+        cognome?: string;
+        nome?: string;
+        denominazione?: string;
+        data_nascita?: string;
+        luogo_nascita?: string;
+        sesso?: string;
+        cf: string;
+        id_soggetto: string;
+        catasti: Array<{
+          citta: string;
+          provincia: string;
+          fabbricati: number;
+          terreni: number;
+          comuni: Array<{
+            comune: string;
+            fabbricati: number;
+            terreni: number;
+          }>;
+        }>;
       }>;
     };
-    esito: 'OK' | 'ERROR';
+    esito: 'OK' | 'ERROR' | null;
     timestamp: number;
     owner: string;
     id: string;
@@ -399,55 +415,57 @@ export class CatastoService {
       console.log(`🔍 Ricerca nazionale per CF/PIVA: ${cfPiva}`);
       const ricercaNazionale = await this.ricercaNazionale(cfPiva, 'TF');
 
-      if (!ricercaNazionale?.province?.length) {
+      if (!ricercaNazionale?.soggetti?.length) {
         console.log('❌ Nessuna proprietà trovata');
         return { fabbricati, terreni };
       }
 
-      console.log(`✅ Trovate ${ricercaNazionale.province.length} province con proprietà`);
+      console.log(`✅ Trovate ${ricercaNazionale.soggetti.length} province con proprietà`);
 
       // 2. Per ogni provincia con fabbricati, ricerca dettagliata
-      for (const provinciaInfo of ricercaNazionale.province) {
-        if (provinciaInfo.fabbricati && provinciaInfo.fabbricati > 0) {
-          console.log(`🏠 Ricerca fabbricati in ${provinciaInfo.provincia} (${provinciaInfo.fabbricati} immobili)`);
-          
-          try {
-            const risultatoFabbricati = await this.ricercaPersona(cfPiva, provinciaInfo.provincia, 'F');
+      for (const soggetto of ricercaNazionale.soggetti) {
+        for (const catasto of soggetto.catasti) {
+          if (catasto.fabbricati > 0) {
+            console.log(`🏠 Ricerca fabbricati in ${catasto.provincia} (${catasto.fabbricati} immobili)`);
             
-            if (risultatoFabbricati?.soggetti) {
-              for (const soggetto of risultatoFabbricati.soggetti) {
-                for (const immobile of soggetto.immobili) {
-                  if (immobile.catasto === 'F') {
-                    fabbricati.push(this.convertToFabbricatoCatastale(immobile, soggetto));
+            try {
+              const risultatoFabbricati = await this.ricercaPersona(cfPiva, catasto.provincia, 'F');
+              
+              if (risultatoFabbricati?.soggetti) {
+                for (const soggettoDettaglio of risultatoFabbricati.soggetti) {
+                  for (const immobile of soggettoDettaglio.immobili) {
+                    if (immobile.catasto === 'F') {
+                      fabbricati.push(this.convertToFabbricatoCatastale(immobile, soggettoDettaglio));
+                    }
                   }
                 }
               }
+            } catch (error) {
+              console.error(`❌ Errore ricerca fabbricati in ${catasto.provincia}:`, error);
+              // Continua con le altre province
             }
-          } catch (error) {
-            console.error(`❌ Errore ricerca fabbricati in ${provinciaInfo.provincia}:`, error);
-            // Continua con le altre province
           }
-        }
 
-        // 3. Per ogni provincia con terreni, ricerca dettagliata
-        if (provinciaInfo.terreni && provinciaInfo.terreni > 0) {
-          console.log(`🌾 Ricerca terreni in ${provinciaInfo.provincia} (${provinciaInfo.terreni} terreni)`);
-          
-          try {
-            const risultatoTerreni = await this.ricercaPersona(cfPiva, provinciaInfo.provincia, 'T');
+          // 3. Per ogni provincia con terreni, ricerca dettagliata
+          if (catasto.terreni > 0) {
+            console.log(`🌾 Ricerca terreni in ${catasto.provincia} (${catasto.terreni} terreni)`);
             
-            if (risultatoTerreni?.soggetti) {
-              for (const soggetto of risultatoTerreni.soggetti) {
-                for (const immobile of soggetto.immobili) {
-                  if (immobile.catasto === 'T') {
-                    terreni.push(this.convertToTerrenoCatastale(immobile, soggetto));
+            try {
+              const risultatoTerreni = await this.ricercaPersona(cfPiva, catasto.provincia, 'T');
+              
+              if (risultatoTerreni?.soggetti) {
+                for (const soggettoDettaglio of risultatoTerreni.soggetti) {
+                  for (const immobile of soggettoDettaglio.immobili) {
+                    if (immobile.catasto === 'T') {
+                      terreni.push(this.convertToTerrenoCatastale(immobile, soggettoDettaglio));
+                    }
                   }
                 }
               }
+            } catch (error) {
+              console.error(`❌ Errore ricerca terreni in ${catasto.provincia}:`, error);
+              // Continua con le altre province
             }
-          } catch (error) {
-            console.error(`❌ Errore ricerca terreni in ${provinciaInfo.provincia}:`, error);
-            // Continua con le altre province
           }
         }
       }
