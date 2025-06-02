@@ -19,12 +19,16 @@ interface UploadResult {
   confidence?: number;
 }
 
+// Nuovo tipo per feedback progressivo
+export type ProgressCallback = (message: string) => void;
+
 /**
  * Servizio di upload semplificato che usa solo AI extraction
  */
 export class UploadServiceAI {
   private aiExtractor: AIExtractionService;
   private tempDir: string;
+  private progressCallback?: ProgressCallback;
 
   constructor() {
     this.aiExtractor = new AIExtractionService();
@@ -37,69 +41,117 @@ export class UploadServiceAI {
   }
 
   /**
-   * Processa file multipli usando AI extraction
+   * Imposta callback per feedback progressivo
+   */
+  setProgressCallback(callback: ProgressCallback): void {
+    this.progressCallback = callback;
+  }
+
+  /**
+   * Invia messaggio di progresso
+   */
+  private sendProgress(message: string): void {
+    if (this.progressCallback) {
+      this.progressCallback(message);
+    }
+    console.log(`📢 ${message}`);
+  }
+
+  /**
+   * Processa file multipli usando AI extraction con feedback progressivo
    */
   async processFiles(files: FileData[]): Promise<UploadResult> {
+    this.sendProgress('🚀 Analisi iniziata...');
     console.log('🚀 === INIZIO PROCESSO UPLOAD AI ===');
     console.log(`📁 File ricevuti: ${files.length}`);
 
     try {
       // Salva file temporaneamente per debug
+      this.sendProgress(`📁 Preparazione di ${files.length} file...`);
       await this.saveTemporaryFiles(files);
       
-      // Usa AI extraction per processare tutti i file
-      console.log('🤖 === ESTRAZIONE AI ===');
-      const aiResult = await this.aiExtractor.extractFromMultipleFiles(files);
+      // Processa file uno per uno con feedback
+      let allFabbricati: any[] = [];
+      let allTerreni: any[] = [];
+      let allErrors: string[] = [];
+      let allWarnings: string[] = [];
+      let totalConfidence = 0;
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        this.sendProgress(`🔍 Analisi file ${i + 1}/${files.length}: ${file.name}...`);
+        
+        // Usa AI extraction per processare il singolo file
+        const aiResult = await this.aiExtractor.extractFromMultipleFiles([file]);
+        
+        allFabbricati.push(...aiResult.fabbricati);
+        allTerreni.push(...aiResult.terreni);
+        allErrors.push(...aiResult.errors);
+        allWarnings.push(...aiResult.warnings);
+        totalConfidence += aiResult.confidence;
+
+        if (aiResult.fabbricati.length + aiResult.terreni.length > 0) {
+          this.sendProgress(`✅ Trovati ${aiResult.fabbricati.length + aiResult.terreni.length} immobili in ${file.name}`);
+        } else {
+          this.sendProgress(`⚠️ Nessun immobile trovato in ${file.name}`);
+        }
+      }
+
+      const avgConfidence = files.length > 0 ? totalConfidence / files.length : 0;
+      const totalImmobili = allFabbricati.length + allTerreni.length;
+      
+      this.sendProgress(`🎯 Analisi completata: ${totalImmobili} immobili trovati (confidenza: ${avgConfidence.toFixed(1)}%)`);
       
       console.log('🤖 === RISULTATO ESTRAZIONE AI ===');
-      console.log(`✅ Successo: ${aiResult.success}`);
-      console.log(`🎯 Confidenza: ${aiResult.confidence.toFixed(1)}%`);
-      console.log(`🏠 Fabbricati: ${aiResult.fabbricati.length}`);
-      console.log(`🌱 Terreni: ${aiResult.terreni.length}`);
-      console.log(`⚠️ Errori: ${aiResult.errors.length}`);
-      console.log(`🟡 Warning: ${aiResult.warnings.length}`);
+      console.log(`✅ Successo: ${totalImmobili > 0}`);
+      console.log(`🎯 Confidenza: ${avgConfidence.toFixed(1)}%`);
+      console.log(`🏠 Fabbricati: ${allFabbricati.length}`);
+      console.log(`🌱 Terreni: ${allTerreni.length}`);
+      console.log(`⚠️ Errori: ${allErrors.length}`);
+      console.log(`🟡 Warning: ${allWarnings.length}`);
 
-      if (aiResult.fabbricati.length > 0) {
+      if (allFabbricati.length > 0) {
         console.log('🏠 === DETTAGLI FABBRICATI TROVATI ===');
-        aiResult.fabbricati.forEach((fab, index) => {
+        allFabbricati.forEach((fab, index) => {
           console.log(`  Fabbricato ${index + 1}:`);
           console.log(`    ├─ Foglio: ${fab.foglio}`);
           console.log(`    ├─ Particella: ${fab.particella}`);
-          console.log(`    ├─ Subalterno: ${fab.subalterno}`);
+          console.log(`    ├─ Subalterno: ${fab.subalterno || 'N/A'}`);
           console.log(`    ├─ Categoria: ${fab.categoria}`);
           console.log(`    ├─ Rendita: €${fab.rendita}`);
+          console.log(`    ├─ Titolarità: ${fab.proprietario?.titolarita || 'N/A'}`);
           console.log(`    └─ Comune: ${fab.comune}`);
         });
       }
 
-      if (aiResult.terreni.length > 0) {
+      if (allTerreni.length > 0) {
         console.log('🌱 === DETTAGLI TERRENI TROVATI ===');
-        aiResult.terreni.forEach((ter, index) => {
+        allTerreni.forEach((ter, index) => {
           console.log(`  Terreno ${index + 1}:`);
           console.log(`    ├─ Foglio: ${ter.foglio}`);
           console.log(`    ├─ Particella: ${ter.particella}`);
           console.log(`    ├─ Qualità: ${ter.qualita}`);
           console.log(`    ├─ Superficie: ${ter.superficie} mq`);
+          console.log(`    ├─ Titolarità: ${ter.proprietario?.titolarita || 'N/A'}`);
           console.log(`    └─ Comune: ${ter.comune}`);
         });
       }
-
-      const totalImmobili = aiResult.fabbricati.length + aiResult.terreni.length;
       
       return {
-        success: aiResult.success && totalImmobili > 0,
+        success: totalImmobili > 0,
         message: totalImmobili > 0 
-          ? `✅ Estrazione AI completata: ${aiResult.fabbricati.length} fabbricati, ${aiResult.terreni.length} terreni (confidenza: ${aiResult.confidence.toFixed(1)}%)`
+          ? `✅ Estrazione AI completata: ${allFabbricati.length} fabbricati, ${allTerreni.length} terreni (confidenza: ${avgConfidence.toFixed(1)}%)`
           : `⚠️ Nessun immobile estratto dai file caricati`,
-        fabbricati: aiResult.fabbricati,
-        terreni: aiResult.terreni,
-        errors: aiResult.errors,
-        warnings: aiResult.warnings,
-        confidence: aiResult.confidence
+        fabbricati: allFabbricati,
+        terreni: allTerreni,
+        errors: allErrors,
+        warnings: allWarnings,
+        confidence: avgConfidence
       };
 
     } catch (error) {
       console.error('❌ Errore durante processamento AI:', error);
+      this.sendProgress(`❌ Errore durante l'analisi: ${(error as Error).message}`);
       
       return {
         success: false,

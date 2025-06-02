@@ -149,16 +149,25 @@ export class VisureParser {
   private parseTextContent(content: string, result: VisuraParsingResult): void {
     const lines = content.split('\n').map(line => line.trim());
     
-    // Pattern per riconoscere dati catastali
+    // Pattern migliorati per riconoscere dati catastali
     const patterns = {
-      // Fabbricati: Foglio 123 Particella 456 Sub 7 Cat A/2 Cl 3 Cons 5,5 Rendita € 1.234,56
-      fabbricato: /(?:Fg\.?|Foglio)\s*(\d+).*?(?:Part\.?|Particella)\s*(\d+).*?(?:Sub\.?|Subalterno)\s*(\d+).*?(?:Cat\.?|Categoria)\s*([\w\/]+).*?(?:Cl\.?|Classe)\s*(\w+).*?(?:Cons\.?|Consistenza)\s*([\d,]+).*?(?:Rendita|€)\s*([\d.,]+)/i,
+      // Fabbricati: pattern più flessibili per catturare subalterno e titolarità
+      fabbricato: /(?:Fg\.?|Foglio)\s*(\d+).*?(?:Part\.?|Particella|P\.)\s*(\d+).*?(?:Sub\.?|Subalterno|S\.)\s*(\d+).*?(?:Cat\.?|Categoria)\s*([\w\/\-]+).*?(?:Cl\.?|Classe)\s*(\w+).*?(?:Cons\.?|Consistenza)\s*([\d,]+).*?(?:Rendita|€)\s*([\d.,]+)/i,
       
-      // Terreni: Foglio 123 Particella 456 Qual SEMINATIVO Cl 2 Sup Ha 0.12.34 RD € 12,34 RA € 5,67
-      terreno: /(?:Fg\.?|Foglio)\s*(\d+).*?(?:Part\.?|Particella)\s*(\d+).*?(?:Qual\.?|Qualità)\s*(\w+).*?(?:Cl\.?|Classe)\s*(\w+).*?(?:Sup\.?|Superficie).*?([\d.,]+).*?(?:RD|Reddito.*?Dominicale).*?([\d.,]+).*?(?:RA|Reddito.*?Agrario).*?([\d.,]+)/i,
+      // Pattern per fabbricati senza subalterno esplicito
+      fabbricatoNoSub: /(?:Fg\.?|Foglio)\s*(\d+).*?(?:Part\.?|Particella|P\.)\s*(\d+).*?(?:Cat\.?|Categoria)\s*([\w\/\-]+).*?(?:Cl\.?|Classe)\s*(\w+).*?(?:Cons\.?|Consistenza)\s*([\d,]+).*?(?:Rendita|€)\s*([\d.,]+)/i,
       
-      // Dati intestatario
-      intestatario: /(?:COGNOME|Cognome)\s*[:\s]*([A-Z\s]+).*?(?:NOME|Nome)\s*[:\s]*([A-Z\s]+).*?(?:CF|Codice.*?Fiscale)\s*[:\s]*([A-Z0-9]{16})/i,
+      // Terreni: pattern migliorato
+      terreno: /(?:Fg\.?|Foglio)\s*(\d+).*?(?:Part\.?|Particella|P\.)\s*(\d+).*?(?:Qual\.?|Qualità)\s*(\w+).*?(?:Cl\.?|Classe)\s*(\w+).*?(?:Sup\.?|Superficie).*?([\d.,]+).*?(?:RD|Reddito.*?Dominicale).*?([\d.,]+).*?(?:RA|Reddito.*?Agrario).*?([\d.,]+)/i,
+      
+      // Dati intestatario migliorati
+      intestatario: /(?:COGNOME|Cognome|DENOMINAZIONE)\s*[:\s]*([A-Z\s]+).*?(?:NOME|Nome)\s*[:\s]*([A-Z\s]+).*?(?:CF|Codice.*?Fiscale|C\.F\.)\s*[:\s]*([A-Z0-9]{16})/i,
+      
+      // Pattern per titolarità
+      titolarita: /(?:TITOLARITÀ|Titolarità|DIRITTO)\s*[:\s]*([A-Z\s]+)/i,
+      
+      // Pattern per quota
+      quota: /(?:QUOTA|Quota)\s*[:\s]*(\d+)\/(\d+)|(?:per\s+intero)/i,
       
       // Comune e provincia
       ubicazione: /(?:Comune|COMUNE)\s*[:\s]*([A-Z\s]+).*?(?:Provincia|PROVINCIA)\s*[:\s]*\(?([A-Z]{2})\)?/i
@@ -175,11 +184,35 @@ export class VisureParser {
       const matchIntestatario = line.match(patterns.intestatario);
       if (matchIntestatario) {
         const [, cognome, nome, cf] = matchIntestatario;
+        
+        // Cerca titolarità nelle righe vicine
+        let titolaritaTrovata = 'Proprietà';
+        let quotaTrovata = { numeratore: 1, denominatore: 1 };
+        
+        for (let j = Math.max(0, i-2); j <= Math.min(lines.length-1, i+2); j++) {
+          const matchTitolarita = lines[j].match(patterns.titolarita);
+          if (matchTitolarita) {
+            titolaritaTrovata = matchTitolarita[1].trim();
+          }
+          
+          const matchQuota = lines[j].match(patterns.quota);
+          if (matchQuota) {
+            if (matchQuota[0].includes('per intero')) {
+              quotaTrovata = { numeratore: 1, denominatore: 1 };
+            } else {
+              quotaTrovata = {
+                numeratore: parseInt(matchQuota[1]),
+                denominatore: parseInt(matchQuota[2])
+              };
+            }
+          }
+        }
+        
         proprietarioCorrente = {
           denominazione: `${nome.trim()} ${cognome.trim()}`,
           codiceFiscale: cf.trim(),
-          titolarita: 'Proprietà',
-          quota: { numeratore: 1, denominatore: 1 }
+          titolarita: titolaritaTrovata,
+          quota: quotaTrovata
         };
       }
 
@@ -190,7 +223,7 @@ export class VisureParser {
         provinciaCorrente = matchUbicazione[2].trim();
       }
 
-      // Cerca fabbricati
+      // Cerca fabbricati (con subalterno)
       const matchFabbricato = line.match(patterns.fabbricato);
       if (matchFabbricato && proprietarioCorrente) {
         const [, foglio, particella, subalterno, categoria, classe, consistenza, rendita] = matchFabbricato;
@@ -208,7 +241,7 @@ export class VisureParser {
           classe: classe.trim(),
           consistenza: parseFloat(consistenza.replace(',', '.')),
           superficie: 0, // Non sempre presente nelle visure
-          rendita: parseFloat(rendita.replace(/[.,]/g, '').slice(0, -2)) + parseFloat(rendita.slice(-2)) / 100,
+          rendita: this.parseRendita(rendita),
           zona: '',
           ubicazione: `${comuneCorrente} (${provinciaCorrente})`,
           piano: '',
@@ -216,6 +249,37 @@ export class VisureParser {
           proprietario: { ...proprietarioCorrente },
           dataAggiornamento: new Date(),
           idImmobile: `${foglio}-${particella}-${subalterno}`
+        };
+        
+        result.fabbricati.push(fabbricato);
+      }
+      
+      // Cerca fabbricati senza subalterno esplicito
+      const matchFabbricatoNoSub = line.match(patterns.fabbricatoNoSub);
+      if (matchFabbricatoNoSub && proprietarioCorrente && !matchFabbricato) {
+        const [, foglio, particella, categoria, classe, consistenza, rendita] = matchFabbricatoNoSub;
+        
+        const fabbricato: FabbricatoCatastaleAPI = {
+          comune: comuneCorrente,
+          provincia: provinciaCorrente,
+          codiceCatastale: '',
+          sezione: null,
+          sezioneUrbana: null,
+          foglio: parseInt(foglio),
+          particella: parseInt(particella),
+          subalterno: 0, // Nessun subalterno trovato
+          categoria: categoria.trim(),
+          classe: classe.trim(),
+          consistenza: parseFloat(consistenza.replace(',', '.')),
+          superficie: 0,
+          rendita: this.parseRendita(rendita),
+          zona: '',
+          ubicazione: `${comuneCorrente} (${provinciaCorrente})`,
+          piano: '',
+          interno: '',
+          proprietario: { ...proprietarioCorrente },
+          dataAggiornamento: new Date(),
+          idImmobile: `${foglio}-${particella}-0`
         };
         
         result.fabbricati.push(fabbricato);
@@ -236,8 +300,8 @@ export class VisureParser {
           qualita: qualita.trim(),
           classe: classe.trim(),
           superficie: parseFloat(superficie.replace(',', '.')),
-          redditoDominicale: parseFloat(redditoDominicale.replace(/[.,]/g, '').slice(0, -2)) + parseFloat(redditoDominicale.slice(-2)) / 100,
-          redditoAgrario: parseFloat(redditoAgrario.replace(/[.,]/g, '').slice(0, -2)) + parseFloat(redditoAgrario.slice(-2)) / 100,
+          redditoDominicale: this.parseRendita(redditoDominicale),
+          redditoAgrario: this.parseRendita(redditoAgrario),
           ubicazione: `${comuneCorrente} (${provinciaCorrente})`,
           proprietario: { ...proprietarioCorrente },
           dataAggiornamento: new Date(),
@@ -247,9 +311,25 @@ export class VisureParser {
         result.terreni.push(terreno);
       }
     }
+  }
 
-    if (!proprietarioCorrente) {
-      result.errors.push('Impossibile identificare l\'intestatario nella visura');
+  /**
+   * Helper per parsare le rendite in formato monetario
+   */
+  private parseRendita(rendita: string): number {
+    // Rimuove caratteri non numerici eccetto virgole e punti
+    const cleanRendita = rendita.replace(/[^0-9.,]/g, '');
+    
+    // Gestisce formati come "1.234,56" o "1234.56"
+    if (cleanRendita.includes(',')) {
+      // Formato italiano: "1.234,56"
+      const parts = cleanRendita.split(',');
+      const integerPart = parts[0].replace(/\./g, ''); // Rimuove separatori di migliaia
+      const decimalPart = parts[1] || '00';
+      return parseFloat(`${integerPart}.${decimalPart}`);
+    } else {
+      // Formato inglese o senza decimali
+      return parseFloat(cleanRendita) || 0;
     }
   }
 

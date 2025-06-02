@@ -125,8 +125,27 @@ export class ChatIMUService {
     try {
       console.log(`🚀 === ELABORAZIONE FILE AI (${files.length} files) ===`);
       
-      // 🤖 USA IL NUOVO SERVIZIO AI
+      // 🤖 Imposta callback per feedback progressivo
+      const progressMessages: ChatMessage[] = [];
+      this.uploadServiceAI.setProgressCallback((message: string) => {
+        const progressMessage: ChatMessage = {
+          id: this.generateMessageId(),
+          timestamp: new Date(),
+          sender: 'ai',
+          content: `💬 ${message}`,
+          type: 'text',
+          metadata: { isProgress: true }
+        };
+        progressMessages.push(progressMessage);
+        // Aggiungi subito alla sessione per il feedback in tempo reale
+        session.conversationHistory.push(progressMessage);
+      });
+      
+      // 🤖 USA IL NUOVO SERVIZIO AI con feedback
       const aiResult = await this.uploadServiceAI.processFiles(files);
+      
+      // Aggiungi tutti i messaggi di progresso
+      messages.push(...progressMessages);
       
       if (aiResult.success && aiResult.fabbricati.length + aiResult.terreni.length > 0) {
         // Converti in formato compatibile
@@ -146,7 +165,7 @@ export class ChatIMUService {
         session.extractedData = compatibleResult;
         session.phase = 'analysis';
 
-        // Messaggio AI con analisi
+        // Messaggio AI con analisi dettagliata
         const totalProperties = aiResult.fabbricati.length + aiResult.terreni.length;
         let analysisContent = `🎉 **Analisi completata con successo!**\n\n`;
         analysisContent += `📊 **Risultati estrazione AI:**\n`;
@@ -161,6 +180,11 @@ export class ChatIMUService {
             if (fab.subalterno) analysisContent += `, Sub ${fab.subalterno}`;
             if (fab.categoria) analysisContent += ` - Categoria ${fab.categoria}`;
             if (fab.rendita > 0) analysisContent += ` (€${fab.rendita})`;
+            // Mostra titolarità se presente
+            if (fab.proprietario?.titolarita) analysisContent += ` - ${fab.proprietario.titolarita}`;
+            if (fab.proprietario?.quota) {
+              analysisContent += ` ${fab.proprietario.quota.numeratore}/${fab.proprietario.quota.denominatore}`;
+            }
             analysisContent += `\n`;
           });
           analysisContent += `\n`;
@@ -172,6 +196,11 @@ export class ChatIMUService {
             analysisContent += `${i + 1}. Foglio ${ter.foglio}, Particella ${ter.particella}`;
             if (ter.qualita) analysisContent += ` - ${ter.qualita}`;
             if (ter.superficie > 0) analysisContent += ` (${ter.superficie} mq)`;
+            // Mostra titolarità se presente
+            if (ter.proprietario?.titolarita) analysisContent += ` - ${ter.proprietario.titolarita}`;
+            if (ter.proprietario?.quota) {
+              analysisContent += ` ${ter.proprietario.quota.numeratore}/${ter.proprietario.quota.denominatore}`;
+            }
             analysisContent += `\n`;
           });
           analysisContent += `\n`;
@@ -239,8 +268,9 @@ export class ChatIMUService {
       });
     }
 
-    // Aggiungi alla cronologia
-    session.conversationHistory.push(...messages);
+    // Aggiungi alla cronologia (escludendo quelli già aggiunti del feedback progressivo)
+    const nonProgressMessages = messages.filter(msg => !msg.metadata?.isProgress);
+    session.conversationHistory.push(...nonProgressMessages);
     return messages;
   }
 
@@ -284,6 +314,7 @@ export class ChatIMUService {
 
     switch (action) {
       case 'proceed_to_questions':
+      case 'start_questionnaire':
         session.phase = 'questions';
         messages.push(...await this.startQuestionnaire(session));
         break;
@@ -400,49 +431,20 @@ export class ChatIMUService {
    * Genera messaggio di analisi dei dati
    */
   private generateAnalysisMessage(data: VisuraParsingResult): string {
-    const uploadSession = this.uploadService.getSessionResult(data.metadata.fileName);
-    const hasAdvancedResult = uploadSession?.advancedResult;
-    
-    let message = `📊 **Analisi Completata** (${hasAdvancedResult ? 'Avanzata' : 'Standard'})\n\n`;
+    let message = `📊 **Analisi Completata**\n\n`;
     
     // Informazioni sui dati estratti
     message += `🏠 **Immobili trovati**: ${data.metadata.totalProperties}\n`;
     message += `├─ Fabbricati: ${data.fabbricati.length}\n`;
     message += `└─ Terreni: ${data.terreni.length}\n\n`;
     
-    // Se abbiamo risultati dell'analisi avanzata, mostra dettagli aggiuntivi
-    if (hasAdvancedResult && uploadSession?.advancedResult) {
-      const advanced = uploadSession.advancedResult;
-      
-      message += `🔍 **Qualità Analisi**:\n`;
-      message += `├─ Affidabilità: ${(advanced.confidence * 100).toFixed(1)}%\n`;
-      message += `├─ Completezza dati: ${(advanced.qualityAssessment.dataCompleteness * 100).toFixed(1)}%\n`;
-      message += `├─ Riconoscimento struttura: ${(advanced.qualityAssessment.structureRecognition * 100).toFixed(1)}%\n`;
-      message += `├─ Tempo elaborazione: ${advanced.metadata.processingTime}ms\n`;
-      message += `└─ Tecniche usate: ${advanced.metadata.techniques.join(', ')}\n\n`;
-      
-      // Avvisi se presenti
-      if (advanced.warnings.length > 0) {
-        message += `⚠️ **Avvisi**:\n`;
-        advanced.warnings.forEach(warning => {
-          message += `• ${warning}\n`;
-        });
-        message += '\n';
-      }
-      
-      // Campi mancanti se presenti
-      if (advanced.qualityAssessment.missingFields.length > 0) {
-        message += `❌ **Campi mancanti**: ${advanced.qualityAssessment.missingFields.join(', ')}\n\n`;
-      }
-      
-      // Suggerimenti
-      if (advanced.qualityAssessment.suggestedActions.length > 0) {
-        message += `💡 **Suggerimenti**:\n`;
-        advanced.qualityAssessment.suggestedActions.forEach(action => {
-          message += `• ${action}\n`;
-        });
-        message += '\n';
-      }
+    // Errori se presenti
+    if (data.errors.length > 0) {
+      message += `⚠️ **Avvisi**:\n`;
+      data.errors.forEach(error => {
+        message += `• ${error}\n`;
+      });
+      message += '\n';
     }
     
     // Dettagli sui fabbricati
@@ -453,6 +455,7 @@ export class ChatIMUService {
         if (fab.subalterno) message += ` Sub.${fab.subalterno}`;
         if (fab.categoria) message += ` - Cat.${fab.categoria}`;
         if (fab.rendita > 0) message += ` - Rendita: €${fab.rendita.toFixed(2)}`;
+        if (fab.proprietario?.titolarita) message += ` - ${fab.proprietario.titolarita}`;
         message += `\n`;
       });
       message += '\n';
@@ -466,6 +469,7 @@ export class ChatIMUService {
         if (ter.qualita) message += ` - ${ter.qualita}`;
         if (ter.superficie > 0) message += ` - Sup: ${ter.superficie.toFixed(0)}mq`;
         if (ter.redditoDominicale > 0) message += ` - RD: €${ter.redditoDominicale.toFixed(2)}`;
+        if (ter.proprietario?.titolarita) message += ` - ${ter.proprietario.titolarita}`;
         message += `\n`;
       });
       message += '\n';

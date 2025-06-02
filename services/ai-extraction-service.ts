@@ -111,7 +111,7 @@ export class AIExtractionService {
    * Analizza il testo estratto con OpenAI
    */
   private async analyzeWithAI(text: string, fileName: string): Promise<AIExtractionResult> {
-    const systemPrompt = `Sei un esperto nell'analisi di visure catastali italiane. Il tuo compito è estrarre in modo preciso e completo tutti i dati degli immobili (fabbricati e terreni) dal testo fornito.
+    const systemPrompt = `Sei un esperto nell'analisi di visure catastali italiane. Il tuo compito è estrarre in modo preciso e completo tutti i dati degli immobili (fabbricati e terreni) dal testo fornito, inclusi i dati dei proprietari.
 
 IMPORTANTE: Restituisci SOLO un oggetto JSON valido, senza testo aggiuntivo.
 
@@ -131,7 +131,16 @@ Formato di output richiesto:
       "rendita": number,
       "ubicazione": string,
       "comune": string,
-      "provincia": string
+      "provincia": string,
+      "proprietario": {
+        "denominazione": string,
+        "codiceFiscale": string,
+        "titolarita": string,
+        "quota": {
+          "numeratore": number,
+          "denominatore": number
+        }
+      }
     }
   ],
   "terreni": [
@@ -144,27 +153,74 @@ Formato di output richiesto:
       "redditoDominicale": number,
       "redditoAgrario": number,
       "comune": string,
-      "provincia": string
+      "provincia": string,
+      "proprietario": {
+        "denominazione": string,
+        "codiceFiscale": string,
+        "titolarita": string,
+        "quota": {
+          "numeratore": number,
+          "denominatore": number
+        }
+      }
     }
   ],
   "errors": string[],
   "warnings": string[]
 }
 
-Regole di estrazione:
-1. Estrai TUTTI i fabbricati e terreni presenti nel documento
-2. Per ogni immobile, cerca di estrarre il maggior numero di informazioni possibili
-3. Se un campo non è presente, usa null o stringa vuota
-4. Converti sempre le rendite in numeri (rimuovi €, virgole, ecc.)
-5. Identifica correttamente categoria catastale (A/1, A/2, C/1, ecc.)
-6. Per i terreni, cerca qualità come "SEMINATIVO", "PASCOLO", ecc.
-7. Calcola una confidenza basata sulla completezza dei dati estratti
-8. Aggiungi warnings per dati incompleti o incerti
-9. Aggiungi errors solo per problemi gravi
+Regole di estrazione SPECIFICHE:
+1. Estrai TUTTI i fabbricati e terreni presenti nel documento, inclusi quelli in tabelle
+2. SUBALTERNO: Cerca sempre il subalterno (Sub, Subalt, S.) per i fabbricati. Se non specificato, usa "0"
+3. TITOLARITÀ: Estrai informazioni su proprietari, usufruttuari, nuda proprietà, ecc.
+   - Cerca pattern come "PROPRIETA'", "PROPRIETA", "NUDA PROPRIETA'", "USUFRUTTO", "DIRITTO DI SUPERFICIE"
+   - Cerca abbreviazioni come "PROP", "NP", "USU", "US", "AB" (abitazione)
+   - Se non specificato chiaramente, NON assumere "Proprietà" - usa "Non specificata"
+4. QUOTA: Estrai le quote di proprietà (es. "1/2", "2/4", "per intero" = 1/1)
+5. DATI PROPRIETARIO: Cerca cognome, nome e codice fiscale del proprietario
+6. TABELLE: Analizza attentamente le tabelle presenti nel documento
+7. Per ogni immobile, cerca di estrarre il maggior numero di informazioni possibili
+8. Se un campo non è presente, usa null o stringa vuota
+9. Converti sempre le rendite in numeri (rimuovi €, virgole, ecc.)
+10. Identifica correttamente categoria catastale (A/1, A/2, C/1, ecc.)
+11. Per i terreni, cerca qualità come "SEMINATIVO", "PASCOLO", "ULIVETO", ecc.
+12. Calcola una confidenza basata sulla completezza dei dati estratti
+13. Aggiungi warnings per dati incompleti o incerti
+14. Aggiungi errors solo per problemi gravi
+
+Tipi di titolarità comuni in visure catastali:
+- "Proprietà" (o "PROPRIETA'", "PROP")
+- "Nuda proprietà" (o "NUDA PROPRIETA'", "NP")
+- "Usufrutto" (o "USU", "USUFRUTTO")
+- "Diritto di superficie" (o "SUPERFICIE", "SUP")
+- "Enfiteusi" (o "ENF")
+- "Uso" (o "DIRITTO D'USO")
+- "Abitazione" (o "AB", "ABITAZIONE")
+- "Non specificata" (quando non è chiaro dal documento)
+
+ESEMPIO di estrazione corretta della titolarità:
+- Se vedi "PROPRIETA'" o "PROP" → "Proprietà"
+- Se vedi "NP" o "NUDA PROP" → "Nuda proprietà"  
+- Se vedi "USU" o "USUFRUTTO" → "Usufrutto"
+- Se la colonna è vuota o contiene solo "-" → "Non specificata"
+
+Esempi di quote:
+- "per intero" = 1/1
+- "1/2" = numeratore 1, denominatore 2
+- "3/4" = numeratore 3, denominatore 4
+- Se non specificata = 1/1
 
 Esempi di categorie: A/1, A/2, A/3, A/4, A/5, A/6, A/7, A/8, A/9, A/10, A/11, B/1, B/2, C/1, C/2, C/3, C/4, C/5, C/6, C/7, D/1, D/2, ecc.`;
 
-    const userPrompt = `Analizza questa visura catastale e estrai tutti i dati degli immobili:
+    const userPrompt = `Analizza questa visura catastale e estrai tutti i dati degli immobili CON PARTICOLARE ATTENZIONE a:
+- Subalterne dei fabbricati (colonna Sub o Subalt)
+- Dati dei proprietari (cognome, nome, codice fiscale)
+- Tipo di titolarità (cerca pattern specifici come PROP, NP, USU, ecc. - NON assumere sempre "Proprietà")
+- Quote di proprietà
+- Tutte le informazioni presenti nelle tabelle
+
+ATTENZIONE CRITICA: Per la titolarità, analizza attentamente il documento e cerca pattern esatti. 
+Se non trovi indicazioni specifiche sulla titolarità, usa "Non specificata" invece di assumere "Proprietà".
 
 NOME FILE: ${fileName}
 
@@ -249,9 +305,9 @@ Restituisci solo il JSON richiesto.`;
       piano: String(fab.piano || ''),
       interno: String(fab.interno || ''),
       proprietario: {
-        denominazione: String(fab.proprietario?.denominazione || 'N/D'),
+        denominazione: String(fab.proprietario?.denominazione || ''),
         codiceFiscale: String(fab.proprietario?.codiceFiscale || ''),
-        titolarita: String(fab.proprietario?.titolarita || 'PROPRIETARIO'),
+        titolarita: String(fab.proprietario?.titolarita || ''),
         quota: {
           numeratore: Number(fab.proprietario?.quota?.numeratore) || 1,
           denominatore: Number(fab.proprietario?.quota?.denominatore) || 1
@@ -281,9 +337,9 @@ Restituisci solo il JSON richiesto.`;
       redditoAgrario: Number(ter.redditoAgrario) || 0,
       ubicazione: String(ter.ubicazione || ''),
       proprietario: {
-        denominazione: String(ter.proprietario?.denominazione || 'N/D'),
+        denominazione: String(ter.proprietario?.denominazione || ''),
         codiceFiscale: String(ter.proprietario?.codiceFiscale || ''),
-        titolarita: String(ter.proprietario?.titolarita || 'PROPRIETARIO'),
+        titolarita: String(ter.proprietario?.titolarita || ''),
         quota: {
           numeratore: Number(ter.proprietario?.quota?.numeratore) || 1,
           denominatore: Number(ter.proprietario?.quota?.denominatore) || 1
