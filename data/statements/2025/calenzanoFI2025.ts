@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.6
+    ratePercent: 0.6,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.6
-    categoryTypes: []
+    ratePercent: 0.6,
+    categoryTypes: [],
     context: "SI"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0
+    ratePercent: 0,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,7 +208,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: ["D"]
   ,
     requiredParameters: {
@@ -277,8 +269,8 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Ter ni agricoli",
-    ratePercent: 0
-    categoryTypes: []
+    ratePercent: 0,
+    categoryTypes: [],
     context: "Esenti ai sensi dell’art. 1, comma 758, della legge 27 dicemb 2019, n. 160"
   ,
     requiredParameters: {
@@ -361,7 +353,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "A e fabbricabili",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -429,7 +421,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -528,7 +520,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria catastale D/2 Alberghi e pensioni con fine di lucro",
     details: "Categoria catastale: - D/2 Alberghi e pensioni con fine di lucro",
-    ratePercent: 1.01
+    ratePercent: 1.01,
     categoryTypes: ["D/2"]
   ,
     requiredParameters: {
@@ -589,8 +581,8 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato, tipo contratto: Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i.",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i. - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale.",
-    ratePercent: 0.6
-    categoryTypes: []
+    ratePercent: 0.6,
+    categoryTypes: [],
     context: "Purché l'affittuario/comodatario la utilizzi come abitazione principale."
   ,
     requiredParameters: {
@@ -660,7 +652,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato, tipo contratto: Locazione, categorie catastali A/2, A/3, A/4, A/5, A/6, A/7",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione Categoria catastale: - A/2 Abitazioni di tipo civile - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - A/7 Abitazioni in villini",
-    ratePercent: 0.6
+    ratePercent: 0.6,
     categoryTypes: ["A/2","A/3","A/4","A/5","A/6","A/7"]
   ,
     requiredParameters: {
@@ -756,8 +748,8 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Immobili di categoria C, categoria catastale C/2 Magazzini e locali di deposito",
     details: "Immobili di categoria C Categoria catastale: - C/2 Magazzini e locali di deposito - Superficie: Non superio a Mq 30 MQ - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo",
-    ratePercent: 0.7
-    categoryTypes: ["C/2"]
+    ratePercent: 0.7,
+    categoryTypes: ["C/2"],
     context: "Superficie: Non superiore a Mq 30 MQ"
   ,
     requiredParameters: {
@@ -801,8 +793,8 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato, tipo contratto: Comodato d'uso gratuito",
     details: "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito - Condizioni locatario/comodatario: Pa nti - Sino al secondo grado in linea tta e collaterale - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale.",
-    ratePercent: 0.71
-    categoryTypes: []
+    ratePercent: 0.71,
+    categoryTypes: [],
     context: "Sino al secondo grado in linea retta e collaterale"
   ,
     requiredParameters: {
@@ -874,7 +866,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato, tipo contratto: Locazione, categorie catastali A/1, A/8, A/9",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione Categoria catastale: - A/1 Abitazioni di tipo signorile - A/8 Abitazioni in ville - A/9 Castelli, palazzi di eminenti p gi artistici o storici",
-    ratePercent: 0.75
+    ratePercent: 0.75,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -958,7 +950,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Immobili di categoria C, categoria catastale C/3 Laboratori per arti e mestieri",
     details: "Immobili di categoria C Categoria catastale: - C/3 Laboratori per arti e mestieri",
-    ratePercent: 1.01
+    ratePercent: 1.01,
     categoryTypes: ["C/3"]
   ,
     requiredParameters: {
@@ -1002,7 +994,7 @@ export const imuRatesCalenzanoFI2025: ImuRateEntry[] = [
   {
     condition: "Abitazione destinata a struttura turistico-ricettiva",
     details: "Abitazione destinata a struttura turistico-ricettiva",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {

@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.6
+    ratePercent: 0.6,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.6
-    categoryTypes: []
+    ratePercent: 0.6,
+    categoryTypes: [],
     context: "SI"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0.1
+    ratePercent: 0.1,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,7 +208,7 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1
+    ratePercent: 1,
     categoryTypes: ["D"]
   ,
     requiredParameters: {
@@ -277,8 +269,8 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Terreni agricoli",
-    ratePercent: 0
-    categoryTypes: []
+    ratePercent: 0,
+    categoryTypes: [],
     context: "Esenti ai sensi dell’art. 1, comma 758, della legge 27 dicembre 2019, n. 160"
   ,
     requiredParameters: {
@@ -361,7 +353,7 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "Aree fabbricabili",
-    ratePercent: 1
+    ratePercent: 1,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -429,7 +421,7 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1
+    ratePercent: 1,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -528,9 +520,9 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/2, D/3, utilizzati per attività produttiva e/o commerciale",
     details: "Fabbricati appartenenti al gruppo catastale D Categoria catastale: - D/2 Alberghi e pensioni con fine di lucro - D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro - Collocazione immobile: Dentro il centro storico - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni - Con contratto gistrato *Per contratti di locazione di immobili devono intendersi esclusivamente quelli gistrati ai sensi delle vigenti disposizioni di legge.",
-    ratePercent: 0.86
-    categoryTypes: ["D/2","D/3"]
-    context: "Utilizzato per attività produttiva e/o commerciale"
+    ratePercent: 0.86,
+    categoryTypes: ["D/2","D/3"],
+    context: "Utilizzato per attività produttiva e/o commerciale",
     zone: "Dentro il centro storico"
   ,
     requiredParameters: {
@@ -611,7 +603,7 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/2, D/3, D/4, D/6, D/7, D/8",
     details: "Fabbricati appartenenti al gruppo catastale D Categoria catastale: - D/1 Opifici - D/2 Alberghi e pensioni con fine di lucro - D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro - D/4 Case di cura ed ospedali con fine di lucro - D/6 Fabbricati e locali per esercizi sportivi con fine di lucro - D/7 Fabbricati costruiti o adattati per le speciali esigenze di un'attivita' industriale e non suscettibili di destinazione diversa senza radicali trasformazioni - D/8 Fabbricati costruiti o adattati per le speciali esigenze di un'attivita' commerciale e non suscettibili di destinazione diversa senza radicali trasformazioni",
-    ratePercent: 0.86
+    ratePercent: 0.86,
     categoryTypes: ["D/1","D/2","D/3","D/4","D/6","D/7","D/8"]
   ,
     requiredParameters: {
@@ -694,9 +686,9 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D, abitazione destinata a struttura turistico-ricettiva",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D Abitazione destinata a struttura turistico-ricettiva - Collocazione immobile: Dentro il centro storico - Limitatamente ad un solo immobile.",
-    ratePercent: 0.86
-    categoryTypes: []
-    context: "Abitazione destinata a struttura turistico-ricettiva"
+    ratePercent: 0.86,
+    categoryTypes: [],
+    context: "Abitazione destinata a struttura turistico-ricettiva",
     zone: "Dentro il centro storico"
   ,
     requiredParameters: {
@@ -795,9 +787,9 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D, abitazione locata o in comodato",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D Abitazione locata o in comodato - Tipo contratto: Locazione o comodato d'uso gratuito Categoria catastale: - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - Destinazione d'uso: Purchè l'affittuario/comodatario la utilizzi come abitazione principale. - Collocazione immobile: Dentro il centro storico",
-    ratePercent: 0.86
-    categoryTypes: ["A/3","A/4","A/5","A/6"]
-    context: "Abitazione locata o in comodato"
+    ratePercent: 0.86,
+    categoryTypes: ["A/3","A/4","A/5","A/6"],
+    context: "Abitazione locata o in comodato",
     zone: "Dentro il centro storico"
   ,
     requiredParameters: {
@@ -896,9 +888,9 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D, immobili di categoria A10, C",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D Immobili di categoria A10, , C Categoria catastale: - A/10 Uffici e studi privati - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - /2 Case di cura ed ospedali senza fine di lucro - /4 Uffici pubblici - /5 Scuole e laboratori scientifici - /6 iblioteche, pinacoteche, musei, gallerie, accademie che non hanno sede in edifici della categoria A/9 - /7 Cappelle ed oratori non destinati all'esercizio pubblico del culto - /8 Magazzini sotterranei per depositi di derrate - C/1 Negozi e botteghe - C/2 Magazzini e locali di deposito - C/3 Laboratori per arti e mestieri - C/4 Fabbricati e locali per esercizi sportivi senza fine di lucro - C/5 Stabilimenti balneari e di acque curative senza fine di lucro - C/6 Stalle, scuderie, rimesse, autorimesse senza fine di lucro - C/7 Tettoie chiuse od aperte - Collocazione immobile: Dentro il centro storico - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni - Con contratto gistrato *Per contratti di locazione di immobili devono intendersi esclusivamente quelli gistrati ai sensi delle vigenti disposizioni di legge. - Limitatamente ad un solo immobile.",
-    ratePercent: 0.86
-    categoryTypes: ["A/10","C"]
-    context: "Immobili locati o concessi in comodato"
+    ratePercent: 0.86,
+    categoryTypes: ["A/10","C"],
+    context: "Immobili locati o concessi in comodato",
     zone: "Dentro il centro storico"
   ,
     requiredParameters: {
@@ -997,8 +989,8 @@ export const imuRatesPiazzaArmerinaEN2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D, abitazione a disposizione",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D Abitazione a disposizione - Abitazioni non locate e non concesse in comodato Categoria catastale: - A/1 Abitazioni di tipo signorile - A/2 Abitazioni di tipo civile - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - A/7 Abitazioni in villini",
-    ratePercent: 0
-    categoryTypes: ["A/1","A/2","A/3","A/4","A/5","A/6","A/7"]
+    ratePercent: 0,
+    categoryTypes: ["A/1","A/2","A/3","A/4","A/5","A/6","A/7"],
     context: "Abitazioni non locate e non concesse in comodato"
   ,
     requiredParameters: {

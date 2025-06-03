@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.58
+    ratePercent: 0.58,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.58
-    categoryTypes: []
+    ratePercent: 0.58,
+    categoryTypes: [],
     context: "SI"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0.1
+    ratePercent: 0.1,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,7 +208,7 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: ["D"]
   ,
     requiredParameters: {
@@ -277,7 +269,7 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Ter ni agricoli",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -360,7 +352,7 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -459,8 +451,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, utilizzati direttamente dal soggetto passivo",
     details: "Categoria catastale: - D/1 Opifici - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Requisiti soggettivi del soggetto passivo utilizzato : Persona giuridica esercente attivita' d'imp sa da un numero di mesi non superio a: 36 - Tipologia di attivit�: Attivita' innovative - Start up - Codice ATECO: 72 - RICERCA SCIENTIFICA E SVILUPPO",
-    ratePercent: 0.84
-    categoryTypes: ["D/1"]
+    ratePercent: 0.84,
+    categoryTypes: ["D/1"],
     context: "Attività innovative - Start up"
   ,
     requiredParameters: {
@@ -520,8 +512,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, immobili locati",
     details: "Categoria catastale: - D/1 Opifici - Fabbricati a disposizione o utilizzati: Immobili locati - Requisiti soggettivi del locatario: Persona giuridica esercente attivita' d'imp sa da un numero di mesi non superio a: 36 - Tipologia di attivit�: Attivita' innovative - Start up - Codice ATECO: 72 - RICERCA SCIENTIFICA E SVILUPPO",
-    ratePercent: 0.84
-    categoryTypes: ["D/1"]
+    ratePercent: 0.84,
+    categoryTypes: ["D/1"],
     context: "Attività innovative - Start up"
   ,
     requiredParameters: {
@@ -580,8 +572,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici e D/7, utilizzati direttamente dal soggetto passivo",
     details: "Categoria catastale: - D/1 Opifici - D/7 Fabbricati costruiti o adattati per le speciali esigenze di un'attivita' industriale e non suscettibili di destinazione diversa senza radicali trasformazioni - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Requisiti soggettivi del soggetto passivo utilizzato : Utilizzato di tto dell' immobile tutti - Tipologia di attivit�: Imp se che hanno ampliato la propria",
-    ratePercent: 0.84
-    categoryTypes: ["D/1","D/7"]
+    ratePercent: 0.84,
+    categoryTypes: ["D/1","D/7"],
     context: "Imprese che hanno ampliato la propria"
   ,
     requiredParameters: {
@@ -645,7 +637,7 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro",
     details: "Categoria catastale: - D/3 Teatri, cinematografi, sale per concerti e spettacoli e simili con fine di lucro - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati di ttamente dal soggetto passivo - Requisiti soggettivi del locatario, comodatario o soggetto passivo utilizzato : Utilizzato di tto dell' immobile tutti",
-    ratePercent: 0.96
+    ratePercent: 0.96,
     categoryTypes: ["D/3"]
   ,
     requiredParameters: {
@@ -704,8 +696,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, utilizzati direttamente dal soggetto passivo con meno di 49 dipendenti",
     details: "Categoria catastale: - D/1 Opifici - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Requisiti soggettivi del soggetto passivo utilizzato : Utilizzato di tto dell' immobile tutti - Numero di dipendenti non superio a, specifica indica il numero dei dipendenti: 49",
-    ratePercent: 1.01
-    categoryTypes: ["D/1"]
+    ratePercent: 1.01,
+    categoryTypes: ["D/1"],
     context: "Meno di 49 dipendenti"
   ,
     requiredParameters: {
@@ -765,8 +757,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/1 Opifici, utilizzati direttamente dal soggetto passivo, microimprese",
     details: "Categoria catastale: - D/1 Opifici - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Requisiti soggettivi del soggetto passivo utilizzato : Utilizzato di tto dell' immobile tutti - Tipologia di attivit�: Microimp se",
-    ratePercent: 1.01
-    categoryTypes: ["D/1"]
+    ratePercent: 1.01,
+    categoryTypes: ["D/1"],
     context: "Microimprese"
   ,
     requiredParameters: {
@@ -826,8 +818,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili diverse da residenziali situate nel Distretto di Trasformazione n. 20 Fiera-Kennedy",
     details: "- Tipologia: Diverse da sidenziali - Situate in determinate zone: Dist tto di Trasformazione n. 20 Fiera-Kennedy in base al PUC del Comune di Genova D.D. 2015/118.0.0./18 del 27.11.2015",
-    ratePercent: 0.76
-    categoryTypes: []
+    ratePercent: 0.76,
+    categoryTypes: [],
     zone: "Distretto di Trasformazione n. 20 Fiera-Kennedy"
   ,
     requiredParameters: {
@@ -895,8 +887,8 @@ export const imuRatesGenovaGE2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili residenziali situate nel Distretto di Trasformazione n. 20 Fiera-Kennedy",
     details: "- Tipologia: Residenziali - Situate in determinate zone: Dist tto di Trasformazione n. 20 Fiera-Kennedy in base al PUC del Comune di Genova D.D. 2015/118.0.0./18 del 27.11.2015",
-    ratePercent: 0.76
-    categoryTypes: []
+    ratePercent: 0.76,
+    categoryTypes: [],
     zone: "Distretto di Trasformazione n. 20 Fiera-Kennedy"
   ,
     requiredParameters: {

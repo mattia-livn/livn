@@ -9,18 +9,10 @@ export interface ImuRateEntry {
 
 export const imuRatesSantaMariaLaLongaUD2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale",
     details: "Abitazione principale - Aliquota 0,60%",
-    ratePercent: 0.6
-    categoryTypes: ["Abitazione principale"]
+    ratePercent: 0.6,
+    categoryTypes: ["Abitazione principale"],
     context: "Aliquota per la casa di residenza del proprietario"
   ,
     requiredParameters: {
@@ -73,8 +65,8 @@ export const imuRatesSantaMariaLaLongaUD2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati",
     details: "Altri fabbricati - Aliquota 1,06%",
-    ratePercent: 1.06
-    categoryTypes: ["Altri fabbricati"]
+    ratePercent: 1.06,
+    categoryTypes: ["Altri fabbricati"],
     context: "Aliquota per immobili diversi da abitazione principale e gruppo D"
   ,
     requiredParameters: {
@@ -173,8 +165,8 @@ export const imuRatesSantaMariaLaLongaUD2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati gruppo D",
     details: "Fabbricati gruppo D - Aliquota 1,06%",
-    ratePercent: 1.06
-    categoryTypes: ["Fabbricati gruppo D"]
+    ratePercent: 1.06,
+    categoryTypes: ["Fabbricati gruppo D"],
     context: "Aliquota per immobili produttivi/commerciali"
   ,
     requiredParameters: {
@@ -217,8 +209,8 @@ export const imuRatesSantaMariaLaLongaUD2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Terreni agricoli - Esenti",
-    ratePercent: 0
-    categoryTypes: ["Terreni agricoli"]
+    ratePercent: 0,
+    categoryTypes: ["Terreni agricoli"],
     context: "Superfici coltivabili esenti da IMU"
   ,
     requiredParameters: {
@@ -301,8 +293,8 @@ export const imuRatesSantaMariaLaLongaUD2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "Aree fabbricabili - Aliquota 1,06%",
-    ratePercent: 1.06
-    categoryTypes: ["Aree fabbricabili"]
+    ratePercent: 1.06,
+    categoryTypes: ["Aree fabbricabili"],
     context: "Aliquota per terreni edificabili"
   ,
     requiredParameters: {

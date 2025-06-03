@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.6
+    ratePercent: 0.6,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.6
-    categoryTypes: []
+    ratePercent: 0.6,
+    categoryTypes: [],
     context: "Posseduta da anziani o disabili"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0.1
+    ratePercent: 0.1,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,8 +208,8 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1.06
-    categoryTypes: ["D"]
+    ratePercent: 1.06,
+    categoryTypes: ["D"],
     context: "Esclusa la categoria D/10"
   ,
     requiredParameters: {
@@ -278,7 +270,7 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Ter ni agricoli",
-    ratePercent: 0.76
+    ratePercent: 0.76,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -361,7 +353,7 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "A e fabbricabili",
-    ratePercent: 1.14
+    ratePercent: 1.14,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -429,7 +421,7 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1.13
+    ratePercent: 1.13,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -528,8 +520,8 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D utilizzati per attività produttiva e/o commerciale o per l'esercizio di arti e professioni",
     details: "- Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati di ttamente dal soggetto passivo - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
-    ratePercent: 1.01
-    categoryTypes: ["D"]
+    ratePercent: 1.01,
+    categoryTypes: ["D"],
     context: "Utilizzato per attività produttiva e/o commerciale"
   ,
     requiredParameters: {
@@ -601,8 +593,8 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato con contratto di comodato d'uso gratuito",
     details: "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito - Condizioni locatario/comodatario: Pa nti - Sino al secondo grado in linea tta e collaterale - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale.",
-    ratePercent: 0.71
-    categoryTypes: []
+    ratePercent: 0.71,
+    categoryTypes: [],
     context: "Comodato d'uso gratuito"
   ,
     requiredParameters: {
@@ -674,8 +666,8 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato con contratto di locazione a canone libero",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione a canone libero - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale.",
-    ratePercent: 0.71
-    categoryTypes: []
+    ratePercent: 0.71,
+    categoryTypes: [],
     context: "Locazione a canone libero"
   ,
     requiredParameters: {
@@ -746,8 +738,8 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato con contratto ai sensi dell'art. 2, comma 3, della Legge n.431/1998",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i. - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale.",
-    ratePercent: 0.46
-    categoryTypes: []
+    ratePercent: 0.46,
+    categoryTypes: [],
     context: "Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998"
   ,
     requiredParameters: {
@@ -817,7 +809,7 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Immobili di categoria C (C/1, C/2, C/3)",
     details: "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe - C/2 Magazzini e locali di deposito - C/3 Laboratori per arti e mestieri",
-    ratePercent: 1.01
+    ratePercent: 1.01,
     categoryTypes: ["C/1","C/2","C/3"]
   ,
     requiredParameters: {
@@ -867,8 +859,8 @@ export const imuRatesLericiSP2025: ImuRateEntry[] = [
   {
     condition: "Abitazione destinata a struttura turistico-ricettiva",
     details: "Abitazione destinata a struttura turistico-ricettiva - Codice ATECO: 55.20.51 - Affittacame per b vi soggiorni, case ed appartamenti per vacanze, bed and b akfast, sidence - Attività condotta in forma imp nditoriale",
-    ratePercent: 1.01
-    categoryTypes: []
+    ratePercent: 1.01,
+    categoryTypes: [],
     context: "Struttura turistico-ricettiva"
   ,
     requiredParameters: {

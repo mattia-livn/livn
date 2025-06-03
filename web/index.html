@@ -1127,6 +1127,94 @@
             `;
 
             container.innerHTML = questionHTML;
+            
+            // NUOVA LOGICA: Gestione esclusività abitazione principale
+            if (question.type === 'object') {
+                setupAbitazionePrincipaleExclusivity();
+            }
+        }
+
+        function setupAbitazionePrincipaleExclusivity() {
+            // Trova tutti i radio button "abitazione_principale"
+            const abitazionePrincipaleRadios = document.querySelectorAll('input[type="radio"][value="abitazione_principale"]');
+            
+            if (abitazionePrincipaleRadios.length > 1) {
+                console.log('🏠 Configurazione esclusività abitazione principale per', abitazionePrincipaleRadios.length, 'immobili');
+                
+                // Aggiungi listener a ciascun radio button "abitazione_principale"
+                abitazionePrincipaleRadios.forEach(radio => {
+                    radio.addEventListener('change', handleAbitazionePrincipaleChange);
+                });
+                
+                // NUOVA LOGICA: Aggiungi listener anche agli altri radio button dello stesso gruppo
+                // per rilevare quando l'utente cambia da abitazione_principale ad altro
+                abitazionePrincipaleRadios.forEach(radio => {
+                    const fieldGroup = radio.closest('.field-group');
+                    const allRadiosInGroup = fieldGroup.querySelectorAll('input[type="radio"]');
+                    
+                    allRadiosInGroup.forEach(groupRadio => {
+                        if (groupRadio.value !== 'abitazione_principale') {
+                            groupRadio.addEventListener('change', handleOtherOptionChange);
+                        }
+                    });
+                });
+                
+                // Controlla stato iniziale
+                updateAbitazionePrincipaleState();
+            }
+        }
+
+        function handleAbitazionePrincipaleChange(event) {
+            console.log('🏠 Abitazione principale selezionata:', event.target.name);
+            updateAbitazionePrincipaleState();
+        }
+
+        function handleOtherOptionChange(event) {
+            // Quando l'utente seleziona un'altra opzione (non abitazione_principale)
+            // ricontrolla lo stato per riabilitare eventualmente altri immobili
+            console.log('🏠 Opzione cambiata da abitazione principale:', event.target.name, '=', event.target.value);
+            updateAbitazionePrincipaleState();
+        }
+
+        function updateAbitazionePrincipaleState() {
+            const abitazionePrincipaleRadios = document.querySelectorAll('input[type="radio"][value="abitazione_principale"]');
+            const selectedRadio = document.querySelector('input[type="radio"][value="abitazione_principale"]:checked');
+            
+            abitazionePrincipaleRadios.forEach(radio => {
+                const parentLabel = radio.closest('label');
+                const fieldGroup = radio.closest('.field-group');
+                
+                if (selectedRadio && selectedRadio !== radio) {
+                    // Disabilita altri radio "abitazione_principale"
+                    radio.disabled = true;
+                    parentLabel.classList.add('disabled');
+                    parentLabel.style.opacity = '0.5';
+                    parentLabel.style.pointerEvents = 'none';
+                    
+                    // Aggiungi indicazione visiva
+                    if (!parentLabel.querySelector('.disabled-indicator')) {
+                        const indicator = document.createElement('span');
+                        indicator.className = 'disabled-indicator';
+                        indicator.innerHTML = ' (già selezionata altrove)';
+                        indicator.style.color = '#666';
+                        indicator.style.fontSize = '0.9em';
+                        indicator.style.fontStyle = 'italic';
+                        parentLabel.appendChild(indicator);
+                    }
+                } else {
+                    // Riabilita se nessuno è selezionato o se è quello selezionato
+                    radio.disabled = false;
+                    parentLabel.classList.remove('disabled');
+                    parentLabel.style.opacity = '';
+                    parentLabel.style.pointerEvents = '';
+                    
+                    // Rimuovi indicazione visiva
+                    const indicator = parentLabel.querySelector('.disabled-indicator');
+                    if (indicator) {
+                        indicator.remove();
+                    }
+                }
+            });
         }
 
         async function submitAnswer(questionId, questionType, required) {

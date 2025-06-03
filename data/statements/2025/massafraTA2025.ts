@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.6
+    ratePercent: 0.6,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.6
-    categoryTypes: []
+    ratePercent: 0.6,
+    categoryTypes: [],
     context: "Posseduta da anziani o disabili"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0
+    ratePercent: 0,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,8 +208,8 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1.06
-    categoryTypes: ["D"]
+    ratePercent: 1.06,
+    categoryTypes: ["D"],
     context: "Esclusa la categoria D/10"
   ,
     requiredParameters: {
@@ -278,7 +270,7 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Terreni agricoli",
-    ratePercent: 0.8
+    ratePercent: 0.8,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -361,7 +353,7 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "A e fabbricabili",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -429,7 +421,7 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -528,8 +520,8 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Immobili di categoria C utilizzati direttamente dal soggetto passivo",
     details: "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
-    ratePercent: 0.92
-    categoryTypes: ["C/1","C/3"]
+    ratePercent: 0.92,
+    categoryTypes: ["C/1","C/3"],
     context: "Utilizzato per attività produttiva e/o commerciale o per l'esercizio di arti e professioni"
   ,
     requiredParameters: {
@@ -569,9 +561,9 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Abitazione a disposizione non locate e non concesse in comodato",
     details: "Abitazione a disposizione - Abitazioni non locate e non concesse in comodato Categoria catastale: - A/2 Abitazioni di tipo civile - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - Utilizzo/Inutilizzo: Con uso limitato e discontinuo o stagionale, per un utilizzo complessivo non superio a mesi: 0 - Collocazione immobile: In una zona specificamente indicata dal comune: Già destinati ad abitazione principale ai sensi del comma 741, lett.b, L. 160/2019, destinatari di ordinanza sindacale di sgombero emessa tra il01/01/2022 e il 31/12/2022",
-    ratePercent: 0
-    categoryTypes: ["A/2","A/3","A/4","A/5","A/6"]
-    context: "Con uso limitato e discontinuo o stagionale"
+    ratePercent: 0,
+    categoryTypes: ["A/2","A/3","A/4","A/5","A/6"],
+    context: "Con uso limitato e discontinuo o stagionale",
     zone: "Già destinati ad abitazione principale"
   ,
     requiredParameters: {
@@ -628,8 +620,8 @@ export const imuRatesMassafraTA2025: ImuRateEntry[] = [
   {
     condition: "Alloggi regolarmente assegnati dagli IACP o dagli enti di edilizia residenziale pubblica",
     details: "Alloggi golarmente assegnati dagli IACP o dagli enti di edilizia sidenziale pubblica aventi le stesse finalità",
-    ratePercent: 1.06
-    categoryTypes: []
+    ratePercent: 1.06,
+    categoryTypes: [],
     context: "Assegnati dagli IACP o enti di edilizia residenziale pubblica"
   ,
     requiredParameters: {

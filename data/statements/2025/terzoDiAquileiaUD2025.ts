@@ -9,18 +9,10 @@ export interface ImuRateEntry {
 
 export const imuRatesTerzoDiAquileiaUD2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale e relative pertinenze",
     details: "Abitazione principale e relative pertinenze: 0,60%",
-    ratePercent: 0.6
-    categoryTypes: ["A/1","A/8","A/9"]
+    ratePercent: 0.6,
+    categoryTypes: ["A/1","A/8","A/9"],
     context: "Aliquota per abitazione principale"
   ,
     requiredParameters: {
@@ -73,8 +65,8 @@ export const imuRatesTerzoDiAquileiaUD2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati",
     details: "Altri fabbricati: 1,06%",
-    ratePercent: 1.06
-    categoryTypes: ["B","C","D","E"]
+    ratePercent: 1.06,
+    categoryTypes: ["B","C","D","E"],
     context: "Aliquota per fabbricati diversi dall'abitazione principale"
   ,
     requiredParameters: {
@@ -173,8 +165,8 @@ export const imuRatesTerzoDiAquileiaUD2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale",
     details: "Fabbricati rurali ad uso strumentale: 0,00%",
-    ratePercent: 0
-    categoryTypes: ["D/10"]
+    ratePercent: 0,
+    categoryTypes: ["D/10"],
     context: "Esenzione per fabbricati rurali strumentali"
   ,
     requiredParameters: {
@@ -217,8 +209,8 @@ export const imuRatesTerzoDiAquileiaUD2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Terreni agricoli: 0,76%",
-    ratePercent: 0.76
-    categoryTypes: []
+    ratePercent: 0.76,
+    categoryTypes: [],
     context: "Aliquota per terreni agricoli"
   ,
     requiredParameters: {
@@ -301,8 +293,8 @@ export const imuRatesTerzoDiAquileiaUD2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "Aree fabbricabili: 1,06%",
-    ratePercent: 1.06
-    categoryTypes: []
+    ratePercent: 1.06,
+    categoryTypes: [],
     context: "Aliquota per terreni edificabili"
   ,
     requiredParameters: {

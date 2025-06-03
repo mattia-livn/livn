@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.5
+    ratePercent: 0.5,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0
-    categoryTypes: []
+    ratePercent: 0,
+    categoryTypes: [],
     context: "NO"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0.1
+    ratePercent: 0.1,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,7 +208,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: ["D"]
   ,
     requiredParameters: {
@@ -277,8 +269,8 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Ter ni agricoli",
-    ratePercent: 0
-    categoryTypes: []
+    ratePercent: 0,
+    categoryTypes: [],
     context: "Esenti ai sensi dell’art. 1, comma 758, della legge 27 dicemb 2019, n. 160"
   ,
     requiredParameters: {
@@ -361,7 +353,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "A e fabbricabili",
-    ratePercent: 0.96
+    ratePercent: 0.96,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -429,7 +421,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 0.96
+    ratePercent: 0.96,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -528,7 +520,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D",
     details: "Fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 0.96
+    ratePercent: 0.96,
     categoryTypes: ["D/1","D/2","D/3","D/4","D/6","D/7","D/9"]
   ,
     requiredParameters: {
@@ -572,8 +564,8 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Immobili di categoria C locati o concessi in comodato",
     details: "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato - Con contratto gistrato",
-    ratePercent: 0.86
-    categoryTypes: ["C/1","C/3"]
+    ratePercent: 0.86,
+    categoryTypes: ["C/1","C/3"],
     context: "Con contratto registrato"
   ,
     requiredParameters: {
@@ -613,7 +605,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato a canone libero",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione a canone libero",
-    ratePercent: 0.86
+    ratePercent: 0.86,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -683,8 +675,8 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata o in comodato d'uso gratuito",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione o comodato d'uso gratuito - Con contratto gistrato - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale. - Limitatamente ad un solo immobile.",
-    ratePercent: 0.96
-    categoryTypes: []
+    ratePercent: 0.96,
+    categoryTypes: [],
     context: "Con contratto registrato"
   ,
     requiredParameters: {
@@ -739,7 +731,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Immobili di categoria C a disposizione",
     details: "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Fabbricati a disposizione o utilizzati: Immobili a disposizione",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: ["C/1","C/3"]
   ,
     requiredParameters: {
@@ -779,7 +771,7 @@ export const imuRatesIglesiasSU2025: ImuRateEntry[] = [
   {
     condition: "Abitazione locata ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i.",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i.",
-    ratePercent: 0.63
+    ratePercent: 0.63,
     categoryTypes: []
   ,
     requiredParameters: {

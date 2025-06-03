@@ -30,7 +30,8 @@ export class CommuneConditionsService {
    * Costruisce l'indice dei file comunali disponibili
    */
   private buildCommuneFileIndex() {
-    const statementsDir = path.join(__dirname, '../data/statements/2025');
+    // Correggo path per gestire compilazione TypeScript
+    const statementsDir = path.join(process.cwd(), 'data/statements/2025');
     
     if (!fs.existsSync(statementsDir)) {
       console.warn('⚠️ Directory statements non trovata:', statementsDir);
@@ -105,7 +106,8 @@ export class CommuneConditionsService {
     }
 
     try {
-      const filePath = path.join(__dirname, '../data/statements/2025', filename);
+      // Correggo path per gestire compilazione TypeScript
+      const filePath = path.join(process.cwd(), 'data/statements/2025', filename);
       
       // Legge il file come testo
       const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -507,7 +509,14 @@ export class CommuneConditionsService {
   }
 
   /**
-   * Lista dei comuni disponibili
+   * Metodo pubblico per ottenere tutte le condizioni di un comune
+   */
+  public async getConditionsForCommune(communeName: string): Promise<ImuRateEntry[]> {
+    return await this.loadCommuneConditions(communeName);
+  }
+
+  /**
+   * Restituisce l'elenco dei comuni disponibili
    */
   public getAvailableCommunes(): string[] {
     return Array.from(this.communeFileCache.keys());

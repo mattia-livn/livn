@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sistema Domande IMU 2025 - Torino</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .input-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .output-section {
+            padding: 30px;
+            background: white;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .preset-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .preset-btn:hover {
+            background: #2980b9;
+        }
+
+        .question-group {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .group-header {
+            margin-bottom: 15px;
+        }
+
+        .group-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .group-description {
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+
+        .applicable-rates {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .question {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .question-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 0.85em;
+            color: #7f8c8d;
+        }
+
+        .meta-item {
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .question-reason {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #856404;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 50px 20px;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+        }
+
+        .property-info {
+            background: #e8f5e8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .property-info h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-section {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .preset-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Test Sistema Domande IMU 2025</h1>
+            <p>Generatore intelligente di domande per Torino</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">📝 Dati Immobile</h3>
+                
+                <div class="preset-buttons">
+                    <button class="preset-btn" onclick="loadPreset('appartamento')">🏠 Appartamento A/2</button>
+                    <button class="preset-btn" onclick="loadPreset('industriale')">🏭 Fabbricato D/1</button>
+                    <button class="preset-btn" onclick="loadPreset('terreno')">🌾 Terreno</button>
+                    <button class="preset-btn" onclick="loadPreset('garage')">🚗 Garage C/6</button>
+                </div>
+
+                <form id="propertyForm">
+                    <div class="form-group">
+                        <label for="propertyId">ID Immobile</label>
+                        <input type="text" id="propertyId" value="PROP_001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="propertyType">Tipo Immobile</label>
+                        <select id="propertyType" required>
+                            <option value="fabbricato">Fabbricato</option>
+                            <option value="terreno">Terreno</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="propertyCategory">Categoria Catastale</label>
+                        <select id="propertyCategory">
+                            <option value="">-- Seleziona --</option>
+                            <optgroup label="Abitazioni">
+                                <option value="A/1">A/1 - Abitazioni signorili</option>
+                                <option value="A/2">A/2 - Abitazioni civili</option>
+                                <option value="A/3">A/3 - Abitazioni economiche</option>
+                                <option value="A/4">A/4 - Abitazioni popolari</option>
+                                <option value="A/5">A/5 - Abitazioni ultrapopolari</option>
+                                <option value="A/6">A/6 - Abitazioni rurali</option>
+                                <option value="A/7">A/7 - Abitazioni villini</option>
+                                <option value="A/8">A/8 - Abitazioni ville</option>
+                                <option value="A/9">A/9 - Castelli e palazzi</option>
+                                <option value="A/10">A/10 - Uffici e studi privati</option>
+                            </optgroup>
+                            <optgroup label="Pertinenze">
+                                <option value="C/2">C/2 - Magazzini e locali di deposito</option>
+                                <option value="C/6">C/6 - Stalle, scuderie, rimesse</option>
+                                <option value="C/7">C/7 - Tettoie chiuse</option>
+                            </optgroup>
+                            <optgroup label="Immobili Speciali">
+                                <option value="D/1">D/1 - Opifici</option>
+                                <option value="D/2">D/2 - Alberghi e pensioni</option>
+                                <option value="D/3">D/3 - Teatri, cinema, ecc.</option>
+                                <option value="D/7">D/7 - Fabbricati costruiti per industrie</option>
+                                <option value="D/10">D/10 - Fabbricati per funzioni produttive</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="propertyAddress">Indirizzo</label>
+                        <input type="text" id="propertyAddress" placeholder="Via Roma 123, Torino" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="propertyOwners">Proprietari (separati da virgola)</label>
+                        <textarea id="propertyOwners" rows="2" placeholder="Mario Rossi, Anna Bianchi" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">🎯 Genera Domande</button>
+                </form>
+            </div>
+
+            <div class="output-section">
+                <h3 style="margin-bottom: 20px; color: #2c3e50;">❓ Domande Generate</h3>
+                <div id="output">
+                    <div class="empty-state">
+                        <h3>Nessun immobile analizzato</h3>
+                        <p>Compila il form a sinistra e clicca "Genera Domande" per vedere le domande specifiche per l'immobile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Simulazione delle interfacce e dati TypeScript
+        const imuRatesTorinoTO2025 = [
+            {
+                label: "Abitazione principale A/1, A/8, A/9 e relative pertinenze",
+                ratePercent: 0.006,
+                categoryTypes: ["A/1", "A/8", "A/9", "C/2", "C/6", "C/7"],
+                officialDescription: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
+                conditions: [
+                    {
+                        description: "L'entità è un fabbricato",
+                        predicate: "entity.type === 'fabbricato'"
+                    },
+                    {
+                        description: "L'entità è stata indicata come abitazione principale",
+                        predicate: "entity.isMainResidence === true"
+                    }
+                ]
+            },
+            {
+                label: "Fabbricati gruppo D (escluso D/10)",
+                ratePercent: 0.0106,
+                categoryTypes: ["D/1", "D/2", "D/3", "D/4", "D/5", "D/6", "D/7", "D/8", "D/9"],
+                officialDescription: "Fabbricati appartenenti al gruppo catastale D (esclusa la categoria catastale D/10)",
+                conditions: [
+                    {
+                        description: "L'entità ha categoria D diversa da D/10",
+                        predicate: "entity.category.startsWith('D') && entity.category !== 'D/10'"
+                    }
+                ]
+            },
+            {
+                label: "Fabbricati D/1 o D/7 usati da startup innovative (ATECO 72.1)",
+                ratePercent: 0.0086,
+                categoryTypes: ["D/1", "D/7"],
+                officialDescription: "Fabbricati D/1 o D/7 utilizzati da startup innovative con codice ATECO 72.1",
+                conditions: [
+                    {
+                        description: "Categoria catastale D/1 o D/7",
+                        predicate: "['D/1','D/7'].includes(entity.category)"
+                    },
+                    {
+                        description: "Codice ATECO 72.1",
+                        predicate: "entity.atecoCode === '72.1'"
+                    },
+                    {
+                        description: "Startup attiva da meno di 24 mesi",
+                        predicate: "entity.tenantCompanyAgeMonths <= 24"
+                    }
+                ]
+            },
+            {
+                label: "Area fabbricabile",
+                ratePercent: 0.0096,
+                officialDescription: "Aree fabbricabili",
+                conditions: [
+                    {
+                        description: "Il terreno è edificabile secondo PRG o catasto",
+                        predicate: "entity.isBuildable === true"
+                    }
+                ]
+            },
+            {
+                label: "Abitazione locata a canone concordato (art. 2, c.3 L.431/1998)",
+                ratePercent: 0.00575,
+                categoryTypes: ["A/2", "A/3", "A/4", "A/5", "A/6", "A/7"],
+                officialDescription: "Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i.",
+                conditions: [
+                    {
+                        description: "Il contratto è a canone concordato",
+                        predicate: "entity.contractType === 'canone_concordato'"
+                    }
+                ]
+            }
+        ];
+
+        class TorinIMUQuestionGenerator {
+            constructor() {
+                this.rates = imuRatesTorinoTO2025;
+            }
+
+            generateQuestions(property) {
+                const potentialRates = this.findPotentialRates(property);
+                const questionGroups = [];
+
+                const basicQuestions = this.generateBasicQuestions(property, potentialRates);
+                if (basicQuestions.questions.length > 0) {
+                    questionGroups.push(basicQuestions);
+                }
+
+                const usageQuestions = this.generateUsageQuestions(property, potentialRates);
+                if (usageQuestions.questions.length > 0) {
+                    questionGroups.push(usageQuestions);
+                }
+
+                const contractQuestions = this.generateContractQuestions(property, potentialRates);
+                if (contractQuestions.questions.length > 0) {
+                    questionGroups.push(contractQuestions);
+                }
+
+                return questionGroups;
+            }
+
+            findPotentialRates(property) {
+                return this.rates.filter(rate => {
+                    if (rate.categoryTypes && property.category) {
+                        return rate.categoryTypes.includes(property.category);
+                    }
+                    return true;
+                });
+            }
+
+            generateBasicQuestions(property, potentialRates) {
+                const questions = [];
+                const applicableRates = potentialRates.map(r => r.label);
+
+                if (property.type === 'fabbricato' && this.needsMainResidenceInfo(potentialRates)) {
+                    questions.push({
+                        id: 'isMainResidence',
+                        text: 'Questo immobile è indicato come abitazione principale del proprietario?',
+                        type: 'boolean',
+                        required: true,
+                        reason: 'Per determinare se applicare l\'aliquota agevolata per abitazione principale'
+                    });
+                }
+
+                if (property.type === 'fabbricato' && this.needsPertinenceInfo(property, potentialRates)) {
+                    questions.push({
+                        id: 'isAppurtenance',
+                        text: 'Questo immobile è una pertinenza (garage, cantina, etc.) di un\'abitazione principale?',
+                        type: 'boolean',
+                        required: true,
+                        reason: 'Le pertinenze godono della stessa aliquota dell\'abitazione principale'
+                    });
+                }
+
+                if (property.type === 'terreno' && this.needsBuildabilityInfo(potentialRates)) {
+                    questions.push({
+                        id: 'isBuildable',
+                        text: 'Questo terreno è considerato edificabile secondo il PRG comunale o risulta come area fabbricabile al catasto?',
+                        type: 'boolean',
+                        required: true,
+                        reason: 'I terreni edificabili hanno un\'aliquota diversa da quelli agricoli'
+                    });
+                }
+
+                return {
+                    title: 'Informazioni di base',
+                    description: 'Caratteristiche principali dell\'immobile',
+                    questions,
+                    applicableRates
+                };
+            }
+
+            generateUsageQuestions(property, potentialRates) {
+                const questions = [];
+                const applicableRates = [];
+
+                const atecoRates = potentialRates.filter(r =>
+                    r.conditions.some(c => c.predicate.includes('atecoCode'))
+                );
+
+                if (atecoRates.length > 0) {
+                    applicableRates.push(...atecoRates.map(r => r.label));
+                    
+                    questions.push({
+                        id: 'hasEconomicActivity',
+                        text: 'Nell\'immobile viene svolta un\'attività economica?',
+                        type: 'boolean',
+                        required: true,
+                        reason: 'Per verificare agevolazioni legate a specifiche attività economiche'
+                    });
+
+                    questions.push({
+                        id: 'atecoCode',
+                        text: 'Qual è il codice ATECO dell\'attività svolta?',
+                        type: 'select',
+                        options: ['72.1', '59.14.00', 'altro'],
+                        required: true,
+                        dependsOn: 'hasEconomicActivity',
+                        reason: 'Alcune attività hanno aliquote agevolate (cinema, startup innovative)'
+                    });
+
+                    questions.push({
+                        id: 'tenantCompanyAgeMonths',
+                        text: 'Da quanti mesi è attiva la startup?',
+                        type: 'number',
+                        required: true,
+                        dependsOn: 'atecoCode',
+                        reason: 'L\'agevolazione per startup innovative vale solo per i primi 24 mesi'
+                    });
+                }
+
+                return {
+                    title: 'Informazioni sull\'uso',
+                    description: 'Come viene utilizzato l\'immobile',
+                    questions,
+                    applicableRates
+                };
+            }
+
+            generateContractQuestions(property, potentialRates) {
+                const questions = [];
+                const applicableRates = [];
+
+                const rentalRates = potentialRates.filter(r =>
+                    r.conditions.some(c => c.predicate.includes('contractType'))
+                );
+
+                if (rentalRates.length > 0 && property.type === 'fabbricato') {
+                    applicableRates.push(...rentalRates.map(r => r.label));
+                    
+                    questions.push({
+                        id: 'isRented',
+                        text: 'L\'immobile è dato in locazione?',
+                        type: 'boolean',
+                        required: true,
+                        reason: 'Alcuni tipi di locazione hanno aliquote agevolate'
+                    });
+
+                    questions.push({
+                        id: 'contractType',
+                        text: 'Che tipo di contratto di locazione è?',
+                        type: 'select',
+                        options: ['canone_concordato', 'studenti', 'transitorio', 'libero'],
+                        required: true,
+                        dependsOn: 'isRented',
+                        reason: 'I contratti a canone concordato, per studenti e transitori hanno aliquote agevolate'
+                    });
+                }
+
+                return {
+                    title: 'Informazioni contrattuali',
+                    description: 'Contratti di locazione e destinazione d\'uso',
+                    questions,
+                    applicableRates
+                };
+            }
+
+            needsMainResidenceInfo(rates) {
+                return rates.some(r => r.conditions.some(c => c.predicate.includes('isMainResidence')));
+            }
+
+            needsPertinenceInfo(property, rates) {
+                const pertinenceCategories = ['C/2', 'C/6', 'C/7'];
+                return property.category && pertinenceCategories.includes(property.category) &&
+                       rates.some(r => r.conditions.some(c => c.predicate.includes('isAppurtenanceOf')));
+            }
+
+            needsBuildabilityInfo(rates) {
+                return rates.some(r => r.conditions.some(c => c.predicate.includes('isBuildable')));
+            }
+        }
+
+        // Presets
+        window.loadPreset = function(type) {
+            const presets = {
+                appartamento: {
+                    id: 'PROP_001',
+                    type: 'fabbricato',
+                    category: 'A/2',
+                    address: 'Via Roma 123, Torino',
+                    owners: 'Mario Rossi'
+                },
+                industriale: {
+                    id: 'PROP_002',
+                    type: 'fabbricato',
+                    category: 'D/1',
+                    address: 'Via Milano 45, Torino',
+                    owners: 'Tech Startup SRL'
+                },
+                terreno: {
+                    id: 'PROP_003',
+                    type: 'terreno',
+                    category: '',
+                    address: 'Località Campagna, Torino',
+                    owners: 'Giuseppe Verdi'
+                },
+                garage: {
+                    id: 'PROP_004',
+                    type: 'fabbricato',
+                    category: 'C/6',
+                    address: 'Via Garibaldi 78, Torino',
+                    owners: 'Anna Bianchi'
+                }
+            };
+
+            const preset = presets[type];
+            if (preset) {
+                document.getElementById('propertyId').value = preset.id;
+                document.getElementById('propertyType').value = preset.type;
+                document.getElementById('propertyCategory').value = preset.category;
+                document.getElementById('propertyAddress').value = preset.address;
+                document.getElementById('propertyOwners').value = preset.owners;
+            }
+        };
+
+        // Form handling
+        document.getElementById('propertyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const property = {
+                id: document.getElementById('propertyId').value,
+                type: document.getElementById('propertyType').value,
+                category: document.getElementById('propertyCategory').value || undefined,
+                address: document.getElementById('propertyAddress').value,
+                owners: document.getElementById('propertyOwners').value.split(',').map(s => s.trim())
+            };
+
+            const generator = new TorinIMUQuestionGenerator();
+            const questionGroups = generator.generateQuestions(property);
+            
+            displayResults(property, questionGroups);
+        });
+
+        function displayResults(property, questionGroups) {
+            const output = document.getElementById('output');
+            
+            if (questionGroups.length === 0) {
+                output.innerHTML = `
+                    <div class="property-info">
+                        <h4>🏠 Immobile: ${property.id}</h4>
+                        <p><strong>Tipo:</strong> ${property.type}</p>
+                        <p><strong>Categoria:</strong> ${property.category || 'N/A'}</p>
+                        <p><strong>Indirizzo:</strong> ${property.address}</p>
+                        <p><strong>Proprietari:</strong> ${property.owners.join(', ')}</p>
+                    </div>
+                    <div class="empty-state">
+                        <h3>❌ Nessuna domanda generata</h3>
+                        <p>Non sono state trovate aliquote specifiche per questo immobile.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div class="property-info">
+                    <h4>🏠 Immobile: ${property.id}</h4>
+                    <p><strong>Tipo:</strong> ${property.type}</p>
+                    <p><strong>Categoria:</strong> ${property.category || 'N/A'}</p>
+                    <p><strong>Indirizzo:</strong> ${property.address}</p>
+                    <p><strong>Proprietari:</strong> ${property.owners.join(', ')}</p>
+                </div>
+            `;
+
+            questionGroups.forEach((group, groupIndex) => {
+                html += `
+                    <div class="question-group">
+                        <div class="group-header">
+                            <div class="group-title">📋 ${group.title}</div>
+                            <div class="group-description">${group.description}</div>
+                            <div class="applicable-rates">
+                                <strong>Aliquote applicabili:</strong> ${group.applicableRates.join(', ')}
+                            </div>
+                        </div>
+                `;
+
+                group.questions.forEach((question, qIndex) => {
+                    html += `
+                        <div class="question">
+                            <div class="question-text">❓ ${question.text}</div>
+                            <div class="question-meta">
+                                <div class="meta-item"><strong>Tipo:</strong> ${question.type}</div>
+                                <div class="meta-item"><strong>Obbligatoria:</strong> ${question.required ? 'Sì' : 'No'}</div>
+                                ${question.dependsOn ? `<div class="meta-item"><strong>Dipende da:</strong> ${question.dependsOn}</div>` : ''}
+                                ${question.options ? `<div class="meta-item"><strong>Opzioni:</strong> ${question.options.join(', ')}</div>` : ''}
+                            </div>
+                            <div class="question-reason">
+                                <strong>💡 Motivo:</strong> ${question.reason}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            });
+
+            output.innerHTML = html;
+        }
+
+        // Load default preset
+        loadPreset('appartamento');
+    </script>
+</body>
+</html> 

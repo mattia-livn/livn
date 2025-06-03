@@ -11,36 +11,36 @@ export const imuRatesTermenoSullaStradaDelVino.BZ2025: ImuRateEntry[] = [
   {
     condition: "Abitazione principale",
     details: "Abitazione principale - Aliquota 0,60%",
-    ratePercent: 0.6
-    categoryTypes: ["Abitazione principale"]
+    ratePercent: 0.6,
+    categoryTypes: ["Abitazione principale"],
     context: "Aliquota per la casa di residenza del proprietario"
   },
   {
     condition: "Altri fabbricati",
     details: "Altri fabbricati - Aliquota 1,06%",
-    ratePercent: 1.06
-    categoryTypes: ["Altri fabbricati"]
+    ratePercent: 1.06,
+    categoryTypes: ["Altri fabbricati"],
     context: "Aliquota per immobili diversi da abitazione principale e gruppo D"
   },
   {
     condition: "Fabbricati gruppo D",
     details: "Fabbricati gruppo D - Aliquota 0,76%",
-    ratePercent: 0.76
-    categoryTypes: ["Fabbricati gruppo D"]
+    ratePercent: 0.76,
+    categoryTypes: ["Fabbricati gruppo D"],
     context: "Aliquota per immobili produttivi/commerciali"
   },
   {
     condition: "Terreni agricoli",
     details: "Terreni agricoli - Esenti",
-    ratePercent: 0
-    categoryTypes: ["Terreni agricoli"]
+    ratePercent: 0,
+    categoryTypes: ["Terreni agricoli"],
     context: "Superfici coltivabili esenti da IMU"
   },
   {
     condition: "Aree fabbricabili",
     details: "Aree fabbricabili - Aliquota 1,06%",
-    ratePercent: 1.06
-    categoryTypes: ["Aree fabbricabili"]
+    ratePercent: 1.06,
+    categoryTypes: ["Aree fabbricabili"],
     context: "Aliquota per terreni edificabili"
   }
 ];

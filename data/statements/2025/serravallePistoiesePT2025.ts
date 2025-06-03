@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.6
+    ratePercent: 0.6,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.6
-    categoryTypes: []
+    ratePercent: 0.6,
+    categoryTypes: [],
     context: "Posseduta da anziani o disabili"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0.1
+    ratePercent: 0.1,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,8 +208,8 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1.06
-    categoryTypes: ["D"]
+    ratePercent: 1.06,
+    categoryTypes: ["D"],
     context: "Esclusa la categoria D/10"
   ,
     requiredParameters: {
@@ -278,7 +270,7 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Ter ni agricoli",
-    ratePercent: 0.96
+    ratePercent: 0.96,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -361,7 +353,7 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "A e fabbricabili",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -429,7 +421,7 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -528,9 +520,9 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli ricadenti nei fogli catastali specificati",
     details: "Ter ni agricoli - Collocazione: Ricadenti nei fogli catastali n.: fogli catastali: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 28, 29, 30, 31, 32, 33, 35, 39, 40, 41, 42, 43, 44, 45, 46, 47",
-    ratePercent: 0
-    categoryTypes: []
-    context: "Ricadenti nei fogli catastali specificati"
+    ratePercent: 0,
+    categoryTypes: [],
+    context: "Ricadenti nei fogli catastali specificati",
     zone: "Fogli catastali: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 28, 29, 30, 31, 32, 33, 35, 39, 40, 41, 42, 43, 44, 45, 46, 47"
   ,
     requiredParameters: {
@@ -573,9 +565,9 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli ricadenti nel Foglio Catastale 21",
     details: "Ter ni agricoli - Collocazione: Ricadenti nei fogli catastali n.: fogli catastali: Foglio Catastale 21 - Si applica l'aliquota 0% solo ai ter ni ricadenti sui seguenti mappali :15, 22, 23, 25, 26, 47, dal 49 al 52, 54, 55, dal 57 al 69, dal 83 al 99, 101,102,104, dal 106 al 109, dal 111 al 124, 153, 155, 156, dal 160 al 164, 184, 195, dal 210 al 217, 226, dal 229 al 234, dal 236 al 239.",
-    ratePercent: 0
-    categoryTypes: []
-    context: "Ricadenti nel Foglio Catastale 21"
+    ratePercent: 0,
+    categoryTypes: [],
+    context: "Ricadenti nel Foglio Catastale 21",
     zone: "Mappali: 15, 22, 23, 25, 26, 47, dal 49 al 52, 54, 55, dal 57 al 69, dal 83 al 99, 101, 102, 104, dal 106 al 109, dal 111 al 124, 153, 155, 156, dal 160 al 164, 184, 195, dal 210 al 217, 226, dal 229 al 234, dal 236 al 239"
   ,
     requiredParameters: {
@@ -620,9 +612,9 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli ricadenti nel Foglio Catastale 25",
     details: "Ter ni agricoli - Collocazione: Ricadenti nei fogli catastali n.: fogli catastali: Foglio Catastale 25 - Si applica l'aliquota 0% solo ai ter ni ricadenti sui seguenti mappali :dall'1 al 6, dal 27 al 50, 98, dal 108 al 133, 135, 137, 138, 170, 172, dal 175 al 178, 181, 184, dal 189 al 193, dal 211 al 220, 229, 230, 322, 323, 339, dal 347 al 354, 357, 360, dal 372 al 374, 402, dal 404 al 408, 414.",
-    ratePercent: 0
-    categoryTypes: []
-    context: "Ricadenti nel Foglio Catastale 25"
+    ratePercent: 0,
+    categoryTypes: [],
+    context: "Ricadenti nel Foglio Catastale 25",
     zone: "Mappali: dall'1 al 6, dal 27 al 50, 98, dal 108 al 133, 135, 137, 138, 170, 172, dal 175 al 178, 181, 184, dal 189 al 193, dal 211 al 220, 229, 230, 322, 323, 339, dal 347 al 354, 357, 360, dal 372 al 374, 402, dal 404 al 408, 414"
   ,
     requiredParameters: {
@@ -667,9 +659,9 @@ export const imuRatesSerravallePistoiesePT2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli ricadenti nel Foglio Catastale 34",
     details: "Ter ni agricoli - Collocazione: Ricadenti nei fogli catastali n.: fogli catastali: Foglio Catastale 34 - Si applica l'aliquota 0% solo ai ter ni ricadenti sui seguenti mappali : 1, 4, 6, 8, 12, 13, 15, 18, 19, dal 21 al 30, 32, dal 35 al 39, dal 42 al 44, 46, 47, 50, 51, dal 53 al 80, dal 83 al 98, 115, 116, dal 132 al 141, dal 143 al 153, dal 155 al 161, dal 163 al 168, dal 185 al 262.",
-    ratePercent: 0
-    categoryTypes: []
-    context: "Ricadenti nel Foglio Catastale 34"
+    ratePercent: 0,
+    categoryTypes: [],
+    context: "Ricadenti nel Foglio Catastale 34",
     zone: "Mappali: 1, 4, 6, 8, 12, 13, 15, 18, 19, dal 21 al 30, 32, dal 35 al 39, dal 42 al 44, 46, 47, 50, 51, dal 53 al 80, dal 83 al 98, 115, 116, dal 132 al 141, dal 143 al 153, dal 155 al 161, dal 163 al 168, dal 185 al 262"
   ,
     requiredParameters: {

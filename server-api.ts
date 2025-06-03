@@ -1,13 +1,15 @@
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Carica variabili d'ambiente da .env.local
-dotenv.config({ path: path.join(__dirname, '.env.local') });
+// Carica variabili d'ambiente da .env.local (correggo path per compilazione)
+const envPath = path.join(process.cwd(), '.env.local');
+dotenv.config({ path: envPath });
 
 import express from 'express';
 import multer from 'multer';
 import puppeteer from 'puppeteer';
 import { UploadServiceAI } from './services/upload-service-ai';
+import { CommuneConditionsService } from './services/commune-conditions-service';
 import * as fs from 'fs';
 
 interface AnalysisProgress {
@@ -29,6 +31,7 @@ interface AnalysisSession {
 class LivnAPIServer {
   private app = express();
   private uploadServiceAI = new UploadServiceAI();
+  private communeConditionsService = new CommuneConditionsService();
   private sessions = new Map<string, AnalysisSession>();
   private upload = multer({ 
     storage: multer.memoryStorage(),
@@ -44,7 +47,10 @@ class LivnAPIServer {
 
   private setupMiddleware() {
     this.app.use(express.json());
-    this.app.use(express.static('web'));
+    
+    // Serve file statici da entrambe le cartelle
+    this.app.use(express.static(path.join(process.cwd(), 'web')));
+    this.app.use(express.static(path.join(process.cwd(), 'public')));
     
     // CORS
     this.app.use((req, res, next) => {
@@ -75,9 +81,14 @@ class LivnAPIServer {
   }
 
   private setupRoutes() {
-    // Home page
+    // Home page (correggo path per compilazione)
     this.app.get('/', (req, res) => {
-      res.sendFile(path.join(__dirname, 'web', 'index.html'));
+      res.sendFile(path.join(process.cwd(), 'web', 'index.html'));
+    });
+
+    // Interfaccia Domande IMU OpenAI
+    this.app.get('/analisi-visura-openai', (req, res) => {
+      res.sendFile(path.join(process.cwd(), 'public', 'analisi-visura-openai.html'));
     });
 
     // API Routes
@@ -89,6 +100,9 @@ class LivnAPIServer {
     this.app.post('/api/report/:sessionId/pdf', this.handleGeneratePDF.bind(this));
     this.app.get('/api/report/:sessionId/download', this.handleDownloadPDF.bind(this));
 
+    // OpenAI Analysis Endpoint
+    this.app.post('/api/openai-analyze', this.handleOpenAIAnalyze.bind(this));
+
     // Health check
     this.app.get('/api/health', (req, res) => {
       res.json({ status: 'ok', timestamp: new Date() });
@@ -96,7 +110,8 @@ class LivnAPIServer {
   }
 
   private ensureTempDirectory() {
-    const tempDir = path.join(__dirname, 'temp-uploads');
+    // Correggo path per compilazione
+    const tempDir = path.join(process.cwd(), 'temp-uploads');
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
       console.log('📁 Cartella temp-uploads creata');
@@ -229,7 +244,7 @@ class LivnAPIServer {
   /**
    * Step 7-9: Gestisce le domande dell'utente
    */
-  private handleQuestions(req: express.Request, res: express.Response) {
+  private async handleQuestions(req: express.Request, res: express.Response) {
     const sessionId = req.params.sessionId;
     const session = this.sessions.get(sessionId);
 
@@ -251,8 +266,8 @@ class LivnAPIServer {
       const { answers } = req.body;
       session.userAnswers = { ...session.userAnswers, ...answers };
 
-      // Genera le domande in base ai dati estratti
-      const questions = this.generateQuestions(session.extractedData, session.userAnswers || {});
+      // Genera le domande in base ai dati estratti (ora async)
+      const questions = await this.generateQuestions(session.extractedData, session.userAnswers || {});
 
       res.json({
         success: true,
@@ -343,7 +358,7 @@ class LivnAPIServer {
       const fileName = `report_imu_${sessionId}.pdf`;
       
       // Salva il PDF temporaneamente
-      const tempPath = path.join(__dirname, 'temp-uploads', fileName);
+      const tempPath = path.join(process.cwd(), 'temp-uploads', fileName);
       fs.writeFileSync(tempPath, pdfBuffer);
       
       console.log(`✅ PDF generato: ${fileName}`);
@@ -370,7 +385,7 @@ class LivnAPIServer {
   private handleDownloadPDF(req: express.Request, res: express.Response) {
     const sessionId = req.params.sessionId;
     const fileName = `report_imu_${sessionId}.pdf`;
-    const filePath = path.join(__dirname, 'temp-uploads', fileName);
+    const filePath = path.join(process.cwd(), 'temp-uploads', fileName);
     
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({
@@ -393,6 +408,152 @@ class LivnAPIServer {
         }, 5000);
       }
     });
+  }
+
+  /**
+   * OpenAI Analysis Endpoint - Analizza testo estratto con OpenAI
+   */
+  private async handleOpenAIAnalyze(req: express.Request, res: express.Response) {
+    try {
+      const { text } = req.body;
+      
+      if (!text || typeof text !== 'string') {
+        return res.status(400).json({
+          success: false,
+          error: 'Testo da analizzare richiesto'
+        });
+      }
+
+      const openaiApiKey = process.env.OPENAI_API_KEY;
+      if (!openaiApiKey) {
+        return res.status(500).json({
+          success: false,
+          error: 'Chiave OpenAI non configurata nel server'
+        });
+      }
+
+      console.log('🤖 Invio richiesta a OpenAI...');
+
+      const prompt = `Analizza questa visura catastale italiana e estrai TUTTI gli immobili presenti.
+
+Per ogni immobile trovato, restituisci un oggetto JSON con questi campi esatti:
+- titolarita: percentuale di proprietà (es. "1/1", "1/2")  
+- comune: nome del comune
+- foglio: numero foglio catastale
+- particella: numero particella
+- subalterno: numero subalterno (se presente)
+- indirizzo: indirizzo completo
+- zona: zona catastale (se presente)
+- categoria: categoria catastale (es. "A/2", "C/6")
+- classe: classe catastale
+- consistenza: consistenza (mq, vani, etc)
+- rendita: rendita catastale
+
+Se un campo non è presente, usa "Non specificato".
+
+Testo visura:
+${text}
+
+Rispondi SOLO con un array JSON valido, nessun altro testo:`;
+
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${openaiApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'gpt-4',
+          messages: [
+            {
+              role: 'user',
+              content: prompt
+            }
+          ],
+          max_tokens: 2000,
+          temperature: 0.1
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('❌ Errore OpenAI API:', errorData);
+        return res.status(500).json({
+          success: false,
+          error: `OpenAI API Error: ${errorData.error?.message || 'Errore sconosciuto'}`
+        });
+      }
+
+      const data = await response.json();
+      const openaiResponse = data.choices[0].message.content;
+      
+      console.log('✅ Risposta OpenAI ricevuta');
+
+      try {
+        // Parse della risposta JSON
+        const jsonResponse = JSON.parse(openaiResponse);
+        
+        // Converte in formato interno
+        const properties = jsonResponse.map((item: any, index: number) => ({
+          id: `OPENAI_${index + 1}`,
+          type: 'fabbricato',
+          titolarita: item.titolarita || 'Non specificato',
+          comune: item.comune || 'Non specificato',
+          foglio: item.foglio || 'Non specificato',
+          particella: item.particella || 'Non specificato',
+          subalterno: item.subalterno || 'Non specificato',
+          indirizzo: item.indirizzo || 'Non specificato',
+          zona: item.zona || 'Non specificato',
+          categoria: item.categoria || 'Non specificato',
+          classe: item.classe || 'Non specificato',
+          consistenza: item.consistenza || 'Non specificato',
+          rendita: item.rendita || 'Non specificato',
+          confidence: 95, // OpenAI ha alta confidenza
+          source: 'OpenAI-GPT4'
+        }));
+
+        res.json({
+          success: true,
+          properties,
+          rawResponse: openaiResponse
+        });
+
+      } catch (parseError) {
+        console.error('❌ Errore parsing JSON OpenAI:', parseError);
+        
+        // Ritorna errore con risposta raw per debug
+        res.json({
+          success: false,
+          error: 'Errore parsing risposta OpenAI',
+          rawResponse: openaiResponse,
+          properties: [{
+            id: 'OPENAI_PARSE_ERROR',
+            type: 'fabbricato',
+            titolarita: 'Errore parsing',
+            comune: 'Errore parsing',
+            foglio: 'Errore parsing',
+            particella: 'Errore parsing',
+            subalterno: 'Errore parsing',
+            indirizzo: 'Errore parsing',
+            zona: 'Errore parsing',
+            categoria: 'Errore parsing',
+            classe: 'Errore parsing',
+            consistenza: 'Errore parsing',
+            rendita: 'Errore parsing',
+            confidence: 20,
+            source: 'OpenAI-Error'
+          }]
+        });
+      }
+
+    } catch (error) {
+      console.error('❌ Errore in handleOpenAIAnalyze:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Errore interno del server',
+        details: (error as Error).message
+      });
+    }
   }
 
   /**
@@ -620,240 +781,424 @@ class LivnAPIServer {
   }
 
   /**
-   * Genera domande basate sui dati estratti
+   * Genera domande basate sui dati estratti - VERSIONE SEMPLIFICATA
    */
-  private generateQuestions(extractedData: any, userAnswers: Record<string, any>): any[] {
-    console.log('🤔 === GENERAZIONE DOMANDE RIVISTA ===');
+  private async generateQuestions(extractedData: any, userAnswers: Record<string, any>): Promise<any[]> {
+    console.log('🤔 === GENERAZIONE DOMANDE SEMPLIFICATA ===');
     console.log('📊 Fabbricati disponibili:', extractedData.fabbricati?.length || 0);
-    console.log('🏠 Categorie trovate:', extractedData.fabbricati?.map((f: any) => f.categoria) || []);
-    console.log('👤 Risposte utente esistenti:', Object.keys(userAnswers || {}));
-    console.log('📋 Contenuto userAnswers:', JSON.stringify(userAnswers, null, 2));
+    console.log('👤 Risposte esistenti:', Object.keys(userAnswers || {}));
 
     const questions = [];
 
-    // STEP 1: Domanda abitazione principale
-    if (!userAnswers.abitazione_principale) {
+    // UNICA DOMANDA: Configurazione diretta di tutti gli immobili
+    if (!userAnswers.configurazione_immobili) {
+      
+      // Trova tutte le abitazioni (per le opzioni pertinenze)
       const abitazioni = extractedData.fabbricati?.filter((fab: any, index: number) => 
         fab.categoria?.startsWith('A/') && fab.categoria !== 'A/10'
       ) || [];
 
-      if (abitazioni.length > 0) {
-        console.log('🏠 Abitazioni filtrate (A/ esclusa A/10):', abitazioni.length);
-        questions.push({
-          id: 'abitazione_principale',
-          type: 'select',
-          title: '🏠 Qual è la tua abitazione principale?',
-          description: 'Seleziona quale immobile costituisce la tua abitazione principale (residenza) oppure scegli "Nessuna" se vivi in affitto',
-          options: [
-            ...abitazioni.map((hab: any, originalIndex: number) => {
-              const index = extractedData.fabbricati.findIndex((f: any) => f === hab);
-              return {
-                value: index.toString(),
-                label: `🏠 ${hab.ubicazione || 'N/D'} - ${hab.categoria} - ${hab.comune}`
-              };
-            }),
-            { value: 'nessuna', label: '❌ Nessuna - Non ho abitazione principale (vivo in affitto o altrove)' }
-          ],
-          required: true
-        });
-        console.log('✅ Aggiunta domanda abitazione principale');
-      }
+      console.log(`🏠 Abitazioni trovate: ${abitazioni.length}`);
+      console.log(`📦 Totale immobili da configurare: ${extractedData.fabbricati?.length || 0}`);
+
+      // Organizza immobili per comune e gruppo catastale
+      const immobiliOrganizzati = this.organizzaImmobiliPerComuneEGruppo(extractedData.fabbricati || []);
+
+      questions.push({
+        id: 'configurazione_immobili',
+        type: 'object',
+        title: '🏠 Configurazione immobili',
+        description: 'Per ogni immobile, indica la sua condizione specifica. Gli immobili sono organizzati per comune e categoria.',
+        fields: await this.generateImmobiliFields(immobiliOrganizzati, abitazioni),
+        required: true
+      });
+
+      console.log(`✅ Generata domanda di configurazione per ${extractedData.fabbricati?.length || 0} immobili`);
     }
 
-    // STEP 2: Pertinenze (solo se abitazione principale != 'nessuna')
-    if (userAnswers.abitazione_principale && 
-        userAnswers.abitazione_principale !== 'nessuna' && 
-        userAnswers.pertinenze === undefined) {
-      
-      const abitazionePrincipaleIndex = parseInt(userAnswers.abitazione_principale);
-      const abitazionePrincipale = extractedData.fabbricati[abitazionePrincipaleIndex];
-      
-      if (abitazionePrincipale) {
-        // Raggruppa per comune e trova potenziali pertinenze
-        const immobiliPerComune: {[comune: string]: {abitazioni: any[], pertinenze: any[]}} = {};
-        
-        extractedData.fabbricati.forEach((fab: any, index: number) => {
-          const comune = fab.comune || 'N/D';
-          if (!immobiliPerComune[comune]) {
-            immobiliPerComune[comune] = { abitazioni: [], pertinenze: [] };
-          }
-          
-          if (fab.categoria?.startsWith('A/') && fab.categoria !== 'A/10') {
-            immobiliPerComune[comune].abitazioni.push({ ...fab, index });
-          } else if (fab.categoria?.startsWith('C/') || fab.categoria === 'A/10') {
-            immobiliPerComune[comune].pertinenze.push({ ...fab, index });
-          }
-        });
-
-        console.log('🚪 Immobili per comune per pertinenze:');
-        Object.entries(immobiliPerComune).forEach(([comune, dati]) => {
-          console.log(`  ${comune}: ${dati.abitazioni.length} abitazioni, ${dati.pertinenze.length} potenziali pertinenze`);
-        });
-
-        // Crea la domanda per il collegamento delle pertinenze
-        const abitazioniOptions = [];
-        Object.entries(immobiliPerComune).forEach(([comune, dati]) => {
-          dati.abitazioni.forEach(abitazione => {
-            const pertinenze = dati.pertinenze.filter(p => p.index !== abitazione.index);
-            if (pertinenze.length > 0) {
-              abitazioniOptions.push({
-                id: `abitazione_${abitazione.index}`,
-                label: `🏠 ${abitazione.ubicazione} - ${abitazione.categoria} (${comune})`,
-                pertinenze: pertinenze.map(p => ({
-                  value: p.index.toString(),
-                  label: `🚪 ${p.ubicazione} - ${p.categoria}`
-                }))
-              });
-            }
-          });
-        });
-
-        if (abitazioniOptions.length > 0) {
-          questions.push({
-            id: 'pertinenze',
-            type: 'object',
-            title: '🚪 Collegamento Pertinenze',
-            description: 'Indica quali immobili sono pertinenze delle tue abitazioni',
-            fields: abitazioniOptions.map(abitazione => ({
-              id: abitazione.id,
-              label: abitazione.label,
-              type: 'multi-select',
-              options: abitazione.pertinenze,
-              required: false
-            })),
-            required: false
-          });
-          
-          console.log(`✅ Aggiunta domanda pertinenze con ${abitazioniOptions.length} abitazioni`);
-        } else {
-          // Nessuna pertinenza disponibile, imposta pertinenze come oggetto vuoto
-          userAnswers.pertinenze = {};
-        }
-      }
-    }
-
-    // Se abitazione principale è "nessuna", salta le pertinenze e imposta automaticamente
-    if (userAnswers.abitazione_principale === 'nessuna' && userAnswers.pertinenze === undefined) {
-      console.log('ℹ️ Abitazione principale = "nessuna" - Salto pertinenze');
-      userAnswers.pertinenze = {}; // Imposta pertinenze vuote per continuare
-    }
-
-    // STEP 3: Condizioni degli immobili (SEMPRE necessario per aliquote corrette)
-    if (!userAnswers.condizioni_immobili) {
-      console.log('🤔 STEP 3: Generazione domande condizioni immobili...');
-      
-      // Estrai indici pertinenze da oggetto complesso (compatibilità frontend)
-      const pertinenzaIndices: number[] = [];
-      if (userAnswers.pertinenze && typeof userAnswers.pertinenze === 'object') {
-        Object.values(userAnswers.pertinenze).forEach((pertinenze: any) => {
-          if (Array.isArray(pertinenze)) {
-            pertinenze.forEach((index: any) => {
-              pertinenzaIndices.push(parseInt(index));
-            });
-          }
-        });
-      }
-      
-      // Solo se ci sono immobili su cui fare domande
-      const immobiliDaAnalizzare = extractedData.fabbricati?.filter((fab: any, index: number) => {
-        // Escludi abitazione principale (se presente) e pertinenze
-        const isAbitazionePrincipale = userAnswers.abitazione_principale && 
-                                      userAnswers.abitazione_principale !== 'nessuna' &&
-                                      userAnswers.abitazione_principale === index.toString();
-        const isPertinenza = pertinenzaIndices.includes(index);
-        return !isAbitazionePrincipale && !isPertinenza;
-      }) || [];
-
-      console.log(`🏠 Immobili da analizzare per condizioni: ${immobiliDaAnalizzare.length}`);
-      
-      if (immobiliDaAnalizzare.length > 0) {
-        questions.push({
-          id: 'condizioni_immobili',
-          type: 'object',
-          title: '🏠 Condizione di utilizzo degli immobili',
-          description: 'Per calcolare correttamente l\'IMU secondo le aliquote specifiche del Comune di Torino, devo sapere come sono utilizzati i tuoi immobili.',
-          fields: extractedData.fabbricati.map((fab: any, index: number) => {
-            const isAbitazionePrincipale = userAnswers.abitazione_principale && 
-                                          userAnswers.abitazione_principale !== 'nessuna' &&
-                                          userAnswers.abitazione_principale === index.toString();
-            const isPertinenza = pertinenzaIndices.includes(index);
-            
-            // Salta abitazione principale e pertinenze
-            if (isAbitazionePrincipale || isPertinenza) {
-              return null;
-            }
-
-            return {
-              id: `immobile_${index}`,
-              type: 'select',
-              label: `${fab.ubicazione || `Immobile ${index + 1}`} (${fab.categoria})`,
-              required: true,
-              options: fab.categoria?.startsWith('A/') ? [
-                { value: 'libero', label: '🏠 Libero (non utilizzato)' },
-                { value: 'locato', label: '💰 Locato (con contratto registrato)' },
-                { value: 'locato_parenti', label: '👨‍👩‍👧‍👦 Dato in comodato a parenti' },
-                { value: 'comodato', label: '🤝 Dato in comodato ad altri' },
-                { value: 'uso_proprio', label: '✋ Uso proprio saltuario' }
-              ] : [
-                { value: 'libero', label: '📦 Libero (non utilizzato)' },
-                { value: 'locato', label: '💰 Locato' },
-                { value: 'uso_proprio', label: '✋ Uso proprio' },
-                { value: 'startup', label: '🚀 Utilizzato da startup innovativa' }
-              ]
-            };
-          }).filter((field: any) => field !== null)
-        });
-        
-        console.log(`✅ Aggiunta domanda condizioni per ${immobiliDaAnalizzare.length} immobili`);
-      }
-    }
-
-    console.log('🤔 === RISULTATO GENERAZIONE RIVISTA ===');
+    console.log('🤔 === RISULTATO GENERAZIONE SEMPLIFICATA ===');
     console.log(`📝 Domande generate: ${questions.length}`);
     
     if (questions.length === 0) {
-      console.log(`✅ QUESTIONARIO COMPLETATO - Nessuna domanda rimanente`);
+      console.log(`✅ CONFIGURAZIONE COMPLETATA - Pronto per il calcolo`);
     }
 
     return questions;
   }
 
   /**
-   * Calcola IMU usando file comunali
+   * Organizza immobili per comune e gruppo catastale
+   */
+  private organizzaImmobiliPerComuneEGruppo(fabbricati: any[]): { [comune: string]: { [gruppo: string]: any[] } } {
+    const organizzati: { [comune: string]: { [gruppo: string]: any[] } } = {};
+
+    fabbricati.forEach((fab: any, index: number) => {
+      const comune = fab.comune || 'N/D';
+      const gruppo = fab.categoria?.charAt(0) || 'N/D';
+
+      if (!organizzati[comune]) {
+        organizzati[comune] = {};
+      }
+      if (!organizzati[comune][gruppo]) {
+        organizzati[comune][gruppo] = [];
+      }
+
+      organizzati[comune][gruppo].push({ ...fab, originalIndex: index });
+    });
+
+    console.log('🏛️ Immobili organizzati per comune e gruppo:');
+    Object.entries(organizzati).forEach(([comune, gruppi]) => {
+      console.log(`  📍 ${comune.toUpperCase()}:`);
+      const gruppiOrdinati = Object.keys(gruppi).sort((a, b) => {
+        const ordine = ['A', 'B', 'C', 'D', 'E', 'F'];
+        return ordine.indexOf(a) - ordine.indexOf(b);
+      });
+      gruppiOrdinati.forEach(gruppo => {
+        console.log(`    📦 Gruppo ${gruppo}: ${gruppi[gruppo].length} immobili`);
+      });
+    });
+
+    return organizzati;
+  }
+
+  /**
+   * Genera i campi di configurazione per gli immobili organizzati
+   */
+  private async generateImmobiliFields(immobiliOrganizzati: any, abitazioni: any[]): Promise<any[]> {
+    const fields: any[] = [];
+    
+    // CORREZIONE: Ordina per comune e poi per gruppo nell'ordine corretto
+    const comuniOrdinati = Object.keys(immobiliOrganizzati).sort();
+    
+    for (const comune of comuniOrdinati) {
+      const gruppi = immobiliOrganizzati[comune];
+      
+      fields.push({
+        id: `header_comune_${comune}`,
+        type: 'header',
+        label: `🏛️ ${comune.toUpperCase()}`
+      });
+      
+      // CORREZIONE: Ordina i gruppi A, B, C, D, E, F
+      const gruppiOrdinati = Object.keys(gruppi).sort((a, b) => {
+        const ordine = ['A', 'B', 'C', 'D', 'E', 'F'];
+        return ordine.indexOf(a) - ordine.indexOf(b);
+      });
+      
+      for (const gruppo of gruppiOrdinati) {
+        const immobili = gruppi[gruppo];
+        
+        fields.push({
+          id: `header_gruppo_${comune}_${gruppo}`,
+          type: 'subheader', 
+          label: `📦 Gruppo ${gruppo}`
+        });
+        
+        for (const immobile of immobili as any[]) {
+          const globalIndex = immobile.originalIndex;
+          
+          const abitazioniStessoComune = abitazioni.filter(ab => 
+            ab.comune?.toLowerCase() === immobile.comune?.toLowerCase()
+          );
+          
+          console.log(`🏛️ Immobile ${globalIndex} (${immobile.comune}): ${abitazioniStessoComune.length} abitazioni disponibili nello stesso comune`);
+          
+          const options = await this.generateOptionsForImmobile(immobile, abitazioniStessoComune, globalIndex);
+          
+          const field = {
+            id: `immobile_${globalIndex}`,
+            type: 'select',
+            label: `${this.getCategoryIcon(immobile.categoria)} ${immobile.ubicazione || `${comune} - ${immobile.categoria}`} (${immobile.categoria})`,
+            options: options
+          };
+          
+          fields.push(field);
+        }
+      }
+    }
+    
+    return fields;
+  }
+
+  /**
+   * Genera opzioni filtrate per ogni immobile in base al comune
+   */
+  private async generateOptionsForImmobile(immobile: any, abitazioniStessoComune: any[], globalIndex: number): Promise<any[]> {
+    const options: any[] = [];
+    const isPertinenzaCompatibile = ['C/2', 'C/6', 'C/7'].includes(immobile.categoria);
+    const isAbitazione = immobile.categoria?.startsWith('A/') && immobile.categoria !== 'A/10';
+    
+    // OPZIONI BASE SEMPRE DISPONIBILI
+    if (isAbitazione) {
+      options.push({ value: 'abitazione_principale', label: '🏠 Abitazione principale (residenza)' });
+    }
+    
+    // PERTINENZE (solo per C/2, C/6, C/7 e solo dello stesso comune)
+    if (isPertinenzaCompatibile && abitazioniStessoComune.length > 0) {
+      abitazioniStessoComune.forEach((abitazione: any, index: number) => {
+        const ubicazione = abitazione.ubicazione || `Abitazione ${index + 1}`;
+        options.push({ 
+          value: `pertinenza_${index}`, 
+          label: `📦 Pertinenza di: ${ubicazione} (${abitazione.categoria})`
+        });
+      });
+    }
+    
+    // CARICA CONDIZIONI SPECIFICHE DEL COMUNE
+    try {
+      const comuneNormalizzato = immobile.comune?.toLowerCase() || '';
+      console.log(`🎯 Caricamento condizioni per comune: ${comuneNormalizzato}`);
+      
+      // Usa il servizio per caricare le condizioni del comune
+      const conditionsData = await this.communeConditionsService.getConditionsForCommune(comuneNormalizzato);
+      
+      if (conditionsData && conditionsData.length > 0) {
+        console.log(`✅ Trovate ${conditionsData.length} condizioni per ${comuneNormalizzato}`);
+        
+        // Converte le condizioni in opzioni selezionabili
+        conditionsData.forEach((condition: any, index: number) => {
+          if (condition.condition && condition.ratePercent !== undefined) {
+            const isApplicabile = this.isConditionApplicableToCategory(condition.condition, immobile.categoria);
+            
+            if (isApplicabile) {
+              const aliquotaPercent = (condition.ratePercent * 100).toFixed(2);
+              options.push({
+                value: `condition_${index}`,
+                label: `📋 ${condition.condition} (${aliquotaPercent}%)`
+              });
+            }
+          }
+        });
+      } else {
+        console.log(`⚠️ Nessuna condizione trovata per ${comuneNormalizzato}, uso opzioni di base`);
+        // Fallback: opzioni di base se non ci sono condizioni specifiche
+        this.addBasicOptions(options, immobile.categoria);
+      }
+      
+    } catch (error) {
+      console.log(`⚠️ Errore caricamento condizioni per ${immobile.comune}:`, error);
+      // Fallback: opzioni di base in caso di errore
+      this.addBasicOptions(options, immobile.categoria);
+    }
+    
+    console.log(`🎯 Comune: ${immobile.comune} - ${options.length} opzioni generate`);
+    return options;
+  }
+
+  /**
+   * Verifica se una condizione è applicabile alla categoria catastale - VERSIONE RIGOROSA
+   */
+  private isConditionApplicableToCategory(condition: string, categoria: string): boolean {
+    const conditionLower = condition.toLowerCase();
+    const gruppo = categoria?.charAt(0);
+    
+    console.log(`🔍 Verifica: "${condition}" per categoria ${categoria}`);
+    
+    // FILTRO 1: Condizioni specifiche per CATEGORIA ESATTA
+    if (conditionLower.includes('categoria catastale')) {
+      // Cerca categorie specifiche menzionate nella condizione
+      const categorieMatch = conditionLower.match(/categoria catastale ([a-z0-9\/,\s]+)/);
+      if (categorieMatch) {
+        const categorieMenzionate = categorieMatch[1];
+        const isApplicabile = categorieMenzionate.includes(categoria.toLowerCase());
+        console.log(`  → Categoria specifica: ${isApplicabile ? '✅' : '❌'} (${categorieMenzionate})`);
+        return isApplicabile;
+      }
+    }
+    
+    // FILTRO 2: Condizioni per GRUPPO CATASTALE specifico
+    if (conditionLower.includes('gruppo catastale')) {
+      const gruppoMatch = conditionLower.match(/gruppo catastale ([a-z])/);
+      if (gruppoMatch) {
+        const gruppoMenzionato = gruppoMatch[1].toUpperCase();
+        const isApplicabile = gruppo === gruppoMenzionato;
+        console.log(`  → Gruppo catastale: ${isApplicabile ? '✅' : '❌'} (richiede ${gruppoMenzionato}, ho ${gruppo})`);
+        return isApplicabile;
+      }
+    }
+    
+    // FILTRO 3: Condizioni SOLO per ABITAZIONI (gruppo A)
+    if (gruppo !== 'A' && (
+      conditionLower.includes('abitazione') ||
+      conditionLower.includes('anziani') ||
+      conditionLower.includes('disabili') ||
+      conditionLower.includes('studenti') ||
+      conditionLower.includes('parenti')
+    )) {
+      console.log(`  → Solo abitazioni: ❌ (${categoria} non è abitazione)`);
+      return false;
+    }
+    
+    // FILTRO 4: Condizioni SOLO per TERRENI
+    if (conditionLower.includes('terreni') || conditionLower.includes('agricol')) {
+      const isTerreno = categoria?.startsWith('T') || conditionLower.includes('terreno');
+      console.log(`  → Solo terreni: ${isTerreno ? '✅' : '❌'}`);
+      return isTerreno;
+    }
+    
+    // FILTRO 5: Condizioni SOLO per FABBRICATI RURALI (normalmente D/10)
+    if (conditionLower.includes('rurali')) {
+      const isRurale = categoria === 'D/10' || conditionLower.includes('d/10');
+      console.log(`  → Solo rurali: ${isRurale ? '✅' : '❌'}`);
+      return isRurale;
+    }
+    
+    // FILTRO 6: Condizioni generiche "immobili di categoria A10, C"
+    if (conditionLower.includes('immobili di categoria')) {
+      const categorieGenericheMatch = conditionLower.match(/immobili di categoria ([a-z0-9,\s]+)/);
+      if (categorieGenericheMatch) {
+        const categorieGeneriche = categorieGenericheMatch[1];
+        // Verifica se include il gruppo o categoria specifica
+        const isApplicabile = categorieGeneriche.includes(gruppo.toLowerCase()) || 
+                             categorieGeneriche.includes(categoria.toLowerCase());
+        console.log(`  → Immobili categoria: ${isApplicabile ? '✅' : '❌'} (${categorieGeneriche})`);
+        return isApplicabile;
+      }
+    }
+    
+    // FILTRO 7: Condizioni generiche per "altri fabbricati"
+    if (conditionLower.includes('altri fabbricati')) {
+      // Solo se non è abitazione principale e non è terreno
+      const isAltroFabbricato = !conditionLower.includes('abitazione principale') && !categoria?.startsWith('T');
+      console.log(`  → Altri fabbricati: ${isAltroFabbricato ? '✅' : '❌'}`);
+      return isAltroFabbricato;
+    }
+    
+    // FILTRO 8: Condizioni per AREE FABBRICABILI
+    if (conditionLower.includes('aree fabbricabili')) {
+      const isAreaFabbricabile = categoria?.startsWith('F') || conditionLower.includes('area');
+      console.log(`  → Aree fabbricabili: ${isAreaFabbricabile ? '✅' : '❌'}`);
+      return isAreaFabbricabile;
+    }
+    
+    // FILTRO 9: RIFIUTA tutto il resto che non è chiaramente applicabile
+    console.log(`  → Condizione generica non applicabile: ❌`);
+    return false;
+  }
+  
+  /**
+   * Aggiunge opzioni di base quando non ci sono condizioni specifiche
+   */
+  private addBasicOptions(options: any[], categoria: string): void {
+    const gruppo = categoria?.charAt(0);
+    
+    if (gruppo === 'A') {
+      options.push({ value: 'libero', label: '🏠 Libero (non utilizzato)' });
+      options.push({ value: 'locato', label: '💰 Locato (con contratto registrato)' });
+      options.push({ value: 'locato_concordato', label: '🤝 Locato con contratto concordato' });
+      options.push({ value: 'comodato_parenti', label: '👨‍👩‍👧‍👦 Dato in comodato a parenti' });
+      options.push({ value: 'comodato_altri', label: '🤝 Dato in comodato ad altri' });
+    } else {
+      options.push({ value: 'libero', label: '📦 Libero (non utilizzato)' });
+      options.push({ value: 'locato', label: '💰 Locato (con contratto registrato)' });
+      options.push({ value: 'uso_proprio', label: '🔧 Uso proprio saltuario' });
+    }
+  }
+
+  /**
+   * Carica condizioni specifiche per un comune
+   */
+  private async getCondizioniPerComune(comune: string): Promise<string[]> {
+    try {
+      const availableCommunes = this.communeConditionsService.getAvailableCommunes();
+      const comuneMatch = availableCommunes.find(c => c.toLowerCase().includes(comune));
+      
+      if (!comuneMatch) {
+        console.log(`⚠️ Nessuna condizione trovata per ${comune}`);
+        return [];
+      }
+      
+      return [
+        'abitazione principale',
+        'abitazione locata o in comodato',
+        'altri fabbricati',
+        'immobili di categoria a10, c'
+      ];
+    } catch (error) {
+      console.log(`⚠️ Errore caricamento condizioni per ${comune}:`, error);
+      return [];
+    }
+  }
+
+  /**
+   * Aggiunge opzioni basate sulle condizioni effettivamente disponibili
+   */
+  private addCondizioniToOptions(options: any[], condizioni: string[], categoria: string): void {
+    const condizioniNormalizzate = condizioni.join(' ').toLowerCase();
+    
+    if (condizioniNormalizzate.includes('locato') || condizioniNormalizzate.includes('locazione')) {
+      options.push({ value: 'locato', label: '💰 Locato (con contratto registrato)' });
+    }
+    
+    if (condizioniNormalizzate.includes('concordato')) {
+      options.push({ value: 'locato_concordato', label: '🤝 Locato con contratto concordato' });
+    }
+    
+    if (condizioniNormalizzate.includes('comodato')) {
+      if (condizioniNormalizzate.includes('parenti')) {
+        options.push({ value: 'comodato_parenti', label: '👨‍👩‍👧‍👦 Dato in comodato a parenti' });
+      }
+      options.push({ value: 'comodato_altri', label: '🤝 Dato in comodato ad altri' });
+    }
+    
+    if (condizioniNormalizzate.includes('proprio') && condizioniNormalizzate.includes('saltuario')) {
+      options.push({ value: 'uso_proprio', label: '👤 Uso proprio saltuario' });
+    }
+    
+    if (condizioniNormalizzate.includes('startup') && condizioniNormalizzate.includes('innovativ')) {
+      options.push({ value: 'startup', label: '🚀 Utilizzato da startup innovativa' });
+    }
+    
+    console.log(`🎯 Comune: opzioni filtrate in base alle condizioni reali del comune`);
+  }
+
+  /**
+   * Restituisce l'icona appropriata per la categoria catastale
+   */
+  private getCategoryIcon(categoria: string): string {
+    if (categoria?.startsWith('A/')) {
+      return '🏠'; // Casa per abitazioni
+    } else if (categoria?.startsWith('C/')) {
+      return '📦'; // Scatola per pertinenze/depositi
+    } else if (categoria?.startsWith('D/')) {
+      return '🏭'; // Fabbrica per immobili produttivi
+    } else if (categoria?.startsWith('B/')) {
+      return '🏢'; // Edificio per uffici
+    } else {
+      return '🏘️'; // Edifici generici
+    }
+  }
+
+  /**
+   * Calcola IMU usando la nuova configurazione semplificata
    */
   private async calculateIMU(extractedData: any, userAnswers: Record<string, any>) {
-    console.log('💰 === CALCOLO IMU SECONDO NORMATIVA ITALIANA ===');
-    console.log('🏠 Abitazione principale index:', userAnswers.abitazione_principale);
-    console.log('🚪 Pertinenze raw:', userAnswers.pertinenze);
+    console.log('💰 === CALCOLO IMU CON CONFIGURAZIONE SEMPLIFICATA ===');
+    console.log('🏠 Configurazione immobili:', userAnswers.configurazione_immobili);
     
     const details = [];
     let totalIMU = 0;
 
-    // Estrai indici pertinenze da oggetto complesso (compatibilità frontend)
-    const pertinenzaIndices: number[] = [];
-    if (userAnswers.pertinenze && typeof userAnswers.pertinenze === 'object') {
-      Object.values(userAnswers.pertinenze).forEach((pertinenze: any) => {
-        if (Array.isArray(pertinenze)) {
-          pertinenze.forEach((index: any) => {
-            pertinenzaIndices.push(parseInt(index));
-          });
-        }
-      });
+    let abitazionePrincipaleIndex = -1;
+    for (const [key, value] of Object.entries(userAnswers.configurazione_immobili || {})) {
+      if (value === 'abitazione_principale') {
+        abitazionePrincipaleIndex = parseInt(key.replace('immobile_', ''));
+        break;
+      }
     }
 
-    console.log('🚪 Pertinenze indices processati:', pertinenzaIndices);
-
-    // Determina il comune principale per le aliquote
-    const comunePrincipale = extractedData.fabbricati?.[0]?.comune?.toLowerCase() || 'standard';
-    console.log('🏛️ Comune rilevato per aliquote:', comunePrincipale);
+    console.log('🏠 Abitazione principale index:', abitazionePrincipaleIndex);
 
     for (const [index, fabbricato] of extractedData.fabbricati.entries()) {
-      // Se abitazione_principale è "nessuna", nessun immobile è prima casa
-      const isPrimaCasa = userAnswers.abitazione_principale !== 'nessuna' && 
-                          userAnswers.abitazione_principale === index.toString();
-      const isPertinenza = pertinenzaIndices.includes(index);
+      const comuneImmobile = fabbricato.comune?.toLowerCase() || 'standard';
+      const configurazioneKey = `immobile_${index}`;
+      const configurazione = userAnswers.configurazione_immobili?.[configurazioneKey] || 'libero';
       
-      // Categorie di lusso soggette a IMU anche se abitazione principale
+      console.log(`🏛️ Immobile ${index}: Comune = ${comuneImmobile}, Configurazione = ${configurazione}`);
+
+      const isPrimaCasa = configurazione === 'abitazione_principale';
+      const isPertinenza = configurazione.startsWith('pertinenza_');
+      
       const categorieDetrazione = ['A/1', 'A/8', 'A/9'];
       const isLusso = categorieDetrazione.includes(fabbricato.categoria);
       
@@ -865,39 +1210,55 @@ class LivnAPIServer {
       let tipoCalculazione = '';
       
       if (isPrimaCasa && !isLusso) {
-        // Abitazione principale non di lusso: ESENTE
         aliquota = 0;
         detrazione = 0;
         importo = 0;
         tipoCalculazione = 'Abitazione principale (ESENTE)';
       } else if (isPrimaCasa && isLusso) {
-        // Abitazione principale di lusso: aliquota ridotta con detrazione
-        aliquota = 0.4;
-        detrazione = 200;
-        importo = Math.max(0, (baseImponibile * aliquota / 100) - detrazione);
-        tipoCalculazione = 'Abitazione principale di lusso';
-      } else if (isPertinenza && userAnswers.abitazione_principale !== 'nessuna') {
-        // Pertinenza dell'abitazione principale: ESENTE (solo se c'è abitazione principale)
+        try {
+          const conditionResult = await this.communeConditionsService.findBestCondition(
+            fabbricato, 
+            { condizioni_immobili: { [configurazioneKey]: 'abitazione_principale' } }, 
+            index, 
+            comuneImmobile
+          );
+          
+          aliquota = conditionResult.aliquota;
+          detrazione = 200;
+          importo = Math.max(0, (baseImponibile * aliquota / 100) - detrazione);
+          tipoCalculazione = `Abitazione principale di lusso - ${conditionResult.descrizione}`;
+        } catch (error) {
+          console.error('❌ Errore caricamento condizioni per abitazione principale di lusso:', error);
+          aliquota = 0.4;
+          detrazione = 200;
+          importo = Math.max(0, (baseImponibile * aliquota / 100) - detrazione);
+          tipoCalculazione = 'Abitazione principale di lusso (fallback)';
+        }
+      } else if (isPertinenza && abitazionePrincipaleIndex >= 0) {
         aliquota = 0;
         detrazione = 0;
         importo = 0;
         tipoCalculazione = 'Pertinenza abitazione principale (ESENTE)';
       } else {
-        // Altri immobili: applica aliquote specifiche del comune
-        const risultatoAliquota = this.getAliquotaSpecificaComune(
-          fabbricato, 
-          userAnswers, 
-          index, 
-          comunePrincipale
-        );
-        
-        aliquota = risultatoAliquota.aliquota;
-        detrazione = 0;
-        importo = baseImponibile * aliquota / 100;
-        tipoCalculazione = risultatoAliquota.descrizione;
+        try {
+          const aliquotaResult = this.getAliquotaPerConfigurazione(configurazione, fabbricato.categoria, comuneImmobile);
+          
+          aliquota = aliquotaResult.aliquota;
+          detrazione = 0;
+          importo = baseImponibile * aliquota / 100;
+          tipoCalculazione = `${this.getDescrizioneConfigurazione(configurazione)} - ${aliquotaResult.descrizione}`;
+          
+          console.log(`🎯 Aliquota applicata per immobile ${index} (${comuneImmobile}): ${configurazione} -> ${aliquota}%`);
+        } catch (error) {
+          console.error(`❌ Errore caricamento aliquota per immobile ${index} (${comuneImmobile}):`, error);
+          aliquota = 1.06;
+          detrazione = 0;
+          importo = baseImponibile * aliquota / 100;
+          tipoCalculazione = `${this.getDescrizioneConfigurazione(configurazione)} (fallback standard)`;
+        }
       }
 
-      console.log(`💰 Immobile ${index}: ${fabbricato.categoria} - ${tipoCalculazione} - IMU: €${importo.toFixed(2)}`);
+      console.log(`💰 Immobile ${index} (${comuneImmobile}): ${fabbricato.categoria} - ${tipoCalculazione} - IMU: €${importo.toFixed(2)}`);
 
       details.push({
         immobile: `${fabbricato.ubicazione || 'N/D'} - ${fabbricato.categoria}`,
@@ -912,9 +1273,8 @@ class LivnAPIServer {
       totalIMU += importo;
     }
 
-    console.log(`💰 Totale IMU calcolato secondo normativa: €${totalIMU.toFixed(2)}`);
+    console.log(`💰 Totale IMU calcolato con configurazione semplificata: €${totalIMU.toFixed(2)}`);
 
-    // Aggiorna le scadenze solo se c'è IMU da pagare
     const scadenze = totalIMU > 0 ? [
       { data: '16/06/2025', descrizione: 'Acconto IMU', importo: totalIMU / 2 },
       { data: '16/12/2025', descrizione: 'Saldo IMU', importo: totalIMU / 2 }
@@ -925,14 +1285,15 @@ class LivnAPIServer {
     const normativa = [
       '✅ Rivalutazione catastale applicata (+5%)',
       '✅ Moltiplicatori catastali 2025',
-      `🏛️ Aliquote specifiche Comune di ${comunePrincipale.toUpperCase()} (Delibera 2025)`,
-      userAnswers.abitazione_principale === 'nessuna' 
-        ? '🏠 Nessuna abitazione principale dichiarata'
-        : '✅ Abitazione principale non di lusso: ESENTE da IMU',
-      userAnswers.abitazione_principale === 'nessuna'
-        ? '🚪 Nessuna pertinenza esentabile (no abitazione principale)'
-        : '✅ Pertinenze abitazione principale: ESENTI da IMU',
-      '⚖️ Normativa: art. 1, comma 741, lett. b, legge 160/2019'
+      `🏛️ Condizioni specifiche per ogni comune (delibere 2025)`,
+      abitazionePrincipaleIndex >= 0 
+        ? '✅ Abitazione principale non di lusso: ESENTE da IMU'
+        : '🏠 Nessuna abitazione principale dichiarata',
+      abitazionePrincipaleIndex >= 0
+        ? '✅ Pertinenze abitazione principale: ESENTI da IMU'
+        : '🚪 Nessuna pertinenza esentabile (no abitazione principale)',
+      '⚖️ Normativa: art. 1, comma 741, lett. b, legge 160/2019',
+      `📊 Sistema di matching automatico delle condizioni comunali attivo`
     ];
 
     return {
@@ -946,64 +1307,47 @@ class LivnAPIServer {
   }
 
   /**
-   * Determina l'aliquota specifica basata sul comune e condizioni
+   * Mappa la nuova configurazione alle vecchie condizioni per compatibilità
    */
-  private getAliquotaSpecificaComune(fabbricato: any, userAnswers: any, index: number, comune: string) {
-    // Per ora implementiamo solo Torino, poi estenderemo per altri comuni
-    if (comune.toLowerCase().includes('torino')) {
-      return this.getAliquotaTorino(fabbricato, userAnswers, index);
+  private mappaConfigurazione(configurazione: string): string {
+    const mapping: Record<string, string> = {
+      'abitazione_principale': 'uso_proprio',
+      'libero': 'libero',
+      'locato': 'locato',
+      'locato_concordato': 'locato',
+      'comodato_parenti': 'locato_parenti',
+      'comodato': 'comodato',
+      'uso_proprio': 'uso_proprio',
+      'startup': 'startup'
+    };
+    
+    if (configurazione.startsWith('pertinenza_')) {
+      return 'pertinenza';
     }
     
-    // Default per altri comuni (aliquote standard nazionali)
-    return {
-      aliquota: 0.76,
-      descrizione: 'Altro immobile (aliquota standard)'
-    };
+    return mapping[configurazione] || 'libero';
   }
 
   /**
-   * Aliquote specifiche Torino secondo delibera n. 776 del 16/12/2024
+   * Restituisce descrizione leggibile della configurazione
    */
-  private getAliquotaTorino(fabbricato: any, userAnswers: any, index: number) {
-    const categoria = fabbricato.categoria;
-    const condizione = userAnswers.condizioni_immobili?.[`immobile_${index}`];
-    
-    console.log(`🏛️ Calcolo aliquota Torino per ${categoria}, condizione: ${condizione}`);
-
-    // Abitazioni A/2, A/3, A/4, A/5, A/6, A/7 locata o in comodato → 0.86%
-    if (['A/2', 'A/3', 'A/4', 'A/5', 'A/6', 'A/7'].includes(categoria)) {
-      if (condizione === 'locato' || condizione === 'locato_parenti' || condizione === 'comodato') {
-        return {
-          aliquota: 0.86,
-          descrizione: `Abitazione ${categoria} locata/comodato (Torino 2025: 0,86%)`
-        };
-      }
-    }
-
-    // Fabbricati appartenenti al gruppo catastale D (esclusa D/10) → 1.06%
-    if (categoria.startsWith('D/') && categoria !== 'D/10') {
-      return {
-        aliquota: 1.06,
-        descrizione: `Fabbricato gruppo D (Torino 2025: 1,06%)`
-      };
-    }
-
-    // Fabbricati rurali D/10 → 0.1%
-    if (categoria === 'D/10') {
-      return {
-        aliquota: 0.1,
-        descrizione: 'Fabbricato rurale D/10 (Torino 2025: 0,1%)'
-      };
-    }
-
-    // C/2, C/3, A/10 utilizzati da startup innovative → 0.86%
-    // (Per ora non implementato, servirebbe domanda specifica)
-
-    // Altri fabbricati (incluso C/2 libero, C/3, etc.) → 1.06%
-    return {
-      aliquota: 1.06,
-      descrizione: `Altri fabbricati ${categoria} (Torino 2025: 1,06%)`
+  private getDescrizioneConfigurazione(configurazione: string): string {
+    const descrizioni: Record<string, string> = {
+      'abitazione_principale': 'Abitazione principale',
+      'libero': 'Immobile libero',
+      'locato': 'Immobile locato',
+      'locato_concordato': 'Locato con contratto concordato',
+      'comodato_parenti': 'Comodato a parenti',
+      'comodato': 'Comodato ad altri',
+      'uso_proprio': 'Uso proprio',
+      'startup': 'Startup innovativa'
     };
+    
+    if (configurazione.startsWith('pertinenza_')) {
+      return 'Pertinenza';
+    }
+    
+    return descrizioni[configurazione] || 'Non specificato';
   }
 
   /**
@@ -1036,6 +1380,46 @@ class LivnAPIServer {
 
   private generateSessionId(): string {
     return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  /**
+   * Restituisce aliquota logica basata sulla configurazione dell'utente
+   */
+  private getAliquotaPerConfigurazione(configurazione: string, categoria: string, comune: string): { aliquota: number, descrizione: string } {
+    if (configurazione.startsWith('pertinenza_')) {
+      return { aliquota: 0, descrizione: 'Pertinenza (ESENTE)' };
+    }
+    
+    switch (configurazione) {
+      case 'abitazione_principale':
+        return { aliquota: 0, descrizione: 'Abitazione principale (ESENTE)' };
+      
+      case 'libero':
+        return { aliquota: 1.06, descrizione: 'Immobile libero/a disposizione' };
+      
+      case 'locato':
+        return { aliquota: 0.96, descrizione: 'Immobile locato' };
+      
+      case 'locato_concordato':
+        return { aliquota: 0.86, descrizione: 'Locato con contratto concordato' };
+      
+      case 'comodato_parenti':
+        return { aliquota: 0.9, descrizione: 'Comodato a parenti' };
+      
+      case 'comodato_altri':
+      case 'comodato':
+        return { aliquota: 0.96, descrizione: 'Comodato ad altri' };
+      
+      case 'uso_proprio':
+        return { aliquota: 1.06, descrizione: 'Uso proprio saltuario' };
+      
+      case 'startup':
+        return { aliquota: 0.1, descrizione: 'Startup innovativa' };
+      
+      default:
+        console.log(`⚠️ Configurazione sconosciuta: ${configurazione}, usando aliquota standard`);
+        return { aliquota: 1.06, descrizione: 'Configurazione non riconosciuta' };
+    }
   }
 
   public start(port: number = 3000) {

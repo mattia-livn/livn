@@ -9,17 +9,9 @@ export interface ImuRateEntry {
 
 export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
-},
-  {
     condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
     details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.6
+    ratePercent: 0.6,
     categoryTypes: ["A/1","A/8","A/9"]
   ,
     requiredParameters: {
@@ -87,8 +79,8 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
     details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.6
-    categoryTypes: []
+    ratePercent: 0.6,
+    categoryTypes: [],
     context: "Posseduta da anziani o disabili"
   ,
     requiredParameters: {
@@ -156,7 +148,7 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
     details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0.1
+    ratePercent: 0.1,
     categoryTypes: ["D/10"]
   ,
     requiredParameters: {
@@ -216,8 +208,8 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
     details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 1.06
-    categoryTypes: ["D"]
+    ratePercent: 1.06,
+    categoryTypes: ["D"],
     context: "Esclusa la categoria D/10"
   ,
     requiredParameters: {
@@ -278,7 +270,7 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Terreni agricoli",
     details: "Ter ni agricoli",
-    ratePercent: 0.66
+    ratePercent: 0.66,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -361,7 +353,7 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Aree fabbricabili",
     details: "A e fabbricabili",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -429,7 +421,7 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
     details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1.06
+    ratePercent: 1.06,
     categoryTypes: []
   ,
     requiredParameters: {
@@ -528,8 +520,8 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categoria D/2",
     details: "Categoria catastale: - D/2 Alberghi e pensioni con fine di lucro - Fabbricati a disposizione o utilizzati: Immobili locati o concessi in comodato o utilizzati di ttamente dal soggetto passivo - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni - Codice ATECO: 55 - ALLOGGIO",
-    ratePercent: 0.86
-    categoryTypes: ["D/2"]
+    ratePercent: 0.86,
+    categoryTypes: ["D/2"],
     context: "Utilizzato per attività produttiva e/o commerciale"
   ,
     requiredParameters: {
@@ -588,9 +580,9 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Fabbricati appartenenti al gruppo catastale D, categorie D/1, D/7, D/8",
     details: "Categoria catastale: - D/1 Opifici - D/7 Fabbricati costruiti o adattati per le speciali esigenze di un'attivita' industriale e non suscettibili di destinazione diversa senza radicali trasformazioni - D/8 Fabbricati costruiti o adattati per le speciali esigenze di un'attivita' commerciale e non suscettibili di destinazione diversa senza radicali trasformazioni - Collocazione immobile: In una zona specificamente indicata dal comune: Ad esclusione degli immobili ricadenti in localizzazioni commerciali, come definite dalla deliberazione del Consiglio gionale Piemonte n. 563-13414/1999 e s.m.i. - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
-    ratePercent: 0.76
-    categoryTypes: ["D/1","D/7","D/8"]
-    context: "Utilizzato per attività produttiva e/o commerciale"
+    ratePercent: 0.76,
+    categoryTypes: ["D/1","D/7","D/8"],
+    context: "Utilizzato per attività produttiva e/o commerciale",
     zone: "Esclusione di localizzazioni commerciali"
   ,
     requiredParameters: {
@@ -657,9 +649,9 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati, immobili di categoria C, categoria C/1",
     details: "Categoria catastale: - C/1 Negozi e botteghe - Collocazione immobile: In una zona specificamente indicata dal comune: Zone esterne al centro abitato urbano della città di Asti, come individuato ai sensi del Codice della strada - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
-    ratePercent: 0.76
-    categoryTypes: ["C/1"]
-    context: "Utilizzato per attività produttiva e/o commerciale"
+    ratePercent: 0.76,
+    categoryTypes: ["C/1"],
+    context: "Utilizzato per attività produttiva e/o commerciale",
     zone: "Zone esterne al centro abitato urbano"
   ,
     requiredParameters: {
@@ -718,9 +710,9 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati, immobili di categoria C, categorie C/1, C/2, C/3",
     details: "Categoria catastale: - C/1 Negozi e botteghe - C/2 Magazzini e locali di deposito - C/3 Laboratori per arti e mestieri - Collocazione immobile: In una zona specificamente indicata dal comune: Ad esclusione degli immobili ricadenti in localizzazioni commerciali, come definite dalla deliberazione del Consiglio gionale Piemonte n. 563-13414/1999 e s.m.i. - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
-    ratePercent: 0.76
-    categoryTypes: ["C/1","C/2","C/3"]
-    context: "Utilizzato per attività produttiva e/o commerciale"
+    ratePercent: 0.76,
+    categoryTypes: ["C/1","C/2","C/3"],
+    context: "Utilizzato per attività produttiva e/o commerciale",
     zone: "Esclusione di localizzazioni commerciali"
   ,
     requiredParameters: {
@@ -787,8 +779,8 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati, abitazione locata o in comodato, categorie A/3, A/4, A/5, A/6",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i. Categoria catastale: - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - Destinazione d'uso: Purchè l'affittuario/comodatario la utilizzi come abitazione principale.",
-    ratePercent: 0.56
-    categoryTypes: ["A/3","A/4","A/5","A/6"]
+    ratePercent: 0.56,
+    categoryTypes: ["A/3","A/4","A/5","A/6"],
     context: "Utilizzo come abitazione principale"
   ,
     requiredParameters: {
@@ -862,8 +854,8 @@ export const imuRatesAstiAT2025: ImuRateEntry[] = [
   {
     condition: "Altri fabbricati, abitazione locata o in comodato a studenti, categorie A/3, A/4, A/5, A/6",
     details: "Abitazione locata o in comodato - Tipo contratto: Locazione a studenti ai sensi dell'art. 5, comma 2, della Legge n. 431/1998 e s.m.i. Categoria catastale: - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - Condizioni locatario/comodatario: Studenti",
-    ratePercent: 0.56
-    categoryTypes: ["A/3","A/4","A/5","A/6"]
+    ratePercent: 0.56,
+    categoryTypes: ["A/3","A/4","A/5","A/6"],
     context: "Locazione a studenti"
   ,
     requiredParameters: {
