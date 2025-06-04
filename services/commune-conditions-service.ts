@@ -1,6 +1,21 @@
 import path from 'path';
 import fs from 'fs';
 
+// Nuovo formato interfacce migrato
+interface ImuRateCondition {
+  description: string;
+  predicate: string;
+}
+
+interface NewImuRateEntry {
+  label: string;
+  ratePercent: number;
+  categoryTypes?: string[];
+  officialDescription: string;
+  conditions: ImuRateCondition[];
+}
+
+// Formato legacy per compatibilità con il resto del sistema
 interface ImuRateEntry {
   condition: string;
   details: string;
@@ -112,25 +127,14 @@ export class CommuneConditionsService {
       // Legge il file come testo
       const fileContent = fs.readFileSync(filePath, 'utf8');
       
-      // Estrae i dati usando parsing diretto
-      const conditions = this.parseConditionsFromFile(fileContent);
-      
-      // Filtra condizioni valide
-      const validConditions = conditions.filter(c => 
-        c && 
-        typeof c === 'object' && 
-        typeof c.condition === 'string' && 
-        typeof c.ratePercent === 'number' &&
-        c.condition !== 'string' && // Filtra l'oggetto template malformato
-        c.details !== 'string' &&
-        c.condition.length > 5 // Deve avere una descrizione ragionevole
-      );
+      // Estrae i dati usando parsing del nuovo formato
+      const conditions = this.parseNewFormatConditionsFromFile(fileContent);
       
       // Cache e ritorna
-      this.loadedCommunes.set(normalizedName, validConditions);
-      console.log(`✅ Caricate ${validConditions.length} condizioni valide per ${communeName}`);
+      this.loadedCommunes.set(normalizedName, conditions);
+      console.log(`✅ Caricate ${conditions.length} condizioni valide per ${communeName}`);
       
-      return validConditions;
+      return conditions;
 
     } catch (error) {
       console.error(`❌ Errore caricamento condizioni ${communeName}:`, error);
@@ -139,9 +143,53 @@ export class CommuneConditionsService {
   }
 
   /**
-   * Estrae i dati dall'file TypeScript
+   * Parsing del nuovo formato JSON dei file migrati
    */
-  private parseConditionsFromFile(fileContent: string): ImuRateEntry[] {
+  private parseNewFormatConditionsFromFile(fileContent: string): ImuRateEntry[] {
+    try {
+      const conditions: ImuRateEntry[] = [];
+      
+      // Cerca l'array JSON nel file
+      const arrayMatch = fileContent.match(/export const imuRates\w+2025: ImuRateEntry\[\] = (\[[\s\S]*?\]);/);
+      
+      if (!arrayMatch) {
+        console.log('⚠️ Array ImuRateEntry non trovato nel file');
+        return [];
+      }
+      
+      // Parse dell'array JSON
+      const newFormatRates: NewImuRateEntry[] = JSON.parse(arrayMatch[1]);
+      
+      // Converti dal nuovo formato al formato legacy per compatibilità
+      for (const newRate of newFormatRates) {
+        const legacyRate: ImuRateEntry = {
+          condition: newRate.label,
+          details: newRate.officialDescription,
+          ratePercent: newRate.ratePercent * 1000, // Converti da decimale a per mille
+          categoryTypes: newRate.categoryTypes,
+          context: undefined,
+          zone: undefined
+        };
+        
+        conditions.push(legacyRate);
+        console.log(`🎯 Trovata condition: ${newRate.label}`);
+        console.log(`✅ Condizione aggiunta: ${newRate.label} -> ${(newRate.ratePercent * 1000).toFixed(2)}%`);
+      }
+      
+      console.log(`🔍 Estratte ${conditions.length} condizioni dal file`);
+      return conditions;
+      
+    } catch (error) {
+      console.error('❌ Errore parsing nuovo formato:', error);
+      // Fallback: prova il parsing del formato vecchio
+      return this.parseOldFormatConditionsFromFile(fileContent);
+    }
+  }
+
+  /**
+   * Fallback: parsing del formato vecchio (per file non ancora migrati)
+   */
+  private parseOldFormatConditionsFromFile(fileContent: string): ImuRateEntry[] {
     try {
       const conditions: ImuRateEntry[] = [];
       
@@ -185,11 +233,11 @@ export class CommuneConditionsService {
         }
       }
       
-      console.log(`🔍 Estratte ${conditions.length} condizioni dal file`);
+      console.log(`🔍 Estratte ${conditions.length} condizioni dal file (formato vecchio)`);
       return conditions;
       
     } catch (error) {
-      console.error('❌ Errore parsing file:', error);
+      console.error('❌ Errore parsing formato vecchio:', error);
       return [];
     }
   }

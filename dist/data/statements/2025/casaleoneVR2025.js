@@ -1,0 +1,162 @@
+"use strict";
+// casaleoneVR2025.ts
+// Migrato automaticamente dal formato legacy
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.imuRatesCasaleoneVR2025 = void 0;
+exports.imuRatesCasaleoneVR2025 = [
+    {
+        "label": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
+        "ratePercent": 0.0006,
+        "categoryTypes": [
+            "A/1",
+            "A/8",
+            "A/9"
+        ],
+        "officialDescription": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/1 o A/8 o A/9",
+                "predicate": "['A/1','A/8','A/9'].includes(entity.category)"
+            },
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
+        "ratePercent": 0.0006,
+        "officialDescription": "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
+        "conditions": [
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+        "ratePercent": 0.0001,
+        "categoryTypes": [
+            "D/10"
+        ],
+        "officialDescription": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria D/10",
+                "predicate": "['D/10'].includes(entity.category)"
+            },
+            {
+                "description": "Il fabbricato è utilizzato per attività agricola",
+                "predicate": "entity.isAgriculturalUse === true"
+            },
+            {
+                "description": "Il proprietario è un coltivatore diretto o imprenditore agricolo",
+                "predicate": "entity.ownerIsAgriculturalEntrepreneur === true"
+            }
+        ]
+    },
+    {
+        "label": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+        "ratePercent": 0.00099,
+        "categoryTypes": [
+            "D"
+        ],
+        "officialDescription": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+        "conditions": [
+            {
+                "description": "Condizione applicabile in base al regolamento comunale",
+                "predicate": "true // Da specificare in base alle condizioni locali"
+            }
+        ]
+    },
+    {
+        "label": "Terreni agricoli",
+        "ratePercent": 0.00099,
+        "officialDescription": "Ter ni agricoli",
+        "conditions": [
+            {
+                "description": "È un terreno agricolo",
+                "predicate": "entity.type === 'terreno' && entity.isAgricultural === true"
+            }
+        ]
+    },
+    {
+        "label": "Aree fabbricabili",
+        "ratePercent": 0.00099,
+        "officialDescription": "A e fabbricabili",
+        "conditions": [
+            {
+                "description": "Il terreno è edificabile secondo PRG o catasto",
+                "predicate": "entity.isBuildable === true"
+            }
+        ]
+    },
+    {
+        "label": "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+        "ratePercent": 0.00099,
+        "officialDescription": "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+        "conditions": [
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Immobili di categoria C/1 Negozi e botteghe con specifiche condizioni",
+        "ratePercent": 0.00049,
+        "categoryTypes": [
+            "C/1"
+        ],
+        "officialDescription": "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe - Superficie: Non superio a Mq 150 MQ - Collocazione immobile: Dentro il centro storico - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d'uso: Con uso limitato e discontinuo o stagionale, per un periodo complessivo inferio a mesi: 6 - Tipologia di attivit�: Microimp se - Codice ATECO: 47.19.90 - Empori ed altri negozi non specializzati di vari prodotti non alimentari - Limitatamente ad un solo immobile.",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria C/1",
+                "predicate": "['C/1'].includes(entity.category)"
+            }
+        ]
+    },
+    {
+        "label": "Immobili di categoria C/1 Negozi e botteghe",
+        "ratePercent": 0.0008900000000000001,
+        "categoryTypes": [
+            "C/1"
+        ],
+        "officialDescription": "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria C/1",
+                "predicate": "['C/1'].includes(entity.category)"
+            }
+        ]
+    },
+    {
+        "label": "Immobili di categoria C/3 Laboratori per arti e mestieri",
+        "ratePercent": 0.0008900000000000001,
+        "categoryTypes": [
+            "C/3"
+        ],
+        "officialDescription": "Immobili di categoria C Categoria catastale: - C/3 Laboratori per arti e mestieri",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria C/3",
+                "predicate": "['C/3'].includes(entity.category)"
+            }
+        ]
+    }
+];
+//# sourceMappingURL=casaleoneVR2025.js.map

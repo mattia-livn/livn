@@ -101,10 +101,10 @@ class CatastoService {
             }
             // Gestione errori specifici dell'API catasto
             if (!response.ok) {
-                const errorCode = responseData?.error || response.status;
-                const errorMessage = responseData?.message ||
-                    responseData?.error_description ||
-                    responseData?.msg ||
+                const errorCode = (responseData === null || responseData === void 0 ? void 0 : responseData.error) || response.status;
+                const errorMessage = (responseData === null || responseData === void 0 ? void 0 : responseData.message) ||
+                    (responseData === null || responseData === void 0 ? void 0 : responseData.error_description) ||
+                    (responseData === null || responseData === void 0 ? void 0 : responseData.msg) ||
                     `Errore HTTP ${response.status}: ${response.statusText}`;
                 console.log(`❌ Errore API: ${response.status} - Codice: ${errorCode}`);
                 console.log(`📋 Messaggio: ${errorMessage}`);
@@ -174,13 +174,14 @@ class CatastoService {
      * Implementa il flusso completo descritto dall'utente
      */
     async raccogliDatiCompleti(cfPiva) {
+        var _a;
         const fabbricati = [];
         const terreni = [];
         try {
             // 1. Ricerca nazionale per ottenere le province
             console.log(`🔍 Ricerca nazionale per CF/PIVA: ${cfPiva}`);
             const ricercaNazionale = await this.ricercaNazionale(cfPiva, 'TF');
-            if (!ricercaNazionale?.soggetti?.length) {
+            if (!((_a = ricercaNazionale === null || ricercaNazionale === void 0 ? void 0 : ricercaNazionale.soggetti) === null || _a === void 0 ? void 0 : _a.length)) {
                 console.log('❌ Nessuna proprietà trovata');
                 return { fabbricati, terreni };
             }
@@ -192,7 +193,7 @@ class CatastoService {
                         console.log(`🏠 Ricerca fabbricati in ${catasto.provincia} (${catasto.fabbricati} immobili)`);
                         try {
                             const risultatoFabbricati = await this.ricercaPersona(cfPiva, catasto.provincia, 'F');
-                            if (risultatoFabbricati?.soggetti) {
+                            if (risultatoFabbricati === null || risultatoFabbricati === void 0 ? void 0 : risultatoFabbricati.soggetti) {
                                 for (const soggettoDettaglio of risultatoFabbricati.soggetti) {
                                     for (const immobile of soggettoDettaglio.immobili) {
                                         if (immobile.catasto === 'F') {
@@ -212,7 +213,7 @@ class CatastoService {
                         console.log(`🌾 Ricerca terreni in ${catasto.provincia} (${catasto.terreni} terreni)`);
                         try {
                             const risultatoTerreni = await this.ricercaPersona(cfPiva, catasto.provincia, 'T');
-                            if (risultatoTerreni?.soggetti) {
+                            if (risultatoTerreni === null || risultatoTerreni === void 0 ? void 0 : risultatoTerreni.soggetti) {
                                 for (const soggettoDettaglio of risultatoTerreni.soggetti) {
                                     for (const immobile of soggettoDettaglio.immobili) {
                                         if (immobile.catasto === 'T') {
@@ -256,8 +257,9 @@ class CatastoService {
      * Converte i dati API in formato FabbricatoCatastale (interfaccia esistente)
      */
     convertToFabbricatoCatastale(immobile, soggetto) {
+        var _a, _b, _c, _d;
         // Estrae categoria dal classamento (es. "zona6 cat. A/10")
-        const categoria = immobile.classamento?.match(/cat\.\s*([A-F]\/\d+)/)?.[1] || '';
+        const categoria = ((_b = (_a = immobile.classamento) === null || _a === void 0 ? void 0 : _a.match(/cat\.\s*([A-F]\/\d+)/)) === null || _b === void 0 ? void 0 : _b[1]) || '';
         // Estrae la rendita numerica (es. "Euro:2.566,79" -> "€ 2.566,79")
         const rendita = immobile.rendita
             ? immobile.rendita.replace('Euro:', '€ ')
@@ -271,7 +273,7 @@ class CatastoService {
             particella: immobile.particella.toString(),
             subalterno: (immobile.subalterno || 0).toString(),
             indirizzo: immobile.ubicazione,
-            zonaCensuaria: immobile.classamento?.match(/zona(\d+)/)?.[1] || '1',
+            zonaCensuaria: ((_d = (_c = immobile.classamento) === null || _c === void 0 ? void 0 : _c.match(/zona(\d+)/)) === null || _d === void 0 ? void 0 : _d[1]) || '1',
             categoria,
             classe: immobile.classe || '',
             consistenza,
@@ -324,3 +326,4 @@ class CatastoService {
     }
 }
 exports.CatastoService = CatastoService;
+//# sourceMappingURL=catasto-service.js.map

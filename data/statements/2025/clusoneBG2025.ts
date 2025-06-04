@@ -1,912 +1,233 @@
+// clusoneBG2025.ts
+// Migrato automaticamente dal formato legacy
+
+export interface ImuRateCondition {
+  description: string;
+  predicate: string;
+}
+
 export interface ImuRateEntry {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
+  label: string;
+  ratePercent: number;
+  categoryTypes?: string[];
+  officialDescription: string;
+  conditions: ImuRateCondition[];
 }
 
 export const imuRatesClusoneBG2025: ImuRateEntry[] = [
   {
-    condition: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
-    details: "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
-    ratePercent: 0.6,
-    categoryTypes: ["A/1","A/8","A/9"]
-  ,
-    requiredParameters: {
-      required: [
+    "label": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
+    "ratePercent": 0.0006,
+    "categoryTypes": [
+      "A/1",
+      "A/8",
+      "A/9"
+    ],
+    "officialDescription": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
+    "conditions": [
       {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "categoria catastale",
-                  "A/1",
-                  "A/8",
-                  "A/9"
-            ],
-            "specificCategories": [
-                  "A/1",
-                  "A/8",
-                  "A/9"
-            ]
-      ,
-    requiredParameters: {
-      required: [
+        "description": "L'entità ha categoria A/1 o A/8 o A/9",
+        "predicate": "['A/1','A/8','A/9'].includes(entity.category)"
+      },
       {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "Abitazione",
-                  "categoria catastale",
-                  "A/1",
-                  "A/8",
-                  "A/9"
-            ],
-            "specificCategories": [
-                  "A/1",
-                  "A/8",
-                  "A/9"
-            ]
+        "description": "L'entità è un fabbricato",
+        "predicate": "entity.type === 'fabbricato'"
       },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Abitazione principale"
-            ]
-      },
-  {
-    condition: "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
-    details: "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
-    ratePercent: 0.6,
-    categoryTypes: [],
-    context: "SI"
-  ,
-    requiredParameters: {
-      required: [
       {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "abitazione principale"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "abitazione"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "abitazione principale"
-            ]
-      },
-  {
-            "name": "caratteristicheSoggetto",
-            "type": "conditional",
-            "questions": [
-                  "Ha particolari caratteristiche (handicap, invalidità, età)?",
-                  "È una ONLUS o ente del terzo settore?",
-                  "È studente o anziano?"
-            ],
-            "validationRules": [
-                  "Must specify if special subject characteristics apply"
-            ],
-            "detectedValues": [
-                  "anziani"
-            ]
-      },
-  {
-    condition: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    details: "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
-    ratePercent: 0,
-    categoryTypes: ["D/10"]
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "categoria catastale",
-                  "D/10"
-            ],
-            "specificCategories": [
-                  "D/10"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "Fabbricati",
-                  "categoria catastale",
-                  "D/10"
-            ],
-            "specificCategories": [
-                  "D/10"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Fabbricati"
-            ]
-      },
-  {
-    condition: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    details: "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
-    ratePercent: 0.76,
-    categoryTypes: ["D"]
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "categoria catastale",
-                  "D/10"
-            ],
-            "specificCategories": [
-                  "D/10"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "Fabbricati",
-                  "gruppo catastale",
-                  "categoria catastale",
-                  "D/10"
-            ],
-            "specificCategories": [
-                  "D/10"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Fabbricati"
-            ]
-      },
-  {
-    condition: "Terreni agricoli",
-    details: "Ter ni agricoli",
-    ratePercent: 0,
-    categoryTypes: [],
-    context: "Esenti ai sensi dell’art. 1, comma 758, della legge 27 dicemb 2019, n. 160"
-  ,
-    requiredParameters: {
-            "required": [
-                  {
-                        "name": "categoriaAtastale",
-                        "type": "required",
-                        "questions": [
-                              "Qual è la categoria catastale del terreno?"
-                        ],
-                        "validationRules": [
-                              "Must be valid cadastral category for agricultural land"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  },
-                  {
-                        "name": "ubicazione",
-                        "type": "required",
-                        "questions": [
-                              "In quale zona del comune si trova il terreno?",
-                              "Qual è l'ubicazione specifica?"
-                        ],
-                        "validationRules": [
-                              "Must specify location within municipality"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  }
-            ],
-            "conditional": [
-                  {
-                        "name": "superficie",
-                        "type": "conditional",
-                        "questions": [
-                              "Qual è la superficie del terreno in metri quadri?"
-                        ],
-                        "validationRules": [
-                              "Must be numeric value in square meters"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  },
-                  {
-                        "name": "condizioniSpeciali",
-                        "type": "conditional",
-                        "questions": [
-                              "Il terreno è soggetto a particolari vincoli?",
-                              "È un terreno coltivato?"
-                        ],
-                        "validationRules": [
-                              "Must specify if special conditions apply"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  }
-            ],
-            "questions": [
-                  "Qual è la categoria catastale del terreno?",
-                  "In quale zona del comune si trova il terreno?",
-                  "Qual è l'ubicazione specifica?",
-                  "Qual è la superficie del terreno in metri quadri?",
-                  "Il terreno è soggetto a particolari vincoli?",
-                  "È un terreno coltivato?",
-                  "Si tratta di terreno agricolo coltivato?",
-                  "È un terreno edificabile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category for agricultural land",
-                  "Must specify location within municipality",
-                  "Must be numeric value in square meters",
-                  "Must specify if special conditions apply"
-            ],
-            "commune": "clusone"
-      },
-  {
-    condition: "Aree fabbricabili",
-    details: "A e fabbricabili",
-    ratePercent: 0.76,
-    categoryTypes: []
-  ,
-    requiredParameters: {
-            "required": [
-                  {
-                        "name": "ubicazione",
-                        "type": "required",
-                        "questions": [
-                              "In quale zona urbanistica si trova l'area?",
-                              "Qual è la destinazione urbanistica?"
-                        ],
-                        "validationRules": [
-                              "Must specify urban zone and destination"
-                        ],
-                        "detectedValues": [
-                              "aree fabbricabili"
-                        ]
-                  }
-            ],
-            "conditional": [
-                  {
-                        "name": "superficie",
-                        "type": "conditional",
-                        "questions": [
-                              "Qual è la superficie dell'area in metri quadri?"
-                        ],
-                        "validationRules": [
-                              "Must be numeric value in square meters"
-                        ],
-                        "detectedValues": [
-                              "aree fabbricabili"
-                        ]
-                  },
-                  {
-                        "name": "destinazioneUso",
-                        "type": "conditional",
-                        "questions": [
-                              "Qual è la destinazione d'uso prevista?",
-                              "Che tipo di costruzione è consentita?"
-                        ],
-                        "validationRules": [
-                              "Must specify intended use destination"
-                        ],
-                        "detectedValues": [
-                              "aree fabbricabili"
-                        ]
-                  }
-            ],
-            "questions": [
-                  "In quale zona urbanistica si trova l'area?",
-                  "Qual è la destinazione urbanistica?",
-                  "Qual è la superficie dell'area in metri quadri?",
-                  "Qual è la destinazione d'uso prevista?",
-                  "Che tipo di costruzione è consentita?",
-                  "In quale zona urbanistica si trova?",
-                  "Ha già ottenuto permessi edilizi?"
-            ],
-            "validationRules": [
-                  "Must specify urban zone and destination",
-                  "Must be numeric value in square meters",
-                  "Must specify intended use destination"
-            ],
-            "commune": "clusone"
-      },
-  {
-    condition: "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    details: "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
-    ratePercent: 1.01,
-    categoryTypes: []
-  ,
-    requiredParameters: {
-            "required": [
-                  {
-                        "name": "categoriaAtastale",
-                        "type": "required",
-                        "questions": [
-                              "Qual è la categoria catastale dell'immobile?"
-                        ],
-                        "validationRules": [
-                              "Must be valid cadastral category"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  },
-                  {
-                        "name": "modalitaUtilizzo",
-                        "type": "required",
-                        "questions": [
-                              "Come viene utilizzato l'immobile?",
-                              "È locato o a disposizione?"
-                        ],
-                        "validationRules": [
-                              "Must specify usage type"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  }
-            ],
-            "conditional": [
-                  {
-                        "name": "ubicazione",
-                        "type": "conditional",
-                        "questions": [
-                              "In quale zona si trova l'immobile?"
-                        ],
-                        "validationRules": [
-                              "Must specify location"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  },
-                  {
-                        "name": "tipoContratto",
-                        "type": "conditional",
-                        "questions": [
-                              "Se locato, che tipo di contratto?",
-                              "Qual è la durata del contratto?"
-                        ],
-                        "validationRules": [
-                              "Must specify contract type if rented"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  }
-            ],
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?",
-                  "Come viene utilizzato l'immobile?",
-                  "È locato o a disposizione?",
-                  "In quale zona si trova l'immobile?",
-                  "Se locato, che tipo di contratto?",
-                  "Qual è la durata del contratto?",
-                  "È diverso dall'abitazione principale?",
-                  "Appartiene al gruppo catastale D?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category",
-                  "Must specify usage type",
-                  "Must specify location",
-                  "Must specify contract type if rented"
-            ],
-            "commune": "clusone"
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Altri",
-                  "fabbricati"
-            ]
-      },
-  {
-    condition: "Fabbricati appartenenti al gruppo catastale D, categoria catastale D/5",
-    details: "Categoria catastale: - D/5 Istituto di c dito, cambio e assicurazione con fine di lucro",
-    ratePercent: 1.01,
-    categoryTypes: ["D/5"]
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "categoria catastale",
-                  "D/5"
-            ],
-            "specificCategories": [
-                  "D/5"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "Fabbricati",
-                  "gruppo catastale",
-                  "categoria catastale",
-                  "D/5"
-            ],
-            "specificCategories": [
-                  "D/5"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Fabbricati"
-            ]
-      },
-  {
-    condition: "Immobili di categoria /1 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro",
-    details: "Immobili di categoria Categoria catastale: - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d'uso: Utilizzati per scopi istituzionali o di pubblica utilita', senza fine di lucro - Codice ATECO: 84.24.00 - Ordine pubblico e sicu zza nazionale",
-    ratePercent: 0,
-    categoryTypes: ["/1"],
-    context: "Utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro"
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "utilizzati"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "utilizzati"
-            ]
-      },
-  {
-    condition: "Immobili di categoria /1 utilizzati per attività dei vigili del fuoco",
-    details: "Immobili di categoria Categoria catastale: - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d'uso: Utilizzati per scopi istituzionali o di pubblica utilita', senza fine di lucro - Codice ATECO: 84.25.10 - Attivita' dei vigili del fuoco",
-    ratePercent: 0,
-    categoryTypes: ["/1"],
-    context: "Utilizzati per attività dei vigili del fuoco"
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "utilizzati"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "utilizzati"
-            ]
-      },
-  {
-            "name": "destinazioneUso",
-            "type": "conditional",
-            "questions": [
-                  "Qual è la destinazione d'uso specifica?",
-                  "Che tipo di attività vi si svolge?",
-                  "Qual è il codice ATECO?"
-            ],
-            "validationRules": [
-                  "Must specify specific use destination"
-            ],
-            "detectedValues": [
-                  "attività"
-            ]
-      },
-  {
-    condition: "Immobili di categoria /1 e /2 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro",
-    details: "Immobili di categoria Categoria catastale: - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - /2 Case di cura ed ospedali senza fine di lucro",
-    ratePercent: 0.76,
-    categoryTypes: ["/1","/2"],
-    context: "Utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro"
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "utilizzati"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "utilizzati"
-            ]
-      },
-  {
-    condition: "Immobili di categoria A/10, C/1, C/3 concessi in comodato",
-    details: "Immobili di categoria A10, C Categoria catastale: - A/10 Uffici e studi privati - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Collocazione immobile: Dentro il centro storico - Fabbricati a disposizione o utilizzati: Immobili concessi in comodato - Requisiti soggettivi del comodatario: Persona giuridica esercente attivita' d'imp sa da un numero di mesi non superio a: 0 - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
-    ratePercent: 0,
-    categoryTypes: ["A/10","C/1","C/3"],
-    context: "Immobili concessi in comodato",
-    zone: "Dentro il centro storico"
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ],
-            "specificCategories": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ],
-            "specificCategories": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "comodato"
-            ]
-      },
-  {
-    condition: "Immobili di categoria A/10, C/1, C/3 utilizzati direttamente dal soggetto passivo",
-    details: "Immobili di categoria A10, C Categoria catastale: - A/10 Uffici e studi privati - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Collocazione immobile: Dentro il centro storico - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Requisiti soggettivi del soggetto passivo utilizzato : Persona giuridica esercente attivita' d'imp sa da un numero di mesi non superio a: 0 - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
-    ratePercent: 0,
-    categoryTypes: ["A/10","C/1","C/3"],
-    context: "Immobili utilizzati direttamente dal soggetto passivo",
-    zone: "Dentro il centro storico"
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ],
-            "specificCategories": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ],
-            "specificCategories": [
-                  "A/10",
-                  "C/1",
-                  "C/3"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "utilizzati"
-            ]
-      },
-  {
-    condition: "Immobili di categoria C/1 concessi in comodato in zone ad alto tasso di abbandono",
-    details: "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe - Collocazione immobile: In zone soggette ad un alto tasso di abbandono di attivita' economico-commerciale: Piazza dell’Orologio, Piazza Sant’And a, Via Carpinoni, Via Que na dall’incrocio con Via Pietro Fanzago, salendo verso Piazza aradello, Vicolo Caio, Largo Locatelli, Piazza aradello, Via Matteotti, Via de ernardi - Fabbricati a disposizione o utilizzati: Immobili concessi in comodato",
-    ratePercent: 0,
-    categoryTypes: ["C/1"],
-    context: "Immobili concessi in comodato",
-    zone: "In zone soggette ad un alto tasso di abbandono di attività economico-commerciale"
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "C/1"
-            ],
-            "specificCategories": [
-                  "C/1"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "C/1"
-            ],
-            "specificCategories": [
-                  "C/1"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "comodato"
-            ]
+        "description": "L'entità è stata indicata come abitazione principale",
+        "predicate": "entity.isMainResidence === true"
       }
+    ]
+  },
+  {
+    "label": "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
+    "ratePercent": 0.0006,
+    "officialDescription": "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
+    "conditions": [
+      {
+        "description": "L'entità è un fabbricato",
+        "predicate": "entity.type === 'fabbricato'"
+      },
+      {
+        "description": "L'entità è stata indicata come abitazione principale",
+        "predicate": "entity.isMainResidence === true"
+      }
+    ]
+  },
+  {
+    "label": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "D/10"
+    ],
+    "officialDescription": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria D/10",
+        "predicate": "['D/10'].includes(entity.category)"
+      },
+      {
+        "description": "Il fabbricato è utilizzato per attività agricola",
+        "predicate": "entity.isAgriculturalUse === true"
+      },
+      {
+        "description": "Il proprietario è un coltivatore diretto o imprenditore agricolo",
+        "predicate": "entity.ownerIsAgriculturalEntrepreneur === true"
+      }
+    ]
+  },
+  {
+    "label": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+    "ratePercent": 0.00076,
+    "categoryTypes": [
+      "D"
+    ],
+    "officialDescription": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+    "conditions": [
+      {
+        "description": "Condizione applicabile in base al regolamento comunale",
+        "predicate": "true // Da specificare in base alle condizioni locali"
+      }
+    ]
+  },
+  {
+    "label": "Terreni agricoli",
+    "ratePercent": 0,
+    "officialDescription": "Ter ni agricoli",
+    "conditions": [
+      {
+        "description": "È un terreno agricolo",
+        "predicate": "entity.type === 'terreno' && entity.isAgricultural === true"
+      }
+    ]
+  },
+  {
+    "label": "Aree fabbricabili",
+    "ratePercent": 0.00076,
+    "officialDescription": "A e fabbricabili",
+    "conditions": [
+      {
+        "description": "Il terreno è edificabile secondo PRG o catasto",
+        "predicate": "entity.isBuildable === true"
+      }
+    ]
+  },
+  {
+    "label": "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+    "ratePercent": 0.00101,
+    "officialDescription": "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+    "conditions": [
+      {
+        "description": "L'entità è un fabbricato",
+        "predicate": "entity.type === 'fabbricato'"
+      },
+      {
+        "description": "L'entità è stata indicata come abitazione principale",
+        "predicate": "entity.isMainResidence === true"
+      }
+    ]
+  },
+  {
+    "label": "Fabbricati appartenenti al gruppo catastale D, categoria catastale D/5",
+    "ratePercent": 0.00101,
+    "categoryTypes": [
+      "D/5"
+    ],
+    "officialDescription": "Categoria catastale: - D/5 Istituto di c dito, cambio e assicurazione con fine di lucro",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria D/5",
+        "predicate": "['D/5'].includes(entity.category)"
+      }
+    ]
+  },
+  {
+    "label": "Immobili di categoria /1 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "/1"
+    ],
+    "officialDescription": "Immobili di categoria Categoria catastale: - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d'uso: Utilizzati per scopi istituzionali o di pubblica utilita', senza fine di lucro - Codice ATECO: 84.24.00 - Ordine pubblico e sicu zza nazionale",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria /1",
+        "predicate": "['/1'].includes(entity.category)"
+      }
+    ]
+  },
+  {
+    "label": "Immobili di categoria /1 utilizzati per attività dei vigili del fuoco",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "/1"
+    ],
+    "officialDescription": "Immobili di categoria Categoria catastale: - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - Fabbricati a disposizione o utilizzati: Immobili locati - Destinazione d'uso: Utilizzati per scopi istituzionali o di pubblica utilita', senza fine di lucro - Codice ATECO: 84.25.10 - Attivita' dei vigili del fuoco",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria /1",
+        "predicate": "['/1'].includes(entity.category)"
+      }
+    ]
+  },
+  {
+    "label": "Immobili di categoria /1 e /2 utilizzati per scopi istituzionali o di pubblica utilità, senza fine di lucro",
+    "ratePercent": 0.00076,
+    "categoryTypes": [
+      "/1",
+      "/2"
+    ],
+    "officialDescription": "Immobili di categoria Categoria catastale: - /1 Collegi e convitti, educandati; ricoveri; orfanotrofi; ospizi; conventi; seminari; caserme - /2 Case di cura ed ospedali senza fine di lucro",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria /1 o /2",
+        "predicate": "['/1','/2'].includes(entity.category)"
+      }
+    ]
+  },
+  {
+    "label": "Immobili di categoria A/10, C/1, C/3 concessi in comodato",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "A/10",
+      "C/1",
+      "C/3"
+    ],
+    "officialDescription": "Immobili di categoria A10, C Categoria catastale: - A/10 Uffici e studi privati - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Collocazione immobile: Dentro il centro storico - Fabbricati a disposizione o utilizzati: Immobili concessi in comodato - Requisiti soggettivi del comodatario: Persona giuridica esercente attivita' d'imp sa da un numero di mesi non superio a: 0 - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria A/10 o C/1 o C/3",
+        "predicate": "['A/10','C/1','C/3'].includes(entity.category)"
+      }
+    ]
+  },
+  {
+    "label": "Immobili di categoria A/10, C/1, C/3 utilizzati direttamente dal soggetto passivo",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "A/10",
+      "C/1",
+      "C/3"
+    ],
+    "officialDescription": "Immobili di categoria A10, C Categoria catastale: - A/10 Uffici e studi privati - C/1 Negozi e botteghe - C/3 Laboratori per arti e mestieri - Collocazione immobile: Dentro il centro storico - Fabbricati a disposizione o utilizzati: Immobili utilizzati di ttamente dal soggetto passivo - Requisiti soggettivi del soggetto passivo utilizzato : Persona giuridica esercente attivita' d'imp sa da un numero di mesi non superio a: 0 - Destinazione d'uso: Utilizzato per attivita' produttiva e/o commerciale o per l'esercizio di arti e professioni",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria A/10 o C/1 o C/3",
+        "predicate": "['A/10','C/1','C/3'].includes(entity.category)"
+      }
+    ]
+  },
+  {
+    "label": "Immobili di categoria C/1 concessi in comodato in zone ad alto tasso di abbandono",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "C/1"
+    ],
+    "officialDescription": "Immobili di categoria C Categoria catastale: - C/1 Negozi e botteghe - Collocazione immobile: In zone soggette ad un alto tasso di abbandono di attivita' economico-commerciale: Piazza dell’Orologio, Piazza Sant’And a, Via Carpinoni, Via Que na dall’incrocio con Via Pietro Fanzago, salendo verso Piazza aradello, Vicolo Caio, Largo Locatelli, Piazza aradello, Via Matteotti, Via de ernardi - Fabbricati a disposizione o utilizzati: Immobili concessi in comodato",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria C/1",
+        "predicate": "['C/1'].includes(entity.category)"
+      }
+    ]
+  }
 ];

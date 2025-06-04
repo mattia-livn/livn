@@ -1,46 +1,112 @@
-export interface ImuRateEntry {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
+// termenoSullaStradaDelVino.BZ2025.ts
+// Migrato automaticamente dal formato legacy
+
+export interface ImuRateCondition {
+  description: string;
+  predicate: string;
 }
 
-export const imuRatesTermenoSullaStradaDelVino.BZ2025: ImuRateEntry[] = [
+export interface ImuRateEntry {
+  label: string;
+  ratePercent: number;
+  categoryTypes?: string[];
+  officialDescription: string;
+  conditions: ImuRateCondition[];
+}
+
+export const imuRatesTermenoSullaStradaDelVinoBZ2025: ImuRateEntry[] = [
   {
-    condition: "Abitazione principale",
-    details: "Abitazione principale - Aliquota 0,60%",
-    ratePercent: 0.6,
-    categoryTypes: ["Abitazione principale"],
-    context: "Aliquota per la casa di residenza del proprietario"
+    "label": "Abitazione principale",
+    "ratePercent": 0.0006,
+    "categoryTypes": [
+      "Abitazione principale"
+    ],
+    "officialDescription": "Abitazione principale - Aliquota 0,60%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Abitazione principale",
+        "predicate": "['Abitazione principale'].includes(entity.category)"
+      },
+      {
+        "description": "L'entità è un fabbricato",
+        "predicate": "entity.type === 'fabbricato'"
+      },
+      {
+        "description": "L'entità è stata indicata come abitazione principale",
+        "predicate": "entity.isMainResidence === true"
+      }
+    ]
   },
   {
-    condition: "Altri fabbricati",
-    details: "Altri fabbricati - Aliquota 1,06%",
-    ratePercent: 1.06,
-    categoryTypes: ["Altri fabbricati"],
-    context: "Aliquota per immobili diversi da abitazione principale e gruppo D"
+    "label": "Altri fabbricati",
+    "ratePercent": 0.00106,
+    "categoryTypes": [
+      "Altri fabbricati"
+    ],
+    "officialDescription": "Altri fabbricati - Aliquota 1,06%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Altri fabbricati",
+        "predicate": "['Altri fabbricati'].includes(entity.category)"
+      },
+      {
+        "description": "Non è abitazione principale",
+        "predicate": "entity.isMainResidence !== true"
+      },
+      {
+        "description": "Non è del gruppo D",
+        "predicate": "!entity.category?.startsWith('D')"
+      }
+    ]
   },
   {
-    condition: "Fabbricati gruppo D",
-    details: "Fabbricati gruppo D - Aliquota 0,76%",
-    ratePercent: 0.76,
-    categoryTypes: ["Fabbricati gruppo D"],
-    context: "Aliquota per immobili produttivi/commerciali"
+    "label": "Fabbricati gruppo D",
+    "ratePercent": 0.00076,
+    "categoryTypes": [
+      "Fabbricati gruppo D"
+    ],
+    "officialDescription": "Fabbricati gruppo D - Aliquota 0,76%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Fabbricati gruppo D",
+        "predicate": "['Fabbricati gruppo D'].includes(entity.category)"
+      }
+    ]
   },
   {
-    condition: "Terreni agricoli",
-    details: "Terreni agricoli - Esenti",
-    ratePercent: 0,
-    categoryTypes: ["Terreni agricoli"],
-    context: "Superfici coltivabili esenti da IMU"
+    "label": "Terreni agricoli",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "Terreni agricoli"
+    ],
+    "officialDescription": "Terreni agricoli - Esenti",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Terreni agricoli",
+        "predicate": "['Terreni agricoli'].includes(entity.category)"
+      },
+      {
+        "description": "È un terreno agricolo",
+        "predicate": "entity.type === 'terreno' && entity.isAgricultural === true"
+      }
+    ]
   },
   {
-    condition: "Aree fabbricabili",
-    details: "Aree fabbricabili - Aliquota 1,06%",
-    ratePercent: 1.06,
-    categoryTypes: ["Aree fabbricabili"],
-    context: "Aliquota per terreni edificabili"
+    "label": "Aree fabbricabili",
+    "ratePercent": 0.00106,
+    "categoryTypes": [
+      "Aree fabbricabili"
+    ],
+    "officialDescription": "Aree fabbricabili - Aliquota 1,06%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Aree fabbricabili",
+        "predicate": "['Aree fabbricabili'].includes(entity.category)"
+      },
+      {
+        "description": "Il terreno è edificabile secondo PRG o catasto",
+        "predicate": "entity.isBuildable === true"
+      }
+    ]
   }
 ];

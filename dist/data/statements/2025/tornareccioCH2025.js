@@ -1,0 +1,213 @@
+"use strict";
+// tornareccioCH2025.ts
+// Migrato automaticamente dal formato legacy
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.imuRatesTornareccioCH2025 = void 0;
+exports.imuRatesTornareccioCH2025 = [
+    {
+        "label": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
+        "ratePercent": 0.0006,
+        "categoryTypes": [
+            "A/1",
+            "A/8",
+            "A/9"
+        ],
+        "officialDescription": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/1 o A/8 o A/9",
+                "predicate": "['A/1','A/8','A/9'].includes(entity.category)"
+            },
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
+        "ratePercent": 0.0006,
+        "officialDescription": "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
+        "conditions": [
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+        "ratePercent": 0.0001,
+        "categoryTypes": [
+            "D/10"
+        ],
+        "officialDescription": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria D/10",
+                "predicate": "['D/10'].includes(entity.category)"
+            },
+            {
+                "description": "Il fabbricato è utilizzato per attività agricola",
+                "predicate": "entity.isAgriculturalUse === true"
+            },
+            {
+                "description": "Il proprietario è un coltivatore diretto o imprenditore agricolo",
+                "predicate": "entity.ownerIsAgriculturalEntrepreneur === true"
+            }
+        ]
+    },
+    {
+        "label": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+        "ratePercent": 0.0008,
+        "categoryTypes": [
+            "D"
+        ],
+        "officialDescription": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+        "conditions": [
+            {
+                "description": "Condizione applicabile in base al regolamento comunale",
+                "predicate": "true // Da specificare in base alle condizioni locali"
+            }
+        ]
+    },
+    {
+        "label": "Terreni agricoli",
+        "ratePercent": 0,
+        "officialDescription": "Ter ni agricoli",
+        "conditions": [
+            {
+                "description": "È un terreno agricolo",
+                "predicate": "entity.type === 'terreno' && entity.isAgricultural === true"
+            }
+        ]
+    },
+    {
+        "label": "Aree fabbricabili",
+        "ratePercent": 0.00076,
+        "officialDescription": "A e fabbricabili",
+        "conditions": [
+            {
+                "description": "Il terreno è edificabile secondo PRG o catasto",
+                "predicate": "entity.isBuildable === true"
+            }
+        ]
+    },
+    {
+        "label": "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+        "ratePercent": 0.001,
+        "officialDescription": "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+        "conditions": [
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Aree fabbricabili residenziali situate in determinate zone inferiori a 100 mq",
+        "ratePercent": 0,
+        "officialDescription": "A e Fabbricabili - Tipologia: Residenziali - Situate in determinate zone: INFERIORI A 100 MQ",
+        "conditions": [
+            {
+                "description": "Il terreno è edificabile secondo PRG o catasto",
+                "predicate": "entity.isBuildable === true"
+            }
+        ]
+    },
+    {
+        "label": "Aree fabbricabili residenziali situate in determinate zone da 0 a 500 mq utilizzati dai proprietari a scopi agricoli o incolti",
+        "ratePercent": 0,
+        "officialDescription": "A e Fabbricabili - Tipologia: Residenziali - Situate in determinate zone: DA O A 500 MQ UTILIZZATI DAI PROPRI ARI A SCOPI AGRICOLI O INCOLTI O SE PER LA LORO CONFORMAZIONE PLANO-ALTIM RICA SI PRESENTANO INEDIFICA ILI, PREVIA AUTODICHIARAZIONE DEL PROPRI ARIO AI SENSI DEGLI ARTT. 46 E 47 DEL DPR 445/2000",
+        "conditions": [
+            {
+                "description": "Il terreno è edificabile secondo PRG o catasto",
+                "predicate": "entity.isBuildable === true"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione locata o in comodato con contratto registrato e utilizzata come abitazione principale",
+        "ratePercent": 0,
+        "categoryTypes": [
+            "A/2",
+            "A/3",
+            "A/4",
+            "A/5",
+            "A/6",
+            "A/7",
+            "A/11"
+        ],
+        "officialDescription": "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito Categoria catastale: - A/2 Abitazioni di tipo civile - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - A/7 Abitazioni in villini - A/11 Abitazioni ed alloggi tipici dei luoghi - Con contratto gistrato - Condizioni locatario/comodatario: Pa nti - Sino al primo grado ipotesi diverse da quella di cui all'art. 1, comma 747, lett. c, della legge n. 160 del 2019 - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale.",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/2 o A/3 o A/4 o A/5 o A/6 o A/7 o A/11",
+                "predicate": "['A/2','A/3','A/4','A/5','A/6','A/7','A/11'].includes(entity.category)"
+            },
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione locata o in comodato con contratto registrato e utilizzata come abitazione principale sino al terzo grado in linea retta",
+        "ratePercent": 0.0005,
+        "categoryTypes": [
+            "A/2",
+            "A/3",
+            "A/4",
+            "A/5",
+            "A/6",
+            "A/7"
+        ],
+        "officialDescription": "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito Categoria catastale: - A/2 Abitazioni di tipo civile - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - A/7 Abitazioni in villini - Con contratto gistrato - Condizioni locatario/comodatario: Pa nti - Sino al terzo grado in linea tta - Destinazione d'uso: Purché l'affittuario/comodatario la utilizzi come abitazione principale.",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/2 o A/3 o A/4 o A/5 o A/6 o A/7",
+                "predicate": "['A/2','A/3','A/4','A/5','A/6','A/7'].includes(entity.category)"
+            },
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione utilizzata direttamente dal soggetto passivo con invalidità civile riconosciuta al 100%",
+        "ratePercent": 0.00055,
+        "categoryTypes": [
+            "A/1",
+            "A/8",
+            "A/9"
+        ],
+        "officialDescription": "Abitazione utilizzata di ttamente dal soggetto passivo Categoria catastale: - A/1 Abitazioni di tipo signorile - A/8 Abitazioni in ville - A/9 Castelli, palazzi di eminenti p gi artistici o storici - Requisiti del soggetto passivo: Soggetto con invalidita' civile riconosciuta in percentuale non inferio al: 100%",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/1 o A/8 o A/9",
+                "predicate": "['A/1','A/8','A/9'].includes(entity.category)"
+            }
+        ]
+    }
+];
+//# sourceMappingURL=tornareccioCH2025.js.map

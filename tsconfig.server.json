@@ -1,0 +1,37 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "server-api.ts",
+    "services/commune-conditions-service.ts",
+    "services/imu-calculation-service.ts",
+    "types/**/*.ts",
+    "migrate-statements-to-new-format.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "app/**/*",
+    "web/**/*",
+    "public/**/*",
+    ".next/**/*",
+    "lib/**/*",
+    "data/statements/2025_old_backup/**/*",
+    "services/upload-service.ts",
+    "services/advanced-data-analyzer.ts",
+    "services/catasto-service.ts"
+  ]
+} 

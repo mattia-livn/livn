@@ -81,21 +81,12 @@ class CommuneConditionsService {
             const filePath = path_1.default.join(process.cwd(), 'data/statements/2025', filename);
             // Legge il file come testo
             const fileContent = fs_1.default.readFileSync(filePath, 'utf8');
-            // Estrae i dati usando parsing diretto
-            const conditions = this.parseConditionsFromFile(fileContent);
-            // Filtra condizioni valide
-            const validConditions = conditions.filter(c => c &&
-                typeof c === 'object' &&
-                typeof c.condition === 'string' &&
-                typeof c.ratePercent === 'number' &&
-                c.condition !== 'string' && // Filtra l'oggetto template malformato
-                c.details !== 'string' &&
-                c.condition.length > 5 // Deve avere una descrizione ragionevole
-            );
+            // Estrae i dati usando parsing del nuovo formato
+            const conditions = this.parseNewFormatConditionsFromFile(fileContent);
             // Cache e ritorna
-            this.loadedCommunes.set(normalizedName, validConditions);
-            console.log(`✅ Caricate ${validConditions.length} condizioni valide per ${communeName}`);
-            return validConditions;
+            this.loadedCommunes.set(normalizedName, conditions);
+            console.log(`✅ Caricate ${conditions.length} condizioni valide per ${communeName}`);
+            return conditions;
         }
         catch (error) {
             console.error(`❌ Errore caricamento condizioni ${communeName}:`, error);
@@ -103,9 +94,46 @@ class CommuneConditionsService {
         }
     }
     /**
-     * Estrae i dati dall'file TypeScript
+     * Parsing del nuovo formato JSON dei file migrati
      */
-    parseConditionsFromFile(fileContent) {
+    parseNewFormatConditionsFromFile(fileContent) {
+        try {
+            const conditions = [];
+            // Cerca l'array JSON nel file
+            const arrayMatch = fileContent.match(/export const imuRates\w+2025: ImuRateEntry\[\] = (\[[\s\S]*?\]);/);
+            if (!arrayMatch) {
+                console.log('⚠️ Array ImuRateEntry non trovato nel file');
+                return [];
+            }
+            // Parse dell'array JSON
+            const newFormatRates = JSON.parse(arrayMatch[1]);
+            // Converti dal nuovo formato al formato legacy per compatibilità
+            for (const newRate of newFormatRates) {
+                const legacyRate = {
+                    condition: newRate.label,
+                    details: newRate.officialDescription,
+                    ratePercent: newRate.ratePercent * 1000, // Converti da decimale a per mille
+                    categoryTypes: newRate.categoryTypes,
+                    context: undefined,
+                    zone: undefined
+                };
+                conditions.push(legacyRate);
+                console.log(`🎯 Trovata condition: ${newRate.label}`);
+                console.log(`✅ Condizione aggiunta: ${newRate.label} -> ${(newRate.ratePercent * 1000).toFixed(2)}%`);
+            }
+            console.log(`🔍 Estratte ${conditions.length} condizioni dal file`);
+            return conditions;
+        }
+        catch (error) {
+            console.error('❌ Errore parsing nuovo formato:', error);
+            // Fallback: prova il parsing del formato vecchio
+            return this.parseOldFormatConditionsFromFile(fileContent);
+        }
+    }
+    /**
+     * Fallback: parsing del formato vecchio (per file non ancora migrati)
+     */
+    parseOldFormatConditionsFromFile(fileContent) {
         try {
             const conditions = [];
             // Nuovo approccio: cerca pattern specifici ignorando la struttura nidificata
@@ -143,11 +171,11 @@ class CommuneConditionsService {
                     }
                 }
             }
-            console.log(`🔍 Estratte ${conditions.length} condizioni dal file`);
+            console.log(`🔍 Estratte ${conditions.length} condizioni dal file (formato vecchio)`);
             return conditions;
         }
         catch (error) {
-            console.error('❌ Errore parsing file:', error);
+            console.error('❌ Errore parsing formato vecchio:', error);
             return [];
         }
     }
@@ -263,6 +291,7 @@ class CommuneConditionsService {
      * Calcola il punteggio di matching tra una condizione e un immobile
      */
     calculateMatchingScore(condition, fabbricato, userAnswers, immobileIndex) {
+        var _a, _b;
         let score = 0;
         const maxScore = 100;
         // 1. Matching categoria catastale (peso 40%)
@@ -284,7 +313,7 @@ class CommuneConditionsService {
             }
         }
         // 2. Matching modalità utilizzo (peso 30%)
-        const modalitaUtente = userAnswers.condizioni_immobili?.[`immobile_${immobileIndex}`];
+        const modalitaUtente = (_a = userAnswers.condizioni_immobili) === null || _a === void 0 ? void 0 : _a[`immobile_${immobileIndex}`];
         if (modalitaUtente && condition.condition) {
             const conditionLower = condition.condition.toLowerCase();
             if (modalitaUtente === 'abitazione_principale' &&
@@ -319,7 +348,7 @@ class CommuneConditionsService {
             }
         }
         // 4. Matching terreni vs fabbricati (peso 10%)
-        const isTerreno = fabbricato.tipo === 'terreno' || fabbricato.categoria?.startsWith('T');
+        const isTerreno = fabbricato.tipo === 'terreno' || ((_b = fabbricato.categoria) === null || _b === void 0 ? void 0 : _b.startsWith('T'));
         const conditionIsTerreno = condition.condition.toLowerCase().includes('terreni') ||
             condition.condition.toLowerCase().includes('agricol');
         if (isTerreno === conditionIsTerreno) {
@@ -331,6 +360,7 @@ class CommuneConditionsService {
      * Genera domande specifiche basate sulle condizioni del comune
      */
     async generateCommuneSpecificQuestions(extractedData, communeName) {
+        var _a;
         const conditions = await this.loadCommuneConditions(communeName);
         const questions = [];
         const askedQuestions = new Set();
@@ -338,7 +368,7 @@ class CommuneConditionsService {
         for (const [index, fabbricato] of extractedData.fabbricati.entries()) {
             const relevantConditions = conditions.filter(condition => this.isConditionRelevantForProperty(condition, fabbricato));
             for (const condition of relevantConditions) {
-                if (condition.requiredParameters?.required) {
+                if ((_a = condition.requiredParameters) === null || _a === void 0 ? void 0 : _a.required) {
                     for (const param of condition.requiredParameters.required) {
                         if (param.questions) {
                             for (const question of param.questions) {
@@ -415,10 +445,17 @@ class CommuneConditionsService {
         }
     }
     /**
-     * Lista dei comuni disponibili
+     * Metodo pubblico per ottenere tutte le condizioni di un comune
+     */
+    async getConditionsForCommune(communeName) {
+        return await this.loadCommuneConditions(communeName);
+    }
+    /**
+     * Restituisce l'elenco dei comuni disponibili
      */
     getAvailableCommunes() {
         return Array.from(this.communeFileCache.keys());
     }
 }
 exports.CommuneConditionsService = CommuneConditionsService;
+//# sourceMappingURL=commune-conditions-service.js.map

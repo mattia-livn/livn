@@ -81,15 +81,23 @@ class LivnAPIServer {
   }
 
   private setupRoutes() {
-    // Home page (correggo path per compilazione)
+    // Home page - nuova interfaccia principale
     this.app.get('/', (req, res) => {
-      res.sendFile(path.join(process.cwd(), 'web', 'index.html'));
+      res.sendFile(path.join(process.cwd(), 'index.html'));
     });
 
-    // Interfaccia Domande IMU OpenAI
-    this.app.get('/analisi-visura-openai', (req, res) => {
-      res.sendFile(path.join(process.cwd(), 'public', 'analisi-visura-openai.html'));
+    // Interfaccia legacy (v0)
+    this.app.get('/v0', (req, res) => {
+      res.sendFile(path.join(process.cwd(), 'v0', 'web', 'index.html'));
     });
+
+    // Interfaccia legacy analisi OpenAI
+    this.app.get('/v0/analisi-visura-openai', (req, res) => {
+      res.sendFile(path.join(process.cwd(), 'v0', 'web', 'analisi-visura-openai.html'));
+    });
+
+    // Serve static files from v0
+    this.app.use('/v0', express.static(path.join(process.cwd(), 'v0')));
 
     // API Routes
     this.app.post('/api/analyze', this.upload.array('files'), this.handleAnalyze.bind(this));
@@ -106,6 +114,67 @@ class LivnAPIServer {
     // Health check
     this.app.get('/api/health', (req, res) => {
       res.json({ status: 'ok', timestamp: new Date() });
+    });
+
+    // Endpoint per aggiornare la chiave API temporanea
+    this.app.post('/api/update-api-key', (req, res) => {
+      const { apiKey } = req.body;
+      if (!apiKey) {
+        return res.status(400).json({ error: 'API key mancante' });
+      }
+      
+      // Aggiorna temporaneamente
+      process.env.OPENAI_API_KEY = apiKey;
+      res.json({ success: true, message: 'API key aggiornata' });
+    });
+
+    // Endpoint per recuperare aliquote IMU per comune
+    this.app.get('/api/commune-rates/:communeName', async (req, res) => {
+      try {
+        const { communeName } = req.params;
+        console.log(`🎯 Richiesta aliquote per comune: ${communeName}`);
+        
+        // Normalizza il nome del comune
+        const normalizedName = communeName.toLowerCase().trim();
+        
+        // Carica le condizioni del comune
+        const conditions = await this.communeConditionsService.getConditionsForCommune(normalizedName);
+        
+        if (!conditions || conditions.length === 0) {
+          console.log(`⚠️ Nessuna condizione trovata per ${communeName}`);
+          return res.json({
+            success: false,
+            message: `Comune ${communeName} non trovato`,
+            rates: []
+          });
+        }
+        
+        // Converte le condizioni in formato aliquote
+        const rates = conditions.map(condition => ({
+          label: condition.condition,
+          ratePercent: condition.ratePercent,
+          categoryTypes: condition.categoryTypes || [],
+          context: condition.context,
+          details: condition.details
+        }));
+        
+        console.log(`✅ Inviate ${rates.length} aliquote per ${communeName}`);
+        
+        res.json({
+          success: true,
+          commune: communeName,
+          rates: rates,
+          count: rates.length
+        });
+        
+      } catch (error) {
+        console.error(`❌ Errore recupero aliquote per ${req.params.communeName}:`, error);
+        res.status(500).json({
+          success: false,
+          error: 'Errore interno del server',
+          message: error instanceof Error ? error.message : 'Errore sconosciuto'
+        });
+      }
     });
   }
 
@@ -721,7 +790,7 @@ Rispondi SOLO con un array JSON valido, nessun altro testo:`;
             </tr>
         </thead>
         <tbody>
-            ${calculationResult.details.map(detail => `
+            ${calculationResult.details.map((detail: any) => `
                 <tr class="${detail.importo === 0 ? 'esente' : ''}">
                     <td>${detail.immobile}</td>
                     <td>${detail.categoria}</td>
@@ -746,7 +815,7 @@ Rispondi SOLO con un array JSON valido, nessun altro testo:`;
             </tr>
         </thead>
         <tbody>
-            ${calculationResult.scadenze.map(scadenza => `
+            ${calculationResult.scadenze.map((scadenza: any) => `
                 <tr>
                     <td>${scadenza.data}</td>
                     <td>${scadenza.descrizione}</td>
@@ -759,7 +828,7 @@ Rispondi SOLO con un array JSON valido, nessun altro testo:`;
     <div class="normativa">
         <h3>⚖️ Normativa Applicata</h3>
         <ul>
-            ${calculationResult.normativa.map(norma => `<li>${norma}</li>`).join('')}
+            ${calculationResult.normativa.map((norma: any) => `<li>${norma}</li>`).join('')}
         </ul>
     </div>
 

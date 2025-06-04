@@ -1,417 +1,134 @@
+// pinzoloTN2025.ts
+// Migrato automaticamente dal formato legacy
+
+export interface ImuRateCondition {
+  description: string;
+  predicate: string;
+}
+
 export interface ImuRateEntry {
-  condition: string; // short summary of the use case
-  details: string; // original wording from the PDF
-  ratePercent: number; // aliquota as percentage
-  context?: string; // zone, contract type, or legal reference (optional)
-  categoryTypes?: string[]; // optional reference to applicable categories (e.g. ["A/1", "A/8"])
-  zone?: string; // optional, specific geographical area if mentioned
+  label: string;
+  ratePercent: number;
+  categoryTypes?: string[];
+  officialDescription: string;
+  conditions: ImuRateCondition[];
 }
 
 export const imuRatesPinzoloTN2025: ImuRateEntry[] = [
   {
-    condition: "Abitazione principale e relative pertinenze",
-    details: "Abitazione principale e relative pertinenze: 0,60%",
-    ratePercent: 0.6,
-    categoryTypes: ["Abitazione principale"],
-    context: "Include le pertinenze classificate nelle categorie catastali C/2, C/6 e C/7"
-  ,
-    requiredParameters: {
-      required: [
+    "label": "Abitazione principale e relative pertinenze",
+    "ratePercent": 0.0006,
+    "categoryTypes": [
+      "Abitazione principale"
+    ],
+    "officialDescription": "Abitazione principale e relative pertinenze: 0,60%",
+    "conditions": [
       {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Abitazione principale"
-            ]
-      ,
-    requiredParameters: {
-      required: [
+        "description": "L'entità ha categoria Abitazione principale",
+        "predicate": "['Abitazione principale'].includes(entity.category)"
+      },
       {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "Abitazione"
-            ]
+        "description": "L'entità è un fabbricato",
+        "predicate": "entity.type === 'fabbricato'"
       },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Abitazione principale"
-            ]
-      },
-  {
-    condition: "Fabbricati rurali ad uso strumentale",
-    details: "Fabbricati rurali ad uso strumentale: 0,00%",
-    ratePercent: 0,
-    categoryTypes: ["Fabbricati rurali"]
-  ,
-    requiredParameters: {
-      required: [],
-      conditional: [],
-      questions: [],
-      validationRules: [],
-      commune: "pinzolo"
-    ,
-    requiredParameters: {
-      required: [
       {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "Fabbricati"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Fabbricati"
-            ]
-      },
-  {
-    condition: "Altri fabbricati",
-    details: "Altri fabbricati: 1,06%",
-    ratePercent: 1.06,
-    categoryTypes: ["Altri fabbricati"]
-  ,
-    requiredParameters: {
-            "required": [
-                  {
-                        "name": "categoriaAtastale",
-                        "type": "required",
-                        "questions": [
-                              "Qual è la categoria catastale dell'immobile?"
-                        ],
-                        "validationRules": [
-                              "Must be valid cadastral category"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  },
-                  {
-                        "name": "modalitaUtilizzo",
-                        "type": "required",
-                        "questions": [
-                              "Come viene utilizzato l'immobile?",
-                              "È locato o a disposizione?"
-                        ],
-                        "validationRules": [
-                              "Must specify usage type"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  }
-            ],
-            "conditional": [
-                  {
-                        "name": "ubicazione",
-                        "type": "conditional",
-                        "questions": [
-                              "In quale zona si trova l'immobile?"
-                        ],
-                        "validationRules": [
-                              "Must specify location"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  },
-                  {
-                        "name": "tipoContratto",
-                        "type": "conditional",
-                        "questions": [
-                              "Se locato, che tipo di contratto?",
-                              "Qual è la durata del contratto?"
-                        ],
-                        "validationRules": [
-                              "Must specify contract type if rented"
-                        ],
-                        "detectedValues": [
-                              "altri fabbricati"
-                        ]
-                  }
-            ],
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?",
-                  "Come viene utilizzato l'immobile?",
-                  "È locato o a disposizione?",
-                  "In quale zona si trova l'immobile?",
-                  "Se locato, che tipo di contratto?",
-                  "Qual è la durata del contratto?",
-                  "È diverso dall'abitazione principale?",
-                  "Appartiene al gruppo catastale D?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category",
-                  "Must specify usage type",
-                  "Must specify location",
-                  "Must specify contract type if rented"
-            ],
-            "commune": "pinzolo"
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Altri",
-                  "fabbricati"
-            ]
-      },
-  {
-    condition: "Terreni agricoli",
-    details: "Terreni agricoli: 0,76%",
-    ratePercent: 0.76,
-    categoryTypes: ["Terreni agricoli"]
-  ,
-    requiredParameters: {
-            "required": [
-                  {
-                        "name": "categoriaAtastale",
-                        "type": "required",
-                        "questions": [
-                              "Qual è la categoria catastale del terreno?"
-                        ],
-                        "validationRules": [
-                              "Must be valid cadastral category for agricultural land"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  },
-                  {
-                        "name": "ubicazione",
-                        "type": "required",
-                        "questions": [
-                              "In quale zona del comune si trova il terreno?",
-                              "Qual è l'ubicazione specifica?"
-                        ],
-                        "validationRules": [
-                              "Must specify location within municipality"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  }
-            ],
-            "conditional": [
-                  {
-                        "name": "superficie",
-                        "type": "conditional",
-                        "questions": [
-                              "Qual è la superficie del terreno in metri quadri?"
-                        ],
-                        "validationRules": [
-                              "Must be numeric value in square meters"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  },
-                  {
-                        "name": "condizioniSpeciali",
-                        "type": "conditional",
-                        "questions": [
-                              "Il terreno è soggetto a particolari vincoli?",
-                              "È un terreno coltivato?"
-                        ],
-                        "validationRules": [
-                              "Must specify if special conditions apply"
-                        ],
-                        "detectedValues": [
-                              "terreni agricoli"
-                        ]
-                  }
-            ],
-            "questions": [
-                  "Qual è la categoria catastale del terreno?",
-                  "In quale zona del comune si trova il terreno?",
-                  "Qual è l'ubicazione specifica?",
-                  "Qual è la superficie del terreno in metri quadri?",
-                  "Il terreno è soggetto a particolari vincoli?",
-                  "È un terreno coltivato?",
-                  "Si tratta di terreno agricolo coltivato?",
-                  "È un terreno edificabile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category for agricultural land",
-                  "Must specify location within municipality",
-                  "Must be numeric value in square meters",
-                  "Must specify if special conditions apply"
-            ],
-            "commune": "pinzolo"
-      },
-  {
-    condition: "Aree fabbricabili",
-    details: "Aree fabbricabili: 1,06%",
-    ratePercent: 1.06,
-    categoryTypes: ["Aree fabbricabili"]
-  ,
-    requiredParameters: {
-            "required": [
-                  {
-                        "name": "ubicazione",
-                        "type": "required",
-                        "questions": [
-                              "In quale zona urbanistica si trova l'area?",
-                              "Qual è la destinazione urbanistica?"
-                        ],
-                        "validationRules": [
-                              "Must specify urban zone and destination"
-                        ],
-                        "detectedValues": [
-                              "aree fabbricabili"
-                        ]
-                  }
-            ],
-            "conditional": [
-                  {
-                        "name": "superficie",
-                        "type": "conditional",
-                        "questions": [
-                              "Qual è la superficie dell'area in metri quadri?"
-                        ],
-                        "validationRules": [
-                              "Must be numeric value in square meters"
-                        ],
-                        "detectedValues": [
-                              "aree fabbricabili"
-                        ]
-                  },
-                  {
-                        "name": "destinazioneUso",
-                        "type": "conditional",
-                        "questions": [
-                              "Qual è la destinazione d'uso prevista?",
-                              "Che tipo di costruzione è consentita?"
-                        ],
-                        "validationRules": [
-                              "Must specify intended use destination"
-                        ],
-                        "detectedValues": [
-                              "aree fabbricabili"
-                        ]
-                  }
-            ],
-            "questions": [
-                  "In quale zona urbanistica si trova l'area?",
-                  "Qual è la destinazione urbanistica?",
-                  "Qual è la superficie dell'area in metri quadri?",
-                  "Qual è la destinazione d'uso prevista?",
-                  "Che tipo di costruzione è consentita?",
-                  "In quale zona urbanistica si trova?",
-                  "Ha già ottenuto permessi edilizi?"
-            ],
-            "validationRules": [
-                  "Must specify urban zone and destination",
-                  "Must be numeric value in square meters",
-                  "Must specify intended use destination"
-            ],
-            "commune": "pinzolo"
-      },
-  {
-    condition: "Fabbricati gruppo D (escluso D/10)",
-    details: "Fabbricati gruppo D (escluso D/10): 0,86%",
-    ratePercent: 0.86,
-    categoryTypes: ["Fabbricati gruppo D"],
-    context: "Esclusi i fabbricati classificati nella categoria D/10"
-  ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "D/10"
-            ],
-            "specificCategories": [
-                  "D/10"
-            ]
-      ,
-    requiredParameters: {
-      required: [
-      {
-            "name": "categoriaAtastale",
-            "type": "required",
-            "questions": [
-                  "Qual è la categoria catastale dell'immobile?"
-            ],
-            "validationRules": [
-                  "Must be valid cadastral category (A/1, A/2, etc.)"
-            ],
-            "detectedValues": [
-                  "Fabbricati",
-                  "D/10"
-            ],
-            "specificCategories": [
-                  "D/10"
-            ]
-      },
-  {
-            "name": "modalitaUtilizzo",
-            "type": "required",
-            "questions": [
-                  "Come viene utilizzato l'immobile?",
-                  "È la sua abitazione principale?",
-                  "È locato o dato in comodato?"
-            ],
-            "validationRules": [
-                  "Must specify usage type"
-            ],
-            "detectedValues": [
-                  "Fabbricati"
-            ]
+        "description": "L'entità è stata indicata come abitazione principale",
+        "predicate": "entity.isMainResidence === true"
       }
+    ]
+  },
+  {
+    "label": "Fabbricati rurali ad uso strumentale",
+    "ratePercent": 0,
+    "categoryTypes": [
+      "Fabbricati rurali"
+    ],
+    "officialDescription": "Fabbricati rurali ad uso strumentale: 0,00%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Fabbricati rurali",
+        "predicate": "['Fabbricati rurali'].includes(entity.category)"
+      },
+      {
+        "description": "Il fabbricato è utilizzato per attività agricola",
+        "predicate": "entity.isAgriculturalUse === true"
+      },
+      {
+        "description": "Il proprietario è un coltivatore diretto o imprenditore agricolo",
+        "predicate": "entity.ownerIsAgriculturalEntrepreneur === true"
+      }
+    ]
+  },
+  {
+    "label": "Altri fabbricati",
+    "ratePercent": 0.00106,
+    "categoryTypes": [
+      "Altri fabbricati"
+    ],
+    "officialDescription": "Altri fabbricati: 1,06%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Altri fabbricati",
+        "predicate": "['Altri fabbricati'].includes(entity.category)"
+      },
+      {
+        "description": "Non è abitazione principale",
+        "predicate": "entity.isMainResidence !== true"
+      },
+      {
+        "description": "Non è del gruppo D",
+        "predicate": "!entity.category?.startsWith('D')"
+      }
+    ]
+  },
+  {
+    "label": "Terreni agricoli",
+    "ratePercent": 0.00076,
+    "categoryTypes": [
+      "Terreni agricoli"
+    ],
+    "officialDescription": "Terreni agricoli: 0,76%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Terreni agricoli",
+        "predicate": "['Terreni agricoli'].includes(entity.category)"
+      },
+      {
+        "description": "È un terreno agricolo",
+        "predicate": "entity.type === 'terreno' && entity.isAgricultural === true"
+      }
+    ]
+  },
+  {
+    "label": "Aree fabbricabili",
+    "ratePercent": 0.00106,
+    "categoryTypes": [
+      "Aree fabbricabili"
+    ],
+    "officialDescription": "Aree fabbricabili: 1,06%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Aree fabbricabili",
+        "predicate": "['Aree fabbricabili'].includes(entity.category)"
+      },
+      {
+        "description": "Il terreno è edificabile secondo PRG o catasto",
+        "predicate": "entity.isBuildable === true"
+      }
+    ]
+  },
+  {
+    "label": "Fabbricati gruppo D (escluso D/10)",
+    "ratePercent": 0.00086,
+    "categoryTypes": [
+      "Fabbricati gruppo D"
+    ],
+    "officialDescription": "Fabbricati gruppo D (escluso D/10): 0,86%",
+    "conditions": [
+      {
+        "description": "L'entità ha categoria Fabbricati gruppo D",
+        "predicate": "['Fabbricati gruppo D'].includes(entity.category)"
+      }
+    ]
+  }
 ];

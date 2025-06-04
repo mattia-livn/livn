@@ -112,25 +112,27 @@ class UploadServiceAI {
             if (allFabbricati.length > 0) {
                 console.log('🏠 === DETTAGLI FABBRICATI TROVATI ===');
                 allFabbricati.forEach((fab, index) => {
+                    var _a;
                     console.log(`  Fabbricato ${index + 1}:`);
                     console.log(`    ├─ Foglio: ${fab.foglio}`);
                     console.log(`    ├─ Particella: ${fab.particella}`);
                     console.log(`    ├─ Subalterno: ${fab.subalterno || 'N/A'}`);
                     console.log(`    ├─ Categoria: ${fab.categoria}`);
                     console.log(`    ├─ Rendita: €${fab.rendita}`);
-                    console.log(`    ├─ Titolarità: ${fab.proprietario?.titolarita || 'N/A'}`);
+                    console.log(`    ├─ Titolarità: ${((_a = fab.proprietario) === null || _a === void 0 ? void 0 : _a.titolarita) || 'N/A'}`);
                     console.log(`    └─ Comune: ${fab.comune}`);
                 });
             }
             if (allTerreni.length > 0) {
                 console.log('🌱 === DETTAGLI TERRENI TROVATI ===');
                 allTerreni.forEach((ter, index) => {
+                    var _a;
                     console.log(`  Terreno ${index + 1}:`);
                     console.log(`    ├─ Foglio: ${ter.foglio}`);
                     console.log(`    ├─ Particella: ${ter.particella}`);
                     console.log(`    ├─ Qualità: ${ter.qualita}`);
                     console.log(`    ├─ Superficie: ${ter.superficie} mq`);
-                    console.log(`    ├─ Titolarità: ${ter.proprietario?.titolarita || 'N/A'}`);
+                    console.log(`    ├─ Titolarità: ${((_a = ter.proprietario) === null || _a === void 0 ? void 0 : _a.titolarita) || 'N/A'}`);
                     console.log(`    └─ Comune: ${ter.comune}`);
                 });
             }
@@ -199,3 +201,4 @@ class UploadServiceAI {
     }
 }
 exports.UploadServiceAI = UploadServiceAI;
+//# sourceMappingURL=upload-service-ai.js.map

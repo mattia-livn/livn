@@ -1,0 +1,198 @@
+"use strict";
+// cupraMarittimaAP2025.ts
+// Migrato automaticamente dal formato legacy
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.imuRatesCupraMarittimaAP2025 = void 0;
+exports.imuRatesCupraMarittimaAP2025 = [
+    {
+        "label": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e relative pertinenze",
+        "ratePercent": 0.0006,
+        "categoryTypes": [
+            "A/1",
+            "A/8",
+            "A/9"
+        ],
+        "officialDescription": "Abitazione principale di categoria catastale A/1, A/8 e A/9 e lative pertinenze",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/1 o A/8 o A/9",
+                "predicate": "['A/1','A/8','A/9'].includes(entity.category)"
+            },
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Assimilazione all’abitazione principale dell’unità immobiliare posseduta da anziani o disabili",
+        "ratePercent": 0.0006,
+        "officialDescription": "Assimilazione all’abitazione principale dell’unità immobilia posseduta da anziani o disabili di cui all'art. 1, comma 741, lett. c, n. 6, della legge n. 160 del 2019",
+        "conditions": [
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+        "ratePercent": 0.0001,
+        "categoryTypes": [
+            "D/10"
+        ],
+        "officialDescription": "Fabbricati rurali ad uso strumentale inclusa la categoria catastale D/10",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria D/10",
+                "predicate": "['D/10'].includes(entity.category)"
+            },
+            {
+                "description": "Il fabbricato è utilizzato per attività agricola",
+                "predicate": "entity.isAgriculturalUse === true"
+            },
+            {
+                "description": "Il proprietario è un coltivatore diretto o imprenditore agricolo",
+                "predicate": "entity.ownerIsAgriculturalEntrepreneur === true"
+            }
+        ]
+    },
+    {
+        "label": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+        "ratePercent": 0.00101,
+        "categoryTypes": [
+            "D"
+        ],
+        "officialDescription": "Fabbricati appartenenti al gruppo catastale D esclusa la categoria catastale D/10",
+        "conditions": [
+            {
+                "description": "Condizione applicabile in base al regolamento comunale",
+                "predicate": "true // Da specificare in base alle condizioni locali"
+            }
+        ]
+    },
+    {
+        "label": "Terreni agricoli",
+        "ratePercent": 0.00076,
+        "officialDescription": "Ter ni agricoli",
+        "conditions": [
+            {
+                "description": "È un terreno agricolo",
+                "predicate": "entity.type === 'terreno' && entity.isAgricultural === true"
+            }
+        ]
+    },
+    {
+        "label": "Aree fabbricabili",
+        "ratePercent": 0.00101,
+        "officialDescription": "A e fabbricabili",
+        "conditions": [
+            {
+                "description": "Il terreno è edificabile secondo PRG o catasto",
+                "predicate": "entity.isBuildable === true"
+            }
+        ]
+    },
+    {
+        "label": "Altri fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+        "ratePercent": 0.00101,
+        "officialDescription": "Altri fabbricati fabbricati diversi dall'abitazione principale e dai fabbricati appartenenti al gruppo catastale D",
+        "conditions": [
+            {
+                "description": "L'entità è un fabbricato",
+                "predicate": "entity.type === 'fabbricato'"
+            },
+            {
+                "description": "L'entità è stata indicata come abitazione principale",
+                "predicate": "entity.isMainResidence === true"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione a disposizione - Abitazioni non locate e non concesse in comodato",
+        "ratePercent": 0.00114,
+        "categoryTypes": [
+            "A"
+        ],
+        "officialDescription": "Abitazione a disposizione - Abitazioni non locate e non concesse in comodato nonche' abitazioni locate o concesse in comodato per periodi inferiori all'anno e comunque per un numero complessivo di mesi inferio a: mesi: 3 - Ulteriori condizioni non rinvenibili tra quelle proposte nella p sente schermata stabilite dal comune, ai sensi dell’art. 1, comma 755, legge n. 160 del 2019, ai fini dell’applicazione dell’aliquota olt la misura dell’1,06%: Ai fini dell’applicazione dell’imposta s’intende per alloggio a disposizione l’unità immobilia classificata o classificabile nel gruppo catastale A ad eccezione della categoria A/10 che non risulti esse : a Residenza anagrafica di soggetto in comodato gratuito, pa nte in linea tta e collaterale entro il terzo grado ed affini entro il secondo grado di soggetti passivi;b Locata con contratto golarmente gistrato per un periodo di almeno 90 giorni durante l’anno .Ciò al fine di disincentivarne il mancato utilizzo e favori l’inserimento nel mercato di immobili con affitti a canone calmierato",
+        "conditions": [
+            {
+                "description": "Condizione applicabile in base al regolamento comunale",
+                "predicate": "true // Da specificare in base alle condizioni locali"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione locata o in comodato - Tipo contratto: Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i.",
+        "ratePercent": 0.00075,
+        "officialDescription": "Abitazione locata o in comodato - Tipo contratto: Locazione ai sensi dell'art. 2, comma 3, della Legge n.431/1998 e s.m.i. - Durata del contratto di durata non inferio a mesi, specifica : 3 - Destinazione d'uso: Purchè l'affittuario/comodatario la utilizzi come abitazione principale.",
+        "conditions": [
+            {
+                "description": "Condizione applicabile in base al regolamento comunale",
+                "predicate": "true // Da specificare in base alle condizioni locali"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito",
+        "ratePercent": 0.00075,
+        "categoryTypes": [
+            "A/2",
+            "A/3",
+            "A/4",
+            "A/5"
+        ],
+        "officialDescription": "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito Categoria catastale: - A/2 Abitazioni di tipo civile - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/2 o A/3 o A/4 o A/5",
+                "predicate": "['A/2','A/3','A/4','A/5'].includes(entity.category)"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito",
+        "ratePercent": 0.00075,
+        "categoryTypes": [
+            "A/6",
+            "A/7",
+            "A/11"
+        ],
+        "officialDescription": "- A/6 Abitazioni di tipo rurale - A/7 Abitazioni in villini - A/11 Abitazioni ed alloggi tipici dei luoghi - Durata del contratto di durata non inferio a mesi, specifica : 3 - Condizioni locatario/comodatario: Pa nti - Sino al primo grado ipotesi diverse da quella di cui all'art. 1, comma 747, lett. c, della legge n. 160 del 2019 - Destinazione d'uso: Purchè l'affittuario/comodatario la utilizzi come abitazione principale.",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/6 o A/7 o A/11",
+                "predicate": "['A/6','A/7','A/11'].includes(entity.category)"
+            }
+        ]
+    },
+    {
+        "label": "Abitazione locata o in comodato - Tipo contratto: Comodato d'uso gratuito",
+        "ratePercent": 0.00075,
+        "categoryTypes": [
+            "A/2",
+            "A/3",
+            "A/4",
+            "A/5",
+            "A/6",
+            "A/7",
+            "A/11"
+        ],
+        "officialDescription": "- A/2 Abitazioni di tipo civile - A/3 Abitazioni di tipo economico - A/4 Abitazioni di tipo popola - A/5 Abitazioni di tipo ultrapopola - A/6 Abitazioni di tipo rurale - A/7 Abitazioni in villini - A/11 Abitazioni ed alloggi tipici dei luoghi - Con contratto gistrato - Condizioni locatario/comodatario: Pa nti - Sino al primo grado ipotesi di cui all'art. 1, comma 747, lett. c, della legge n. 160 del 2019 - Locatario/comodatario non titola di proprieta o altro diritto ale di godimento su immobili - Destinazione d'uso: Purchè l'affittuario/comodatario la utilizzi come abitazione principale. - Limitatamente ad un solo immobile.",
+        "conditions": [
+            {
+                "description": "L'entità ha categoria A/2 o A/3 o A/4 o A/5 o A/6 o A/7 o A/11",
+                "predicate": "['A/2','A/3','A/4','A/5','A/6','A/7','A/11'].includes(entity.category)"
+            }
+        ]
+    }
+];
+//# sourceMappingURL=cupraMarittimaAP2025.js.map

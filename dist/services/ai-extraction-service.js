@@ -95,6 +95,7 @@ class AIExtractionService {
      * Analizza il testo estratto con OpenAI
      */
     async analyzeWithAI(text, fileName) {
+        var _a, _b, _c, _d;
         const systemPrompt = `Sei un esperto nell'analisi di visure catastali italiane. Il tuo compito è estrarre in modo preciso e completo tutti i dati degli immobili (fabbricati e terreni) dal testo fornito, inclusi i dati dei proprietari.
 
 IMPORTANTE: Restituisci SOLO un oggetto JSON valido, senza testo aggiuntivo.
@@ -222,7 +223,7 @@ Restituisci solo il JSON richiesto.`;
                 temperature: 0.1, // Bassa creatività per maggiore precisione
                 max_tokens: 4000
             });
-            const aiResponse = completion.choices[0]?.message?.content;
+            const aiResponse = (_b = (_a = completion.choices[0]) === null || _a === void 0 ? void 0 : _a.message) === null || _b === void 0 ? void 0 : _b.content;
             if (!aiResponse) {
                 throw new Error('Risposta vuota da OpenAI');
             }
@@ -242,8 +243,8 @@ Restituisci solo il JSON richiesto.`;
             }
             // Valida e completa il risultato
             const validatedResult = {
-                success: parsedResult.success ?? true,
-                confidence: Math.min(Math.max(parsedResult.confidence ?? 70, 0), 100),
+                success: (_c = parsedResult.success) !== null && _c !== void 0 ? _c : true,
+                confidence: Math.min(Math.max((_d = parsedResult.confidence) !== null && _d !== void 0 ? _d : 70, 0), 100),
                 fabbricati: this.validateFabbricati(parsedResult.fabbricati || []),
                 terreni: this.validateTerreni(parsedResult.terreni || []),
                 errors: parsedResult.errors || [],
@@ -261,67 +262,73 @@ Restituisci solo il JSON richiesto.`;
      * Valida e normalizza i dati dei fabbricati
      */
     validateFabbricati(fabbricati) {
-        return fabbricati.map((fab, index) => ({
-            comune: String(fab.comune || ''),
-            provincia: String(fab.provincia || ''),
-            codiceCatastale: String(fab.codiceCatastale || ''),
-            sezione: fab.sezione ? String(fab.sezione) : null,
-            sezioneUrbana: fab.sezioneUrbana ? String(fab.sezioneUrbana) : null,
-            foglio: Number(fab.foglio) || 0,
-            particella: Number(fab.particella) || 0,
-            subalterno: Number(fab.subalterno) || 0,
-            categoria: String(fab.categoria || ''),
-            classe: String(fab.classe || ''),
-            consistenza: Number(fab.consistenza) || 0,
-            superficie: Number(fab.superficie) || 0,
-            rendita: Number(fab.rendita) || 0,
-            zona: String(fab.zona || ''),
-            ubicazione: String(fab.ubicazione || ''),
-            piano: String(fab.piano || ''),
-            interno: String(fab.interno || ''),
-            proprietario: {
-                denominazione: String(fab.proprietario?.denominazione || ''),
-                codiceFiscale: String(fab.proprietario?.codiceFiscale || ''),
-                titolarita: String(fab.proprietario?.titolarita || ''),
-                quota: {
-                    numeratore: Number(fab.proprietario?.quota?.numeratore) || 1,
-                    denominatore: Number(fab.proprietario?.quota?.denominatore) || 1
-                }
-            },
-            dataAggiornamento: new Date(),
-            idImmobile: `AI_${Date.now()}_${index}`
-        }));
+        return fabbricati.map((fab, index) => {
+            var _a, _b, _c, _d, _e, _f, _g;
+            return ({
+                comune: String(fab.comune || ''),
+                provincia: String(fab.provincia || ''),
+                codiceCatastale: String(fab.codiceCatastale || ''),
+                sezione: fab.sezione ? String(fab.sezione) : null,
+                sezioneUrbana: fab.sezioneUrbana ? String(fab.sezioneUrbana) : null,
+                foglio: Number(fab.foglio) || 0,
+                particella: Number(fab.particella) || 0,
+                subalterno: Number(fab.subalterno) || 0,
+                categoria: String(fab.categoria || ''),
+                classe: String(fab.classe || ''),
+                consistenza: Number(fab.consistenza) || 0,
+                superficie: Number(fab.superficie) || 0,
+                rendita: Number(fab.rendita) || 0,
+                zona: String(fab.zona || ''),
+                ubicazione: String(fab.ubicazione || ''),
+                piano: String(fab.piano || ''),
+                interno: String(fab.interno || ''),
+                proprietario: {
+                    denominazione: String(((_a = fab.proprietario) === null || _a === void 0 ? void 0 : _a.denominazione) || ''),
+                    codiceFiscale: String(((_b = fab.proprietario) === null || _b === void 0 ? void 0 : _b.codiceFiscale) || ''),
+                    titolarita: String(((_c = fab.proprietario) === null || _c === void 0 ? void 0 : _c.titolarita) || ''),
+                    quota: {
+                        numeratore: Number((_e = (_d = fab.proprietario) === null || _d === void 0 ? void 0 : _d.quota) === null || _e === void 0 ? void 0 : _e.numeratore) || 1,
+                        denominatore: Number((_g = (_f = fab.proprietario) === null || _f === void 0 ? void 0 : _f.quota) === null || _g === void 0 ? void 0 : _g.denominatore) || 1
+                    }
+                },
+                dataAggiornamento: new Date(),
+                idImmobile: `AI_${Date.now()}_${index}`
+            });
+        });
     }
     /**
      * Valida e normalizza i dati dei terreni
      */
     validateTerreni(terreni) {
-        return terreni.map((ter, index) => ({
-            comune: String(ter.comune || ''),
-            provincia: String(ter.provincia || ''),
-            codiceCatastale: String(ter.codiceCatastale || ''),
-            sezione: ter.sezione ? String(ter.sezione) : null,
-            foglio: Number(ter.foglio) || 0,
-            particella: Number(ter.particella) || 0,
-            subalterno: ter.subalterno ? Number(ter.subalterno) : undefined,
-            qualita: String(ter.qualita || ''),
-            classe: String(ter.classe || ''),
-            superficie: Number(ter.superficie) || 0,
-            redditoDominicale: Number(ter.redditoDominicale) || 0,
-            redditoAgrario: Number(ter.redditoAgrario) || 0,
-            ubicazione: String(ter.ubicazione || ''),
-            proprietario: {
-                denominazione: String(ter.proprietario?.denominazione || ''),
-                codiceFiscale: String(ter.proprietario?.codiceFiscale || ''),
-                titolarita: String(ter.proprietario?.titolarita || ''),
-                quota: {
-                    numeratore: Number(ter.proprietario?.quota?.numeratore) || 1,
-                    denominatore: Number(ter.proprietario?.quota?.denominatore) || 1
-                }
-            },
-            dataAggiornamento: new Date(),
-            idImmobile: `AI_${Date.now()}_${index}`
-        }));
+        return terreni.map((ter, index) => {
+            var _a, _b, _c, _d, _e, _f, _g;
+            return ({
+                comune: String(ter.comune || ''),
+                provincia: String(ter.provincia || ''),
+                codiceCatastale: String(ter.codiceCatastale || ''),
+                sezione: ter.sezione ? String(ter.sezione) : null,
+                foglio: Number(ter.foglio) || 0,
+                particella: Number(ter.particella) || 0,
+                subalterno: ter.subalterno ? Number(ter.subalterno) : undefined,
+                qualita: String(ter.qualita || ''),
+                classe: String(ter.classe || ''),
+                superficie: Number(ter.superficie) || 0,
+                redditoDominicale: Number(ter.redditoDominicale) || 0,
+                redditoAgrario: Number(ter.redditoAgrario) || 0,
+                ubicazione: String(ter.ubicazione || ''),
+                proprietario: {
+                    denominazione: String(((_a = ter.proprietario) === null || _a === void 0 ? void 0 : _a.denominazione) || ''),
+                    codiceFiscale: String(((_b = ter.proprietario) === null || _b === void 0 ? void 0 : _b.codiceFiscale) || ''),
+                    titolarita: String(((_c = ter.proprietario) === null || _c === void 0 ? void 0 : _c.titolarita) || ''),
+                    quota: {
+                        numeratore: Number((_e = (_d = ter.proprietario) === null || _d === void 0 ? void 0 : _d.quota) === null || _e === void 0 ? void 0 : _e.numeratore) || 1,
+                        denominatore: Number((_g = (_f = ter.proprietario) === null || _f === void 0 ? void 0 : _f.quota) === null || _g === void 0 ? void 0 : _g.denominatore) || 1
+                    }
+                },
+                dataAggiornamento: new Date(),
+                idImmobile: `AI_${Date.now()}_${index}`
+            });
+        });
     }
     /**
      * Processa file multipli in batch
@@ -351,3 +358,4 @@ Restituisci solo il JSON richiesto.`;
     }
 }
 exports.AIExtractionService = AIExtractionService;
+//# sourceMappingURL=ai-extraction-service.js.map
